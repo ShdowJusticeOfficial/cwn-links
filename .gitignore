@@ -1,0 +1,35 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Dependencies
+node_modules/
+
+# Build folders
+dist/
+build/
+out/
+
+# Vercel
+.vercel/
+
+# Environment
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary
+*.tmp
+*.swp
