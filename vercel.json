@@ -30,7 +30,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'sha256-qBJvPQCYbZFlZY4biJXdd0SZVzR4BNDanB4IjdEIghU='; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' 'sha256-qBJvPQCYbZFlZY4biJXdd0SZVzR4BNDanB4IjdEIghU='; style-src 'self' 'sha256-ZshMkQvwDEpaRQAAy0MwfvVMH01oSH1lzXIfzj9oxsA=' 'sha256-ZshMkQvwDEpaRQAAy0MwfvVMH01oSH1lzXIfzj9oxsA='; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
         }
       ]
     }
