@@ -1,1 +1,97 @@
 # code-coverage.yml
+name: Code Coverage
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  code-coverage:
+    name: Test and generate coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check project files
+        id: project
+        shell: bash
+        run: |
+          if [ -f package.json ]; then
+            echo "has_package=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_package=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        if: steps.project.outputs.has_package == 'true'
+        shell: bash
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Run JavaScript syntax checks
+        shell: bash
+        run: |
+          set -e
+
+          mapfile -t files < <(
+            find . \
+              -type f \
+              -name "*.js" \
+              ! -path "./node_modules/*" \
+              ! -path "./coverage/*" \
+              ! -path "./dist/*" \
+              ! -path "./build/*"
+          )
+
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No JavaScript files found."
+            exit 0
+          fi
+
+          for file in "${files[@]}"; do
+            echo "Checking $file"
+            node --check "$file"
+          done
+
+      - name: Run coverage tests
+        if: steps.project.outputs.has_package == 'true'
+        shell: bash
+        run: |
+          if npm run | grep -qE '^[[:space:]]+test:coverage'; then
+            npm run test:coverage
+          elif npm run | grep -qE '^[[:space:]]+coverage'; then
+            npm run coverage
+          elif npm run | grep -qE '^[[:space:]]+test'; then
+            npm test -- --coverage
+          else
+            echo "No coverage or test script exists in package.json."
+            echo "Syntax checks completed instead."
+          fi
+
+      - name: Upload coverage report
+        if: always() && hashFiles('coverage/**') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report
+          path: coverage/
+          retention-days: 14
+          if-no-files-found: ignore
