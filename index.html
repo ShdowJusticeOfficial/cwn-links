@@ -35,834 +35,7 @@
 
   <title>Community Watch Network</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root {
-      --background: #050806;
-      --background-secondary: #09100b;
-
-      --card: rgba(15, 22, 17, 0.92);
-      --card-hover: rgba(88, 245, 138, 0.08);
-
-      --text: #f3fff6;
-      --muted: #9eafa3;
-
-      --green: #58f58a;
-      --green-dark: #07190d;
-      --green-soft: rgba(88, 245, 138, 0.12);
-
-      --blue: #6da9ff;
-      --yellow: #ffd166;
-      --red: #ff6b6b;
-
-      --border: rgba(255, 255, 255, 0.09);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-
-      color: var(--text);
-
-      background:
-        radial-gradient(
-          circle at top,
-          rgba(88, 245, 138, 0.18),
-          transparent 32%
-        ),
-        radial-gradient(
-          circle at bottom,
-          rgba(109, 169, 255, 0.08),
-          transparent 35%
-        ),
-        var(--background);
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-
-      position: fixed;
-      inset: 0;
-
-      pointer-events: none;
-
-      background-image:
-        linear-gradient(
-          rgba(255, 255, 255, 0.025) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.025) 1px,
-          transparent 1px
-        );
-
-      background-size: 34px 34px;
-
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent
-        );
-
-      z-index: -1;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .page {
-      width: min(100%, 650px);
-      min-height: 100vh;
-
-      margin: auto;
-
-      padding:
-        38px
-        18px
-        30px;
-    }
-
-    .profile {
-      text-align: center;
-    }
-
-    .logo {
-      width: 100px;
-      height: 100px;
-
-      margin:
-        0
-        auto
-        18px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 28px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #70ff9e,
-          var(--green)
-        );
-
-      color: #041108;
-
-      font-size: 30px;
-      font-weight: 900;
-      letter-spacing: -2px;
-
-      box-shadow:
-        0 0 50px
-        rgba(88, 245, 138, 0.28);
-    }
-
-    .official-status {
-      display: inline-flex;
-      align-items: center;
-
-      gap: 8px;
-
-      color: var(--green);
-
-      font-size: 11px;
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-
-      border-radius: 50%;
-
-      background: var(--green);
-
-      box-shadow:
-        0 0 12px
-        var(--green);
-
-      animation:
-        pulse
-        2s
-        infinite;
-    }
-
-    @keyframes pulse {
-      0%,
-      100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0.45;
-      }
-    }
-
-    h1 {
-      margin:
-        14px
-        0
-        10px;
-
-      font-size:
-        clamp(
-          32px,
-          8vw,
-          54px
-        );
-
-      line-height: 1;
-
-      letter-spacing: -2px;
-    }
-
-    .username {
-      margin:
-        0
-        0
-        12px;
-
-      color: var(--green);
-
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .bio {
-      max-width: 500px;
-
-      margin: auto;
-
-      color: var(--muted);
-
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .quick-info {
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          3,
-          1fr
-        );
-
-      gap: 10px;
-
-      margin-top: 24px;
-    }
-
-    .quick-info-card {
-      padding: 13px 8px;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.025
-        );
-
-      border:
-        1px
-        solid
-        var(--border);
-
-      border-radius: 14px;
-    }
-
-    .quick-info-card strong {
-      display: block;
-
-      color: var(--green);
-
-      font-size: 13px;
-    }
-
-    .quick-info-card span {
-      display: block;
-
-      margin-top: 4px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-    }
-
-    .section-title {
-      margin:
-        32px
-        0
-        12px;
-
-      text-align: left;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-    }
-
-    .links {
-      display: grid;
-
-      gap: 12px;
-    }
-
-    .link-button {
-      min-height: 86px;
-
-      padding:
-        17px
-        19px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 15px;
-
-      color: var(--text);
-
-      text-decoration: none;
-      text-align: left;
-
-      background:
-        var(--card);
-
-      border:
-        1px
-        solid
-        var(--border);
-
-      border-radius: 17px;
-
-      backdrop-filter:
-        blur(14px);
-
-      transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease;
-    }
-
-    .link-button:hover,
-    .link-button:focus-visible {
-      transform:
-        translateY(-2px);
-
-      border-color:
-        rgba(
-          88,
-          245,
-          138,
-          0.5
-        );
-
-      background:
-        var(--card-hover);
-
-      outline: none;
-    }
-
-    .link-content {
-      min-width: 0;
-    }
-
-    .link-category {
-      display: block;
-
-      margin-bottom: 6px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-      font-weight: 800;
-
-      letter-spacing: 1.4px;
-    }
-
-    .link-title {
-      display: block;
-
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .link-detail {
-      display: block;
-
-      margin-top: 6px;
-
-      color: var(--muted);
-
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .arrow {
-      flex-shrink: 0;
-
-      color: var(--green);
-
-      font-size: 24px;
-    }
-
-    .featured-link {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(88, 245, 138, 0.13),
-          rgba(15, 22, 17, 0.95)
-        );
-
-      border-color:
-        rgba(
-          88,
-          245,
-          138,
-          0.25
-        );
-    }
-
-    .support-link {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(109, 169, 255, 0.13),
-          rgba(15, 22, 17, 0.95)
-        );
-
-      border-color:
-        rgba(
-          109,
-          169,
-          255,
-          0.25
-        );
-    }
-
-    .support-link .arrow {
-      color: var(--blue);
-    }
-
-    .badge {
-      display: inline-block;
-
-      margin-top: 9px;
-
-      padding:
-        5px
-        8px;
-
-      border-radius: 999px;
-
-      color: #041108;
-
-      background:
-        var(--green);
-
-      font-size: 9px;
-      font-weight: 900;
-
-      letter-spacing: 0.8px;
-    }
-
-    .goal-box {
-      margin-top: 14px;
-
-      padding: 18px;
-
-      text-align: left;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(109, 169, 255, 0.09),
-          rgba(255, 255, 255, 0.02)
-        );
-
-      border:
-        1px
-        solid
-        rgba(
-          109,
-          169,
-          255,
-          0.22
-        );
-
-      border-radius: 17px;
-    }
-
-    .goal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 12px;
-    }
-
-    .goal-header span {
-      color: var(--blue);
-
-      font-size: 11px;
-      font-weight: 900;
-
-      letter-spacing: 1.3px;
-    }
-
-    .goal-header strong {
-      font-size: 20px;
-    }
-
-    .goal-box p {
-      margin:
-        12px
-        0
-        0;
-
-      color: var(--muted);
-
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .goal-items {
-      display: grid;
-      gap: 7px;
-
-      margin-top: 14px;
-    }
-
-    .goal-item {
-      color: var(--muted);
-
-      font-size: 12px;
-    }
-
-    .coming-soon {
-      margin-top: 22px;
-
-      padding: 19px;
-
-      text-align: left;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255, 209, 102, 0.09),
-          rgba(255, 255, 255, 0.02)
-        );
-
-      border:
-        1px
-        solid
-        rgba(
-          255,
-          209,
-          102,
-          0.24
-        );
-
-      border-radius: 17px;
-    }
-
-    .coming-soon-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 14px;
-    }
-
-    .coming-label {
-      color: var(--yellow);
-
-      font-size: 10px;
-      font-weight: 900;
-
-      letter-spacing: 1.4px;
-    }
-
-    .coming-badge {
-      padding:
-        6px
-        9px;
-
-      color: #171104;
-
-      background:
-        var(--yellow);
-
-      border-radius: 999px;
-
-      font-size: 9px;
-      font-weight: 900;
-
-      letter-spacing: 1px;
-    }
-
-    .coming-soon h2 {
-      margin:
-        12px
-        0
-        8px;
-
-      font-size: 20px;
-
-      letter-spacing: -0.5px;
-    }
-
-    .coming-soon p {
-      margin: 0;
-
-      color: var(--muted);
-
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .progress {
-      width: 100%;
-      height: 8px;
-
-      margin-top: 16px;
-
-      overflow: hidden;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.07
-        );
-
-      border-radius: 999px;
-    }
-
-    .progress-bar {
-      width: 35%;
-      height: 100%;
-
-      background:
-        var(--yellow);
-
-      border-radius: 999px;
-
-      box-shadow:
-        0 0 14px
-        rgba(
-          255,
-          209,
-          102,
-          0.35
-        );
-    }
-
-    .contact-card {
-      margin-top: 22px;
-
-      padding: 18px;
-
-      text-align: left;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.025
-        );
-
-      border:
-        1px
-        solid
-        var(--border);
-
-      border-radius: 17px;
-    }
-
-    .contact-card h2 {
-      margin:
-        0
-        0
-        8px;
-
-      font-size: 18px;
-    }
-
-    .contact-card p {
-      margin: 0;
-
-      color: var(--muted);
-
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .contact-email {
-      display: block;
-
-      margin-top: 12px;
-
-      color: var(--green);
-
-      font-size: 13px;
-      font-weight: 800;
-
-      word-break: break-word;
-    }
-
-    .disclaimer {
-      margin-top: 20px;
-
-      padding:
-        15px
-        16px;
-
-      color: var(--muted);
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.025
-        );
-
-      border:
-        1px
-        solid
-        var(--border);
-
-      border-radius: 14px;
-
-      font-size: 12px;
-      line-height: 1.55;
-
-      text-align: left;
-    }
-
-    .disclaimer strong {
-      color: var(--text);
-    }
-
-    .footer {
-      margin-top: 25px;
-
-      display: flex;
-      justify-content: space-between;
-
-      gap: 15px;
-
-      color: #6f7e73;
-
-      font-size: 10px;
-      font-weight: 700;
-
-      letter-spacing: 1px;
-    }
-
-    @media (max-width: 470px) {
-      .page {
-        padding-top: 28px;
-      }
-
-      .logo {
-        width: 84px;
-        height: 84px;
-
-        border-radius: 23px;
-
-        font-size: 26px;
-      }
-
-      .quick-info {
-        grid-template-columns: 1fr;
-      }
-
-      .link-button {
-        min-height: 80px;
-
-        padding:
-          16px
-          17px;
-      }
-
-      .goal-header {
-        align-items: flex-start;
-
-        flex-direction: column;
-      }
-
-      .footer {
-        flex-direction: column;
-
-        gap: 7px;
-      }
-    }
-  </style>
-</head><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Official links for Community Watch Network."
-  >
-
-  <meta
-    name="theme-color"
-    content="#050806"
-  >
-
-  <meta
-    property="og:title"
-    content="Community Watch Network"
-  >
-
-  <meta
-    property="og:description"
-    content="Official CWN links, community pages, support and contact information."
-  >
-
-  <meta
-    property="og:type"
-    content="website"
-  >
-
-  <title>Community Watch Network</title>
+  <link rel="stylesheet" href="staff-directory.css">
 
   <style>
     * {
@@ -1872,6 +1045,355 @@
 
       </div>
 
+
+      <section
+        class="staff-directory"
+        id="staff-directory"
+        aria-labelledby="staff-directory-title"
+      >
+        <div class="staff-directory-header">
+          <div>
+            <span class="staff-directory-eyebrow">
+              VERIFIED CWN TEAM
+            </span>
+
+            <h2 id="staff-directory-title">
+              Staff Directory
+            </h2>
+
+            <p>
+              Search CWN staff members, leadership,
+              divisions and current activity status.
+            </p>
+          </div>
+
+          <div
+            class="staff-directory-count"
+            aria-live="polite"
+          >
+            <strong id="staff-visible-count">0</strong>
+            <span>staff shown</span>
+          </div>
+        </div>
+
+        <div class="staff-directory-notice">
+          <span aria-hidden="true">✓</span>
+
+          <p>
+            Only profiles shown in this official directory
+            should be treated as verified CWN staff.
+          </p>
+        </div>
+
+        <div class="staff-directory-tools">
+          <label class="staff-search">
+            <span class="sr-only">
+              Search staff directory
+            </span>
+
+            <span
+              class="staff-search-icon"
+              aria-hidden="true"
+            >
+              ⌕
+            </span>
+
+            <input
+              id="staff-search-input"
+              type="search"
+              placeholder="Search name, role, division or ID..."
+              autocomplete="off"
+            >
+          </label>
+
+          <label class="staff-filter">
+            <span class="sr-only">
+              Filter staff by division
+            </span>
+
+            <select id="staff-division-filter">
+              <option value="all">
+                All divisions
+              </option>
+            </select>
+          </label>
+
+          <label class="staff-filter">
+            <span class="sr-only">
+              Filter staff by status
+            </span>
+
+            <select id="staff-status-filter">
+              <option value="all">
+                All statuses
+              </option>
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="break">
+                On break
+              </option>
+
+              <option value="inactive">
+                Inactive
+              </option>
+
+              <option value="vacant">
+                Vacant
+              </option>
+            </select>
+          </label>
+
+          <button
+            class="staff-clear-button"
+            id="staff-clear-filters"
+            type="button"
+          >
+            Clear
+          </button>
+        </div>
+
+        <section
+          class="staff-hierarchy-section executive-hierarchy-section"
+          id="executive-leadership-section"
+        >
+          <div class="staff-section-heading">
+            <div>
+              <span class="staff-section-eyebrow">
+                HIGHEST ORGANISATIONAL AUTHORITY
+              </span>
+
+              <h3>
+                Executive Leadership
+              </h3>
+
+              <p>
+                The Founder, Co-Founder / Second-in-Command and
+                Third-in-Command oversee Community Watch Network
+                as a whole.
+              </p>
+            </div>
+
+            <span class="staff-section-icon" aria-hidden="true">
+              👑
+            </span>
+          </div>
+
+          <div
+            class="staff-executive-grid"
+            id="staff-executive"
+            aria-label="CWN Executive Leadership"
+          ></div>
+        </section>
+
+        <section
+          class="staff-hierarchy-section directorate-hierarchy-section"
+          id="directorates-section"
+        >
+          <div class="staff-section-heading">
+            <div>
+              <span class="staff-section-eyebrow">
+                DEPARTMENTAL LEADERSHIP
+              </span>
+
+              <h3>
+                CWN Directorates
+              </h3>
+
+              <p>
+                Directors manage their respective departments
+                under the oversight of Executive Leadership.
+              </p>
+            </div>
+
+            <span class="staff-section-icon" aria-hidden="true">
+              🛡️
+            </span>
+          </div>
+
+          <div
+            class="staff-featured"
+            id="staff-featured"
+            aria-label="Appointed CWN Directors"
+          ></div>
+
+          <div
+            class="staff-grid"
+            id="staff-grid"
+            aria-live="polite"
+          ></div>
+        </section>
+
+        <div
+          class="staff-empty"
+          id="staff-empty"
+          hidden
+        >
+          <strong>No matching staff found</strong>
+
+          <span>
+            Try changing the search or filters.
+          </span>
+        </div>
+
+
+        <div class="directorate-handbook">
+          <section class="directorate-info-panel executive-info-panel">
+            <span class="directorate-info-label">
+              EXECUTIVE LEADERSHIP
+            </span>
+
+            <h3>
+              Community Watch Network Executive Leadership
+            </h3>
+
+            <p>
+              Executive Leadership is the highest level of
+              authority within Community Watch Network.
+            </p>
+
+            <p>
+              The Founder, Co-Founder / Second-in-Command and
+              Third-in-Command establish strategic direction,
+              supervise all Directorates and ensure CWN operates
+              professionally, effectively and in accordance with
+              its mission.
+            </p>
+
+            <p>
+              Each Executive Leadership position may appoint a
+              Deputy to assist with day-to-day responsibilities
+              and provide continuity when required. All current
+              Executive Leadership Deputy positions are vacant.
+            </p>
+          </section>
+
+
+          <section class="directorate-info-panel">
+            <span class="directorate-info-label">
+              ORGANISATIONAL STRUCTURE
+            </span>
+
+            <h3>
+              Community Watch Network Directorates
+            </h3>
+
+            <p>
+              CWN Directorates are responsible for overseeing
+              their respective departments and maintaining
+              professionalism, accountability and operational
+              effectiveness across the organisation.
+            </p>
+
+            <p>
+              Each Director reports to Executive Leadership and
+              is responsible for the management, development and
+              performance of their department.
+            </p>
+          </section>
+
+          <div class="directorate-info-grid">
+            <section class="directorate-info-panel">
+              <span class="directorate-info-label">
+                DEPUTY DIRECTORS
+              </span>
+
+              <h3>
+                Deputy Director Responsibilities
+              </h3>
+
+              <ul>
+                <li>
+                  Assists the Director with day-to-day
+                  responsibilities.
+                </li>
+
+                <li>
+                  Acts on behalf of the Director during periods
+                  of absence.
+                </li>
+
+                <li>
+                  Supports planning, organisation and
+                  departmental management.
+                </li>
+
+                <li>
+                  Helps maintain departmental standards and
+                  continuity.
+                </li>
+
+                <li>
+                  Is expected to be capable of assuming the
+                  Director role if required.
+                </li>
+              </ul>
+            </section>
+
+            <section class="directorate-info-panel">
+              <span class="directorate-info-label">
+                LEADERSHIP STANDARDS
+              </span>
+
+              <h3>
+                Director Expectations
+              </h3>
+
+              <ul>
+                <li>
+                  Demonstrate professionalism and maturity.
+                </li>
+
+                <li>
+                  Maintain activity within their department.
+                </li>
+
+                <li>
+                  Lead by example and uphold CWN standards.
+                </li>
+
+                <li>
+                  Work collaboratively with other Directorates.
+                </li>
+
+                <li>
+                  Submit reports or updates to Executive
+                  Leadership when required.
+                </li>
+              </ul>
+            </section>
+          </div>
+
+          <section class="directorate-info-panel">
+            <span class="directorate-info-label">
+              FUTURE DEVELOPMENT
+            </span>
+
+            <h3>
+              Additional Directorates
+            </h3>
+
+            <p>
+              Executive Leadership may establish, merge, rename
+              or dissolve Directorates as Community Watch Network
+              grows and operational requirements evolve.
+            </p>
+          </section>
+        </div>
+
+        <div class="staff-directory-footer">
+          <span>
+            Staff verification system
+          </span>
+
+          <strong>
+            CWN-DIR-0001
+          </strong>
+        </div>
+      </section>
+
       <section class="goal-box">
 
         <div class="goal-header">
@@ -2004,6 +1526,9 @@
 
     </section>
   </main>
+
+  <script src="staff-data.js"></script>
+  <script src="staff-directory.js"></script>
 
   <script>
     const linkButtons =
