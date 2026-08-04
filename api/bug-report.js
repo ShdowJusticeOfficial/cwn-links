@@ -556,6 +556,242 @@ function isAllowedOrigin(req) {
     .has(origin);
 }
 
+async function sendCwnStaffPrivacyAlert({
+  alertType,
+  title,
+  severity = "medium",
+  findingTypes = [],
+  reporter = "Unavailable",
+  service = "Unknown",
+  category = "Unknown",
+  reference = "Not generated",
+  requestId = "Unknown",
+  clientIdentifier = "Unknown",
+  details = ""
+}) {
+  const webhookUrl =
+    process.env
+      .DISCORD_SECURITY_ALERT_WEBHOOK_URL;
+
+  /*
+   * Alerts are optional. The main report flow must continue safely
+   * if a dedicated staff-alert webhook has not been configured.
+   */
+  if (!webhookUrl) {
+    console.warn(
+      "CWN staff privacy alert skipped because " +
+      "DISCORD_SECURITY_ALERT_WEBHOOK_URL is not configured."
+    );
+
+    return false;
+  }
+
+  const colours = {
+    info: 0x6da9ff,
+    low: 0x58f58a,
+    medium: 0xffd166,
+    high: 0xff9f43,
+    critical: 0xff5c5c
+  };
+
+  const safeFindingTypes =
+    [...new Set(findingTypes)]
+      .slice(0, 15)
+      .map(
+        (finding) =>
+          String(finding)
+            .replace(/@/g, "@\u200b")
+            .slice(0, 100)
+      );
+
+  const fields = [
+    {
+      name: "Alert Type",
+      value:
+        String(alertType)
+          .slice(0, 1024),
+      inline: true
+    },
+    {
+      name: "Severity",
+      value:
+        String(severity)
+          .toUpperCase()
+          .slice(0, 1024),
+      inline: true
+    },
+    {
+      name: "Reference",
+      value:
+        `\`${String(reference).slice(0, 100)}\``,
+      inline: true
+    },
+    {
+      name: "Affected Service",
+      value:
+        String(service)
+          .replace(/@/g, "@\u200b")
+          .slice(0, 1024),
+      inline: true
+    },
+    {
+      name: "Report Category",
+      value:
+        String(category)
+          .replace(/@/g, "@\u200b")
+          .slice(0, 1024),
+      inline: true
+    },
+    {
+      name: "Reporter",
+      value:
+        String(reporter)
+          .replace(/@/g, "@\u200b")
+          .slice(0, 1024),
+      inline: true
+    },
+    {
+      name: "Finding Categories",
+      value:
+        safeFindingTypes.length > 0
+          ? safeFindingTypes
+              .map(
+                (finding) =>
+                  `• ${finding}`
+              )
+              .join("\n")
+              .slice(0, 1024)
+          : "No categories available.",
+      inline: false
+    },
+    {
+      name: "Privacy Protection",
+      value:
+        "Detected values were not included in this staff alert.",
+      inline: false
+    },
+    {
+      name: "Request Metadata",
+      value:
+        [
+          `**Request ID:** \`${String(requestId).slice(0, 100)}\``,
+          `**Connection ID:** \`${String(clientIdentifier).slice(0, 100)}\``
+        ].join("\n"),
+      inline: false
+    }
+  ];
+
+  if (details) {
+    fields.push({
+      name: "Action Taken",
+      value:
+        String(details)
+          .replace(/@/g, "@\u200b")
+          .slice(0, 1024),
+      inline: false
+    });
+  }
+
+  const alertRoleId =
+    process.env
+      .DISCORD_SECURITY_ALERT_ROLE_ID;
+
+  const shouldPing =
+    Boolean(alertRoleId) &&
+    (
+      severity === "high" ||
+      severity === "critical"
+    );
+
+  const payload = {
+    username:
+      "CWN Shield Security Alerts",
+
+    content:
+      shouldPing
+        ? `<@&${alertRoleId}>`
+        : undefined,
+
+    allowed_mentions: {
+      parse: [],
+      roles:
+        shouldPing
+          ? [alertRoleId]
+          : []
+    },
+
+    embeds: [
+      {
+        title:
+          `🛡️ ${String(title).slice(0, 240)}`,
+
+        description:
+          [
+            "CWN Shield generated a staff privacy and safety alert.",
+            "",
+            "**No detected personal information or credential values are included.**"
+          ].join("\n"),
+
+        color:
+          colours[severity] ||
+          colours.medium,
+
+        fields,
+
+        footer: {
+          text:
+            "Community Watch Network • CWN Shield"
+        },
+
+        timestamp:
+          new Date()
+            .toISOString()
+      }
+    ]
+  };
+
+  try {
+    const response =
+      await fetch(
+        webhookUrl,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body:
+            JSON.stringify(payload),
+          signal:
+            AbortSignal.timeout(8000)
+        }
+      );
+
+    if (!response.ok) {
+      console.error(
+        "CWN staff privacy alert failed:",
+        response.status,
+        (
+          await response
+            .text()
+            .catch(() => "")
+        ).slice(0, 500)
+      );
+
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error(
+      "CWN staff privacy alert error:",
+      error.message
+    );
+
+    return false;
+  }
+}
+
 function json(res, status, body) {
   res.statusCode = status;
 
@@ -583,6 +819,14 @@ module.exports = async function handler(
   req,
   res
 ) {
+  const cwnRequestId =
+    crypto.randomUUID();
+
+  res.setHeader(
+    "X-CWN-Request-ID",
+    cwnRequestId
+  );
+
   if (req.method !== "POST") {
     res.setHeader(
       "Allow",
@@ -758,10 +1002,6 @@ module.exports = async function handler(
     "active"
   );
 
-  res.setHeader(
-    "X-CWN-Request-ID",
-    crypto.randomUUID()
-  );
 
   if (!rateLimitResult.allowed) {
     res.setHeader(
@@ -913,6 +1153,46 @@ module.exports = async function handler(
         )
       );
 
+      await sendCwnStaffPrivacyAlert({
+        alertType:
+          "High-risk content blocked",
+
+        title:
+          "Credential or secret blocked",
+
+        severity:
+          "critical",
+
+        findingTypes:
+          highRiskFindings.map(
+            (finding) =>
+              finding.type
+          ),
+
+        reporter:
+          report.reporter ||
+          "Unavailable",
+
+        service:
+          body.service ||
+          "Unknown",
+
+        category:
+          body.category ||
+          "Unknown",
+
+        reference:
+          "Blocked before report creation",
+
+        requestId:
+          cwnRequestId,
+
+        clientIdentifier,
+
+        details:
+          "The submission was rejected before delivery to the normal bug-report channel."
+      });
+
       return json(
         res,
         400,
@@ -960,6 +1240,46 @@ module.exports = async function handler(
       body.personalInformationScan !==
       "completed"
     ) {
+      await sendCwnStaffPrivacyAlert({
+        alertType:
+          "Protection check bypass attempt",
+
+        title:
+          "Personal-information scan was not completed",
+
+        severity:
+          "medium",
+
+        findingTypes:
+          sensitiveFindings.map(
+            (finding) =>
+              finding.type
+          ),
+
+        reporter:
+          report.reporter ||
+          "Unavailable",
+
+        service:
+          body.service ||
+          "Unknown",
+
+        category:
+          body.category ||
+          "Unknown",
+
+        reference:
+          "Rejected before report creation",
+
+        requestId:
+          cwnRequestId,
+
+        clientIdentifier,
+
+        details:
+          "The server rejected a submission that did not include a completed CWN Shield scan state."
+      });
+
       return json(
         res,
         400,
@@ -985,6 +1305,51 @@ module.exports = async function handler(
 
     const submittedAt =
       new Date();
+
+    if (
+      sensitiveFindings.length > 0 &&
+      body.personalInformationConfirmed ===
+        "on"
+    ) {
+      await sendCwnStaffPrivacyAlert({
+        alertType:
+          "Personal information retained",
+
+        title:
+          "Report contains confirmed personal information",
+
+        severity:
+          "high",
+
+        findingTypes:
+          sensitiveFindings.map(
+            (finding) =>
+              finding.type
+          ),
+
+        reporter:
+          report.reporter ||
+          "Unavailable",
+
+        service:
+          body.service ||
+          "Unknown",
+
+        category:
+          body.category ||
+          "Unknown",
+
+        reference,
+
+        requestId:
+          cwnRequestId,
+
+        clientIdentifier,
+
+        details:
+          "The reporter confirmed that the detected information is necessary and appropriate for CWN to receive. Staff should review access, handling and retention."
+      });
+    }
 
     const embedFields = [
       {
