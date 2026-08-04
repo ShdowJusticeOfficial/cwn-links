@@ -35,3 +35,12 @@ Thumbs.db
 *.swp
 .vercel
 .env*
+
+# Production build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Build reports
+build-report.json

@@ -1,0 +1,32 @@
+{
+  "name": "cwn-portal",
+  "version": "3.1.0",
+  "description": "The official **Community Watch Network (CWN)** links page, providing quick access to CWN services, projects, investigations, staff information, social platforms, public resources, and community tools.",
+  "main": "bug-report.js",
+  "scripts": {
+    "check": "node scripts/check-source.js",
+    "clean": "rm -rf dist build-report.json",
+    "build": "npm run check && node scripts/build.js && node scripts/check-dist.js",
+    "preview": "python -m http.server 8080 --directory dist",
+    "release": "npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShdowJusticeOfficial/cwn-links.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ShdowJusticeOfficial/cwn-links/issues"
+  },
+  "homepage": "https://github.com/ShdowJusticeOfficial/cwn-links#readme",
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "html-minifier-terser": "^7.2.0",
+    "javascript-obfuscator": "^5.5.0",
+    "terser": "^5.49.1"
+  },
+  "private": true
+}
