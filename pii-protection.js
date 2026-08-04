@@ -104,7 +104,7 @@
       severity: "high",
       redactable: true,
       pattern:
-        /(?<!\w)(?:\+?\d[\d ()-]{7,}\d)(?!\w)/g,
+        /(?:^|[^\w])(\+?\d[\d ()-]{7,}\d)(?=$|[^\w])/g,
       replacement: "[REDACTED PHONE NUMBER]",
       validate(match) {
         const digits =
@@ -129,7 +129,7 @@
       severity: "high",
       redactable: true,
       pattern:
-        /(?<!\d)-?(?:[0-8]?\d(?:\.\d{4,})?|90(?:\.0+)?)[,\s]+-?(?:1[0-7]\d(?:\.\d{4,})?|180(?:\.0+)?|\d?\d(?:\.\d{4,})?)(?!\d)/g,
+        /(?:^|[^\d])-?(?:[0-8]?\d(?:\.\d{4,})?|90(?:\.0+)?)[,\s]+-?(?:1[0-7]\d(?:\.\d{4,})?|180(?:\.0+)?|\d?\d(?:\.\d{4,})?)(?=$|[^\d])/g,
       replacement: "[REDACTED COORDINATES]"
     }
   ];
@@ -138,31 +138,73 @@
     text,
     detector
   ) => {
-    detector.pattern.lastIndex = 0;
+    const input =
+      String(text ?? "");
 
-    const matches = [
-      ...text.matchAll(
-        detector.pattern
-      )
-    ];
+    /*
+     * Use RegExp.exec instead of String.matchAll for compatibility
+     * with older Android and embedded VR browser engines.
+     */
+    const flags =
+      detector.pattern.flags.includes("g")
+        ? detector.pattern.flags
+        : `${detector.pattern.flags}g`;
 
-    return matches.filter((match) => {
+    const expression =
+      new RegExp(
+        detector.pattern.source,
+        flags
+      );
+
+    const matches = [];
+    let match;
+
+    while (
+      (
+        match =
+          expression.exec(input)
+      ) !== null
+    ) {
+      const matchedValue =
+        String(
+          match[0] ?? ""
+        );
+
       if (
-        detector.context &&
-        !detector.context.test(text)
+        detector.context
       ) {
-        return false;
+        detector.context.lastIndex = 0;
+
+        if (
+          !detector.context.test(input)
+        ) {
+          continue;
+        }
       }
 
       if (
         detector.validate &&
-        !detector.validate(match[0])
+        !detector.validate(
+          matchedValue
+        )
       ) {
-        return false;
+        continue;
       }
 
-      return true;
-    });
+      matches.push(match);
+
+      /*
+       * Prevent an infinite loop if a future detector can match an
+       * empty string.
+       */
+      if (
+        matchedValue.length === 0
+      ) {
+        expression.lastIndex += 1;
+      }
+    }
+
+    return matches;
   };
 
   const scanText = (

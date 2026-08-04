@@ -331,25 +331,66 @@
   };
 
   const scanPiiContent = () => {
-    const protection =
-      window.CWNPersonalInfoProtection;
+    try {
+      const protection =
+        window.CWNPersonalInfoProtection;
 
-    if (!protection) {
+      if (
+        !protection ||
+        typeof protection.scanText !==
+          "function"
+      ) {
+        throw new Error(
+          "The personal-information scanner did not load."
+        );
+      }
+
+      if (
+        !piiStatus ||
+        !piiFindings
+      ) {
+        throw new Error(
+          "The personal-information protection interface is incomplete."
+        );
+      }
+
+      piiStatus.className =
+        "pii-protection-status";
+
+      piiStatus.textContent =
+        "Checking report content…";
+
+      const findings =
+        protection.scanText(
+          getPiiProtectedText()
+        );
+
+      renderPiiScan(findings);
+
+      return findings;
+    } catch (error) {
+      console.error(
+        "CWN Shield scan failed:",
+        error
+      );
+
+      if (piiStatus) {
+        piiStatus.className =
+          "pii-protection-status pii-protection-status-critical";
+
+        piiStatus.textContent =
+          `The protection check failed: ${
+            error.message ||
+            "Unknown scanner error"
+          }`;
+      }
+
       showMessage(
-        "CWN Shield Personal Information Protection could not be loaded."
+        "CWN Shield could not check the report. Reload the page and try again."
       );
 
       return [];
     }
-
-    const findings =
-      protection.scanText(
-        getPiiProtectedText()
-      );
-
-    renderPiiScan(findings);
-
-    return findings;
   };
 
   const redactPiiContent = () => {
@@ -426,6 +467,21 @@
       const counter =
         document.getElementById(counterId);
 
+      if (
+        !field ||
+        !counter
+      ) {
+        console.warn(
+          "Missing counter field:",
+          {
+            fieldId,
+            counterId
+          }
+        );
+
+        return;
+      }
+
       const update = () => {
         counter.textContent =
           `${field.value.length} / ${maximum}`;
@@ -440,7 +496,7 @@
     }
   );
 
-  severity.addEventListener(
+  severity?.addEventListener(
     "change",
     updateSeverity
   );
@@ -474,7 +530,7 @@
     }
   );
 
-  form.addEventListener(
+  form?.addEventListener(
     "submit",
     async (event) => {
       event.preventDefault();
@@ -616,7 +672,7 @@
     }
   );
 
-  anotherButton.addEventListener(
+  anotherButton?.addEventListener(
     "click",
     () => {
       form.reset();
@@ -709,4 +765,12 @@
   }
 
   updateSeverity();
+
+  document.documentElement.dataset
+    .cwnBugReportReady =
+    "true";
+
+  console.log(
+    "CWN Bug Reporting frontend ready."
+  );
 })();
