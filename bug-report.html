@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Report a bug affecting the Community Watch Network portal or services."
+  >
+
+  <meta
+    name="theme-color"
+    content="#050806"
+  >
+
+  <title>Report a Bug | Community Watch Network</title>
+
+  <link rel="stylesheet" href="bug-report.css">
+</head>
+
+<body>
+  <div
+    class="bug-progress"
+    id="bug-progress"
+    aria-hidden="true"
+  ></div>
+
+  <main class="bug-page">
+    <nav class="bug-navigation">
+      <a href="index.html">
+        ← Back to CWN Portal
+      </a>
+
+      <span>
+        CWN-BUG-SYSTEM
+      </span>
+    </nav>
+
+    <header class="bug-hero">
+      <div>
+        <span class="bug-eyebrow">
+          CWN QUALITY ASSURANCE
+        </span>
+
+        <h1>
+          Report a Bug
+        </h1>
+
+        <p>
+          Report a technical problem affecting the CWN Portal,
+          Staff Directory, File Risk Scanner, public pages or another
+          Community Watch Network service.
+        </p>
+      </div>
+
+      <div class="bug-hero-status">
+        <span class="bug-status-dot"></span>
+
+        <div>
+          <strong>
+            Reporting system available
+          </strong>
+
+          <span>
+            Reports are sent securely to CWN
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <section class="bug-security-notice">
+      <span aria-hidden="true">
+        🔒
+      </span>
+
+      <div>
+        <strong>
+          Before submitting
+        </strong>
+
+        <p>
+          Do not include passwords, authentication tokens, private
+          evidence, home addresses, payment information, malware files
+          or other highly sensitive information. Use a safe evidence
+          link where appropriate.
+        </p>
+      </div>
+    </section>
+
+    <form
+      class="bug-form"
+      id="bug-report-form"
+      novalidate
+    >
+      <section class="bug-form-section">
+        <div class="bug-section-heading">
+          <span>
+            01
+          </span>
+
+          <div>
+            <h2>
+              Reporter Information
+            </h2>
+
+            <p>
+              Tell us how to identify or contact you about the report.
+            </p>
+          </div>
+        </div>
+
+        <div class="bug-form-grid">
+          <label class="bug-field">
+            <span>
+              Display name or Discord username
+              <strong>*</strong>
+            </span>
+
+            <input
+              id="reporter"
+              name="reporter"
+              type="text"
+              maxlength="80"
+              autocomplete="nickname"
+              placeholder="Example: Nexi or @username"
+              required
+            >
+
+            <small>
+              This will appear in the internal Discord report.
+            </small>
+          </label>
+
+          <label class="bug-field">
+            <span>
+              Contact information
+            </span>
+
+            <input
+              id="contact"
+              name="contact"
+              type="text"
+              maxlength="120"
+              placeholder="Discord username or email (optional)"
+            >
+
+            <small>
+              Optional, but useful if CWN needs more information.
+            </small>
+          </label>
+        </div>
+      </section>
+
+      <section class="bug-form-section">
+        <div class="bug-section-heading">
+          <span>
+            02
+          </span>
+
+          <div>
+            <h2>
+              Bug Classification
+            </h2>
+
+            <p>
+              Identify the affected service, category and severity.
+            </p>
+          </div>
+        </div>
+
+        <div class="bug-form-grid bug-form-grid-three">
+          <label class="bug-field">
+            <span>
+              Affected service
+              <strong>*</strong>
+            </span>
+
+            <select
+              id="service"
+              name="service"
+              required
+            >
+              <option value="">
+                Select a service
+              </option>
+
+              <option value="CWN Links Portal">
+                CWN Links Portal
+              </option>
+
+              <option value="Staff Directory">
+                Staff Directory
+              </option>
+
+              <option value="File Risk Scanner">
+                File Risk Scanner
+              </option>
+
+              <option value="Privacy Notice">
+                Privacy Notice
+              </option>
+
+              <option value="Discord Community">
+                Discord Community
+              </option>
+
+              <option value="VRChat Group">
+                VRChat Group
+              </option>
+
+              <option value="CWN Help Centre">
+                CWN Help Centre
+              </option>
+
+              <option value="Other CWN Service">
+                Other CWN Service
+              </option>
+            </select>
+          </label>
+
+          <label class="bug-field">
+            <span>
+              Category
+              <strong>*</strong>
+            </span>
+
+            <select
+              id="category"
+              name="category"
+              required
+            >
+              <option value="">
+                Select a category
+              </option>
+
+              <option value="Visual / Layout">
+                Visual / Layout
+              </option>
+
+              <option value="Mobile Compatibility">
+                Mobile Compatibility
+              </option>
+
+              <option value="Navigation">
+                Navigation
+              </option>
+
+              <option value="Search">
+                Search
+              </option>
+
+              <option value="Form Submission">
+                Form Submission
+              </option>
+
+              <option value="Broken Link">
+                Broken Link
+              </option>
+
+              <option value="Incorrect Information">
+                Incorrect Information
+              </option>
+
+              <option value="Accessibility">
+                Accessibility
+              </option>
+
+              <option value="Performance">
+                Performance
+              </option>
+
+              <option value="Security Concern">
+                Security Concern
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+            </select>
+          </label>
+
+          <label class="bug-field">
+            <span>
+              Severity
+              <strong>*</strong>
+            </span>
+
+            <select
+              id="severity"
+              name="severity"
+              required
+            >
+              <option value="">
+                Select severity
+              </option>
+
+              <option value="low">
+                Low — minor inconvenience
+              </option>
+
+              <option value="medium">
+                Medium — feature partly broken
+              </option>
+
+              <option value="high">
+                High — major feature unusable
+              </option>
+
+              <option value="critical">
+                Critical — security or total outage
+              </option>
+            </select>
+          </label>
+        </div>
+
+        <div
+          class="bug-severity-preview"
+          id="severity-preview"
+          hidden
+        >
+          <span
+            class="bug-severity-dot"
+            id="severity-dot"
+          ></span>
+
+          <div>
+            <strong id="severity-label"></strong>
+            <span id="severity-description"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="bug-form-section">
+        <div class="bug-section-heading">
+          <span>
+            03
+          </span>
+
+          <div>
+            <h2>
+              Bug Details
+            </h2>
+
+            <p>
+              Give CWN enough information to reproduce and investigate
+              the problem.
+            </p>
+          </div>
+        </div>
+
+        <label class="bug-field">
+          <span>
+            Report title
+            <strong>*</strong>
+          </span>
+
+          <input
+            id="title"
+            name="title"
+            type="text"
+            minlength="5"
+            maxlength="120"
+            placeholder="Short summary of the problem"
+            required
+          >
+
+          <div class="bug-field-footer">
+            <small>
+              Be clear and specific.
+            </small>
+
+            <small id="title-counter">
+              0 / 120
+            </small>
+          </div>
+        </label>
+
+        <label class="bug-field">
+          <span>
+            Detailed description
+            <strong>*</strong>
+          </span>
+
+          <textarea
+            id="description"
+            name="description"
+            minlength="20"
+            maxlength="1800"
+            rows="7"
+            placeholder="Explain what happened, when it started and how it affects you."
+            required
+          ></textarea>
+
+          <div class="bug-field-footer">
+            <small>
+              Include relevant context without sharing sensitive data.
+            </small>
+
+            <small id="description-counter">
+              0 / 1800
+            </small>
+          </div>
+        </label>
+
+        <div class="bug-form-grid">
+          <label class="bug-field">
+            <span>
+              Steps to reproduce
+              <strong>*</strong>
+            </span>
+
+            <textarea
+              id="steps"
+              name="steps"
+              minlength="10"
+              maxlength="1200"
+              rows="7"
+              placeholder="1. Open the page&#10;2. Select...&#10;3. The error appears"
+              required
+            ></textarea>
+
+            <div class="bug-field-footer">
+              <small>
+                Numbered steps are easiest to follow.
+              </small>
+
+              <small id="steps-counter">
+                0 / 1200
+              </small>
+            </div>
+          </label>
+
+          <div class="bug-stacked-fields">
+            <label class="bug-field">
+              <span>
+                Expected behaviour
+                <strong>*</strong>
+              </span>
+
+              <textarea
+                id="expected"
+                name="expected"
+                minlength="5"
+                maxlength="700"
+                rows="4"
+                placeholder="What should have happened?"
+                required
+              ></textarea>
+            </label>
+
+            <label class="bug-field">
+              <span>
+                Actual behaviour
+                <strong>*</strong>
+              </span>
+
+              <textarea
+                id="actual"
+                name="actual"
+                minlength="5"
+                maxlength="700"
+                rows="4"
+                placeholder="What happened instead?"
+                required
+              ></textarea>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="bug-form-section">
+        <div class="bug-section-heading">
+          <span>
+            04
+          </span>
+
+          <div>
+            <h2>
+              Technical Environment
+            </h2>
+
+            <p>
+              Device and browser information can help CWN reproduce the
+              issue.
+            </p>
+          </div>
+        </div>
+
+        <div class="bug-form-grid">
+          <label class="bug-field">
+            <span>
+              Device and operating system
+            </span>
+
+            <input
+              id="device"
+              name="device"
+              type="text"
+              maxlength="150"
+              placeholder="Example: Samsung A55, Android 16"
+            >
+          </label>
+
+          <label class="bug-field">
+            <span>
+              Browser or app version
+            </span>
+
+            <input
+              id="browser"
+              name="browser"
+              type="text"
+              maxlength="150"
+              placeholder="Example: Chrome Mobile 140"
+            >
+          </label>
+
+          <label class="bug-field">
+            <span>
+              Affected page URL
+            </span>
+
+            <input
+              id="pageUrl"
+              name="pageUrl"
+              type="url"
+              maxlength="500"
+              placeholder="https://cwn-links.vercel.app/..."
+            >
+          </label>
+
+          <label class="bug-field">
+            <span>
+              Screenshot or evidence link
+            </span>
+
+            <input
+              id="evidenceUrl"
+              name="evidenceUrl"
+              type="url"
+              maxlength="500"
+              placeholder="https://..."
+            >
+
+            <small>
+              Use a trusted link. Direct file uploads are not supported.
+            </small>
+          </label>
+        </div>
+
+        <label class="bug-field">
+          <span>
+            Additional notes
+          </span>
+
+          <textarea
+            id="notes"
+            name="notes"
+            maxlength="800"
+            rows="4"
+            placeholder="Anything else CWN should know?"
+          ></textarea>
+        </label>
+      </section>
+
+      <section class="bug-form-section bug-confirmation-section">
+        <div class="bug-section-heading">
+          <span>
+            05
+          </span>
+
+          <div>
+            <h2>
+              Review and Submit
+            </h2>
+
+            <p>
+              Confirm that the report is safe and accurate.
+            </p>
+          </div>
+        </div>
+
+        <label class="bug-checkbox">
+          <input
+            id="safe-content"
+            name="safeContent"
+            type="checkbox"
+            required
+          >
+
+          <span>
+            I confirm this report does not contain passwords,
+            authentication tokens, payment details, private addresses,
+            malware files or other highly sensitive information.
+          </span>
+        </label>
+
+        <label class="bug-checkbox">
+          <input
+            id="accurate-report"
+            name="accurateReport"
+            type="checkbox"
+            required
+          >
+
+          <span>
+            I confirm that this report is truthful to the best of my
+            knowledge and is not intentionally false, abusive or spam.
+          </span>
+        </label>
+
+        <label
+          class="bug-honeypot"
+          aria-hidden="true"
+        >
+          Leave this field empty
+
+          <input
+            name="companyWebsite"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+          >
+        </label>
+
+        <div
+          class="bug-form-message"
+          id="bug-form-message"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <div class="bug-submit-row">
+          <button
+            class="bug-submit-button"
+            id="bug-submit-button"
+            type="submit"
+          >
+            <span id="bug-submit-label">
+              Submit Bug Report
+            </span>
+
+            <span aria-hidden="true">
+              →
+            </span>
+          </button>
+
+          <p>
+            By submitting, the report will be sent to an internal CWN
+            Discord logging channel for review.
+          </p>
+        </div>
+      </section>
+    </form>
+
+    <section
+      class="bug-success"
+      id="bug-success"
+      hidden
+    >
+      <span class="bug-success-icon">
+        ✓
+      </span>
+
+      <span class="bug-eyebrow">
+        REPORT RECEIVED
+      </span>
+
+      <h2>
+        Thank you for helping improve CWN
+      </h2>
+
+      <p>
+        Your bug report was sent successfully. Keep the reference below
+        in case CWN asks for additional information.
+      </p>
+
+      <code id="bug-reference"></code>
+
+      <div class="bug-success-actions">
+        <button
+          id="submit-another-report"
+          type="button"
+        >
+          Submit another report
+        </button>
+
+        <a href="index.html">
+          Return to CWN Portal
+        </a>
+      </div>
+    </section>
+
+    <footer class="bug-footer">
+      <p>
+        Community Watch Network Bug Reporting System
+      </p>
+
+      <p>
+        Reports are for genuine technical issues. Emergency or immediate
+        safeguarding concerns should be directed to the appropriate
+        platform, emergency service or authority.
+      </p>
+
+      <a href="privacy.html">
+        Data & Privacy Notice
+      </a>
+    </footer>
+  </main>
+
+  <script src="bug-report.js"></script>
+</body>
+</html>
