@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050806">
+  <title>Changelog | Community Watch Network</title>
+  <link rel="stylesheet" href="phase2.css">
+  <script src="themes.js"></script>
+</head>
+<body>
+  <main class="p2-page">
+    
+<nav class="p2-nav">
+  <div class="p2-nav-links">
+    <a href="index.html">← Portal</a>
+    <a href="status.html">Status</a>
+    <a href="news.html">News</a>
+    <a href="faq.html">FAQ</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="changelog.html">Changelog</a>
+    <a href="search.html">Search</a>
+    <a href="patch-notes.html">Patch Notes</a>
+  </div>
+
+  <select class="p2-theme-select" data-theme-select aria-label="Portal theme">
+    <option value="cwn">CWN Green</option>
+    <option value="amoled">AMOLED</option>
+    <option value="blue">CWN Blue</option>
+    <option value="matrix">Matrix</option>
+    <option value="light">Light</option>
+  </select>
+</nav>
+
+
+    <header class="p2-hero">
+      <span class="p2-eyebrow">CWN RELEASE HISTORY</span>
+      <h1>Portal Changelog</h1>
+      <p>Search every published CWN Portal release, feature addition, correction and security improvement.</p>
+    </header>
+
+    
+    <section class="p2-section">
+      <div class="p2-section-heading">
+        <div>
+          <h2>Release history</h2>
+          <p>Version information is published for transparency and maintenance tracking.</p>
+        </div>
+        <span class="p2-id">CWN-CHANGELOG-0001</span>
+      </div>
+
+      <div class="p2-toolbar">
+        <input
+          class="p2-input"
+          id="changelog-search"
+          type="search"
+          placeholder="Search versions, features, fixes or security notes..."
+        >
+
+        <a class="p2-button" href="patch-notes.html">
+          Generate Patch Notes
+        </a>
+      </div>
+
+      <div class="p2-changelog" id="phase2-changelog"></div>
+    </section>
+    
+
+    <footer class="p2-footer">
+      Community Watch Network Portal · Phase 2 · v3.1.0
+    </footer>
+  </main>
+
+  <script src="phase2-data.js"></script>
+  <script src="phase2.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050806">
+  <title>Search | Community Watch Network</title>
+  <link rel="stylesheet" href="phase2.css">
+  <script src="themes.js"></script>
+</head>
+<body>
+  <main class="p2-page">
+    
+<nav class="p2-nav">
+  <div class="p2-nav-links">
+    <a href="index.html">← Portal</a>
+    <a href="status.html">Status</a>
+    <a href="news.html">News</a>
+    <a href="faq.html">FAQ</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="changelog.html">Changelog</a>
+    <a href="search.html">Search</a>
+    <a href="patch-notes.html">Patch Notes</a>
+  </div>
+
+  <select class="p2-theme-select" data-theme-select aria-label="Portal theme">
+    <option value="cwn">CWN Green</option>
+    <option value="amoled">AMOLED</option>
+    <option value="blue">CWN Blue</option>
+    <option value="matrix">Matrix</option>
+    <option value="light">Light</option>
+  </select>
+</nav>
+
+
+    <header class="p2-hero">
+      <span class="p2-eyebrow">CWN UNIVERSAL SEARCH</span>
+      <h1>Search the Portal</h1>
+      <p>Search CWN services, news, releases, public documents, staff resources, tools and frequently asked questions.</p>
+    </header>
+
+    
+    <section class="p2-section">
+      <div class="p2-section-heading">
+        <div>
+          <h2>Universal search</h2>
+          <p>The search index runs locally in your browser and does not transmit search terms to CWN.</p>
+        </div>
+        <span class="p2-id">CWN-SEARCH-0001</span>
+      </div>
+
+      <div class="p2-toolbar">
+        <input
+          class="p2-input"
+          id="universal-search"
+          type="search"
+          placeholder="Search the entire CWN Portal..."
+          autofocus
+        >
+      </div>
+
+      <div class="p2-grid" id="phase2-search-results"></div>
+    </section>
+    
+
+    <footer class="p2-footer">
+      Community Watch Network Portal · Phase 2 · v3.1.0
+    </footer>
+  </main>
+
+  <script src="phase2-data.js"></script>
+  <script src="phase2.js"></script>
+  
+</body>
+</html>

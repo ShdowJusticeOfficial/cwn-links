@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050806">
+
+  <title>Patch Note Generator | CWN</title>
+
+  <link rel="stylesheet" href="phase2.css">
+  <script src="themes.js"></script>
+</head>
+
+<body>
+  <main class="p2-page">
+    <nav class="p2-nav">
+      <div class="p2-nav-links">
+        <a href="index.html">← Portal</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="news.html">News</a>
+      </div>
+
+      <select class="p2-theme-select" data-theme-select aria-label="Portal theme">
+        <option value="cwn">CWN Green</option>
+        <option value="amoled">AMOLED</option>
+        <option value="blue">CWN Blue</option>
+        <option value="matrix">Matrix</option>
+        <option value="light">Light</option>
+      </select>
+    </nav>
+
+    <header class="p2-hero">
+      <span class="p2-eyebrow">
+        CWN RELEASE MANAGEMENT
+      </span>
+
+      <h1>
+        Patch Note Generator
+      </h1>
+
+      <p>
+        Build consistently formatted CWN release notes for Discord,
+        Markdown, GitHub, announcements and the public changelog.
+        Everything runs locally in your browser.
+      </p>
+    </header>
+
+    <section class="p2-section">
+      <div class="p2-section-heading">
+        <div>
+          <h2>
+            Release details
+          </h2>
+
+          <p>
+            Enter one item per line in each release category.
+          </p>
+        </div>
+
+        <span class="p2-id">
+          CWN-PATCH-GEN-0001
+        </span>
+      </div>
+
+      <div class="p2-generator-grid">
+        <form class="p2-form-stack" id="patch-note-form">
+          <label class="p2-field">
+            <span>Version</span>
+
+            <input
+              class="p2-input"
+              id="patch-version"
+              type="text"
+              placeholder="3.1.0"
+              value="3.1.0"
+            >
+          </label>
+
+          <label class="p2-field">
+            <span>Release title</span>
+
+            <input
+              class="p2-input"
+              id="patch-title"
+              type="text"
+              placeholder="CWN Portal Phase 2"
+              value="CWN Portal Phase 2"
+            >
+          </label>
+
+          <label class="p2-field">
+            <span>Release date</span>
+
+            <input
+              class="p2-input"
+              id="patch-date"
+              type="date"
+              value="2026-08-04"
+            >
+          </label>
+
+          <label class="p2-field">
+            <span>Summary</span>
+
+            <textarea
+              class="p2-textarea"
+              id="patch-summary"
+              placeholder="Briefly explain the release..."
+            >Expanded the CWN Portal with new public information, status, search and release-management tools.</textarea>
+          </label>
+
+          <label class="p2-field">
+            <span>Added</span>
+
+            <textarea
+              class="p2-textarea"
+              id="patch-added"
+              placeholder="One item per line"
+            >Service-status page
+Transparency dashboard
+Universal search
+Theme selector
+Patch-note generator</textarea>
+          </label>
+
+          <label class="p2-field">
+            <span>Changed</span>
+
+            <textarea
+              class="p2-textarea"
+              id="patch-changed"
+              placeholder="One item per line"
+            >Expanded portal navigation
+Updated Quick Actions</textarea>
+          </label>
+
+          <label class="p2-field">
+            <span>Fixed</span>
+
+            <textarea
+              class="p2-textarea"
+              id="patch-fixed"
+              placeholder="One item per line"
+            ></textarea>
+          </label>
+
+          <label class="p2-field">
+            <span>Security</span>
+
+            <textarea
+              class="p2-textarea"
+              id="patch-security"
+              placeholder="One item per line"
+            >Kept Phase 2 tools client-side without collecting additional visitor data</textarea>
+          </label>
+
+          <label class="p2-field">
+            <span>Output format</span>
+
+            <select class="p2-select" id="patch-format">
+              <option value="markdown">
+                Markdown / GitHub
+              </option>
+
+              <option value="discord">
+                Discord Announcement
+              </option>
+
+              <option value="plain">
+                Plain Text
+              </option>
+
+              <option value="json">
+                Changelog JSON Object
+              </option>
+            </select>
+          </label>
+
+          <button class="p2-button" type="submit">
+            Generate Patch Notes
+          </button>
+        </form>
+
+        <section>
+          <label class="p2-field">
+            <span>Generated output</span>
+
+            <textarea
+              class="p2-textarea p2-output"
+              id="patch-output"
+              readonly
+            ></textarea>
+          </label>
+
+          <div class="p2-copy-row">
+            <button
+              class="p2-button"
+              id="copy-patch-notes"
+              type="button"
+            >
+              Copy Output
+            </button>
+
+            <button
+              class="p2-button p2-button-secondary"
+              id="download-patch-notes"
+              type="button"
+            >
+              Download File
+            </button>
+
+            <button
+              class="p2-button p2-button-secondary"
+              id="clear-patch-notes"
+              type="button"
+            >
+              Clear
+            </button>
+          </div>
+
+          <p class="p2-card">
+            Patch-note content remains on your device unless you copy,
+            download or publish it yourself.
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <footer class="p2-footer">
+      Community Watch Network Patch Note Generator · CWN-PATCH-GEN-0001
+    </footer>
+  </main>
+
+  <script src="patch-notes.js"></script>
+</body>
+</html>
