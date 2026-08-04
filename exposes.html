@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Published investigations, exposés and public-interest reports from Community Watch Network."
+  >
+
+  <meta
+    name="theme-color"
+    content="#050806"
+  >
+
+  <meta
+    property="og:title"
+    content="CWN Exposés and Investigations"
+  >
+
+  <meta
+    property="og:description"
+    content="Evidence-based investigations and public-interest reporting from Community Watch Network."
+  >
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <title>CWN Exposés and Investigations</title>
+
+  <link
+    rel="stylesheet"
+    href="phase2.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="exposes.css"
+  >
+
+  <script src="themes.js"></script>
+</head>
+
+<body>
+  <div
+    class="exposes-progress"
+    id="exposes-progress"
+    aria-hidden="true"
+  ></div>
+
+  <main class="exposes-page">
+    <nav class="exposes-nav">
+      <a
+        class="exposes-brand"
+        href="index.html"
+      >
+        <span class="exposes-brand-mark">
+          CWN
+        </span>
+
+        <span>
+          Community Watch Network
+        </span>
+      </a>
+
+      <div class="exposes-nav-links">
+        <a href="index.html">
+          Portal
+        </a>
+
+        <a href="news.html">
+          News
+        </a>
+
+        <a
+          href="exposes.html"
+          aria-current="page"
+        >
+          Exposés
+        </a>
+
+        <a href="transparency.html">
+          Transparency
+        </a>
+
+        <select
+          class="exposes-theme-select"
+          data-theme-select
+          aria-label="Portal theme"
+        >
+          <option value="cwn">
+            CWN Green
+          </option>
+
+          <option value="amoled">
+            AMOLED
+          </option>
+
+          <option value="blue">
+            CWN Blue
+          </option>
+
+          <option value="matrix">
+            Matrix
+          </option>
+
+          <option value="light">
+            Light
+          </option>
+        </select>
+      </div>
+    </nav>
+
+    <header class="exposes-hero">
+      <div class="exposes-hero-content">
+        <span class="exposes-eyebrow">
+          CWN PUBLIC-INTEREST REPORTING
+        </span>
+
+        <h1>
+          Exposés and Investigations
+        </h1>
+
+        <p>
+          Community Watch Network publishes evidence-based
+          investigations into online communities, platforms, scams,
+          misconduct, abuse and public-safety concerns.
+        </p>
+
+        <div class="exposes-hero-actions">
+          <a
+            class="exposes-button exposes-button-primary"
+            href="#investigations"
+          >
+            Browse investigations
+          </a>
+
+          <a
+            class="exposes-button"
+            href="bug-report.html"
+          >
+            Submit information
+          </a>
+        </div>
+      </div>
+
+      <aside class="exposes-hero-status">
+        <span class="exposes-status-label">
+          PUBLICATION STATUS
+        </span>
+
+        <strong>
+          Section established
+        </strong>
+
+        <p>
+          Investigation pages will be added after evidence review,
+          verification and editorial preparation.
+        </p>
+
+        <div class="exposes-status-row">
+          <span>
+            Reference
+          </span>
+
+          <code>
+            CWN-EXP-0001
+          </code>
+        </div>
+      </aside>
+    </header>
+
+    <section class="exposes-notice">
+      <span
+        class="exposes-notice-icon"
+        aria-hidden="true"
+      >
+        ⚖️
+      </span>
+
+      <div>
+        <strong>
+          Evidence, allegations and analysis are kept separate
+        </strong>
+
+        <p>
+          CWN aims to clearly distinguish verified material, allegations,
+          witness statements, responses and CWN analysis. Reports may be
+          corrected or updated when new information becomes available.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="exposes-section"
+      id="investigations"
+    >
+      <div class="exposes-section-heading">
+        <div>
+          <span class="exposes-section-label">
+            INVESTIGATIONS
+          </span>
+
+          <h2>
+            Published and upcoming reports
+          </h2>
+
+          <p>
+            Cases will appear here once they are ready for public
+            release.
+          </p>
+        </div>
+
+        <span class="exposes-count">
+          1 upcoming · 0 published
+        </span>
+      </div>
+
+      <div class="exposes-toolbar">
+        <label class="exposes-search">
+          <span class="sr-only">
+            Search investigations
+          </span>
+
+          <input
+            id="exposes-search"
+            type="search"
+            placeholder="Search investigations, platforms or topics"
+            autocomplete="off"
+          >
+        </label>
+
+        <select
+          id="exposes-category-filter"
+          class="exposes-filter"
+          aria-label="Filter by category"
+        >
+          <option value="all">
+            All categories
+          </option>
+
+          <option value="gaming">
+            Gaming communities
+          </option>
+
+          <option value="discord">
+            Discord servers
+          </option>
+
+          <option value="vr">
+            VR communities
+          </option>
+
+          <option value="scams">
+            Scams and fraud
+          </option>
+
+          <option value="cybersecurity">
+            Cybersecurity
+          </option>
+
+          <option value="community-safety">
+            Community safety
+          </option>
+        </select>
+
+        <select
+          id="exposes-status-filter"
+          class="exposes-filter"
+          aria-label="Filter by status"
+        >
+          <option value="all">
+            All statuses
+          </option>
+
+          <option value="published">
+            Published
+          </option>
+
+          <option value="ongoing">
+            Ongoing
+          </option>
+
+          <option value="awaiting-response">
+            Awaiting response
+          </option>
+
+          <option value="archived">
+            Archived
+          </option>
+        </select>
+      </div>
+
+      <div
+        class="exposes-grid"
+        id="exposes-grid"
+      >
+
+        <article
+          class="exposes-card exposes-upcoming-card"
+          id="vanadium-expose-card"
+          data-title="vanadium investigation pompous fudge"
+          data-category="community-safety"
+          data-status="ongoing"
+        >
+          <div class="exposes-card-top">
+            <span class="exposes-card-reference">
+              CWN-EXP-VANADIUM
+            </span>
+
+            <span
+              class="exposes-status exposes-status-ongoing"
+              id="vanadium-release-status"
+            >
+              Upcoming
+            </span>
+          </div>
+
+          <div class="exposes-placeholder-icon">
+            ⏳
+          </div>
+
+          <h3>
+            Vanadium Investigation
+          </h3>
+
+          <p>
+            CWN is preparing a public-interest report concerning
+            Vanadium. The report is scheduled for release at midnight
+            as Friday turns into Saturday.
+          </p>
+
+          <div
+            class="exposes-countdown"
+            id="vanadium-countdown"
+            data-release-time="2026-08-08T00:00:00+01:00"
+            aria-live="polite"
+          >
+            <div>
+              <strong id="vanadium-days">
+                00
+              </strong>
+
+              <span>
+                Days
+              </span>
+            </div>
+
+            <div>
+              <strong id="vanadium-hours">
+                00
+              </strong>
+
+              <span>
+                Hours
+              </span>
+            </div>
+
+            <div>
+              <strong id="vanadium-minutes">
+                00
+              </strong>
+
+              <span>
+                Minutes
+              </span>
+            </div>
+
+            <div>
+              <strong id="vanadium-seconds">
+                00
+              </strong>
+
+              <span>
+                Seconds
+              </span>
+            </div>
+          </div>
+
+          <div class="exposes-release-details">
+            <span>
+              Scheduled release
+            </span>
+
+            <strong>
+              Saturday, 8 August 2026 · 00:00 UK time
+            </strong>
+          </div>
+
+          <div class="exposes-video-placeholder">
+            <span class="exposes-video-icon">
+              ▶
+            </span>
+
+            <div>
+              <strong>
+                Pompous Fudge video
+              </strong>
+
+              <p id="vanadium-video-description">
+                The video will be added here after it is publicly
+                released.
+              </p>
+            </div>
+          </div>
+
+          <a
+            class="exposes-card-action exposes-card-action-disabled"
+            id="vanadium-video-link"
+            href="#"
+            aria-disabled="true"
+          >
+            Video link coming soon
+          </a>
+        </article>
+
+        <article
+          class="exposes-card exposes-placeholder-card"
+          data-title="future investigation"
+          data-category="community-safety"
+          data-status="ongoing"
+        >
+          <div class="exposes-card-top">
+            <span class="exposes-card-reference">
+              CWN-EXP-PENDING
+            </span>
+
+            <span class="exposes-status exposes-status-ongoing">
+              In preparation
+            </span>
+          </div>
+
+          <div class="exposes-placeholder-icon">
+            🔎
+          </div>
+
+          <h3>
+            First public investigation coming soon
+          </h3>
+
+          <p>
+            CWN is preparing the structure for future evidence-based
+            investigations and public-interest reporting.
+          </p>
+
+          <div class="exposes-card-meta">
+            <span>
+              Evidence review required
+            </span>
+
+            <span>
+              Publication date pending
+            </span>
+          </div>
+
+          <span class="exposes-card-action exposes-card-action-disabled">
+            Not yet published
+          </span>
+        </article>
+
+        <article
+          class="exposes-card exposes-placeholder-card"
+          data-title="case archive"
+          data-category="community-safety"
+          data-status="archived"
+        >
+          <div class="exposes-card-top">
+            <span class="exposes-card-reference">
+              CWN-EXP-ARCHIVE
+            </span>
+
+            <span class="exposes-status exposes-status-archived">
+              Archive
+            </span>
+          </div>
+
+          <div class="exposes-placeholder-icon">
+            🗃️
+          </div>
+
+          <h3>
+            Investigation archive
+          </h3>
+
+          <p>
+            Closed, corrected or historical reports will be retained
+            here with clear update and correction histories.
+          </p>
+
+          <div class="exposes-card-meta">
+            <span>
+              No archived reports
+            </span>
+
+            <span>
+              Public access planned
+            </span>
+          </div>
+
+          <span class="exposes-card-action exposes-card-action-disabled">
+            Archive empty
+          </span>
+        </article>
+
+        <article
+          class="exposes-card exposes-placeholder-card"
+          data-title="submit evidence"
+          data-category="community-safety"
+          data-status="ongoing"
+        >
+          <div class="exposes-card-top">
+            <span class="exposes-card-reference">
+              CWN-EVD-SUBMIT
+            </span>
+
+            <span class="exposes-status exposes-status-open">
+              Open
+            </span>
+          </div>
+
+          <div class="exposes-placeholder-icon">
+            📥
+          </div>
+
+          <h3>
+            Have relevant information?
+          </h3>
+
+          <p>
+            Submit information through CWN’s reporting system. Do not
+            submit passwords, access tokens, private addresses or
+            unlawfully obtained material.
+          </p>
+
+          <div class="exposes-card-meta">
+            <span>
+              Privacy checks enabled
+            </span>
+
+            <span>
+              Staff review required
+            </span>
+          </div>
+
+          <a
+            class="exposes-card-action"
+            href="bug-report.html"
+          >
+            Contact CWN →
+          </a>
+        </article>
+      </div>
+
+      <div
+        class="exposes-empty"
+        id="exposes-empty"
+        hidden
+      >
+        <span>
+          No matching investigations
+        </span>
+
+        <p>
+          Try changing the search text or filters.
+        </p>
+      </div>
+    </section>
+
+    <section class="exposes-section">
+      <div class="exposes-section-heading">
+        <div>
+          <span class="exposes-section-label">
+            CATEGORIES
+          </span>
+
+          <h2>
+            Areas CWN may investigate
+          </h2>
+        </div>
+      </div>
+
+      <div class="exposes-category-grid">
+        <article class="exposes-category-card">
+          <span>
+            🎮
+          </span>
+
+          <h3>
+            Gaming communities
+          </h3>
+
+          <p>
+            Safety, moderation and conduct concerns across online games.
+          </p>
+        </article>
+
+        <article class="exposes-category-card">
+          <span>
+            💬
+          </span>
+
+          <h3>
+            Discord servers
+          </h3>
+
+          <p>
+            Abuse, scams, unsafe moderation and community misconduct.
+          </p>
+        </article>
+
+        <article class="exposes-category-card">
+          <span>
+            🥽
+          </span>
+
+          <h3>
+            VR communities
+          </h3>
+
+          <p>
+            Reports involving VRChat, Rec Room and social VR spaces.
+          </p>
+        </article>
+
+        <article class="exposes-category-card">
+          <span>
+            💳
+          </span>
+
+          <h3>
+            Scams and fraud
+          </h3>
+
+          <p>
+            Deceptive conduct, impersonation and financial exploitation.
+          </p>
+        </article>
+
+        <article class="exposes-category-card">
+          <span>
+            🔐
+          </span>
+
+          <h3>
+            Cybersecurity
+          </h3>
+
+          <p>
+            Malware, compromised services and preventable security risks.
+          </p>
+        </article>
+
+        <article class="exposes-category-card">
+          <span>
+            🛡️
+          </span>
+
+          <h3>
+            Community safety
+          </h3>
+
+          <p>
+            Safeguarding, harassment and broader online-safety concerns.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="exposes-section">
+      <div class="exposes-section-heading">
+        <div>
+          <span class="exposes-section-label">
+            PROCESS
+          </span>
+
+          <h2>
+            How an investigation reaches publication
+          </h2>
+
+          <p>
+            Publication should occur only after appropriate review and
+            verification.
+          </p>
+        </div>
+      </div>
+
+      <ol class="exposes-process">
+        <li>
+          <span>
+            01
+          </span>
+
+          <div>
+            <strong>
+              Report received
+            </strong>
+
+            <p>
+              CWN receives a report or identifies a public-interest
+              concern.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span>
+            02
+          </span>
+
+          <div>
+            <strong>
+              Initial assessment
+            </strong>
+
+            <p>
+              Staff assess scope, safety, relevance and available
+              information.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span>
+            03
+          </span>
+
+          <div>
+            <strong>
+              Evidence collection
+            </strong>
+
+            <p>
+              Relevant material is collected, organised and assigned
+              evidence references.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span>
+            04
+          </span>
+
+          <div>
+            <strong>
+              Verification
+            </strong>
+
+            <p>
+              Claims, dates, sources and evidence are reviewed for
+              accuracy and context.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span>
+            05
+          </span>
+
+          <div>
+            <strong>
+              Right of reply
+            </strong>
+
+            <p>
+              Where appropriate, relevant subjects are invited to
+              provide a response.
+            </p>
+          </div>
+        </li>
+
+        <li>
+          <span>
+            06
+          </span>
+
+          <div>
+            <strong>
+              Publication and updates
+            </strong>
+
+            <p>
+              The report is published with corrections and update
+              history retained.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="exposes-standards">
+      <div>
+        <span class="exposes-section-label">
+          PUBLICATION STANDARDS
+        </span>
+
+        <h2>
+          Before you read
+        </h2>
+      </div>
+
+      <div class="exposes-standards-grid">
+        <article>
+          <strong>
+            Allegations are identified
+          </strong>
+
+          <p>
+            Unverified claims must not be presented as established fact.
+          </p>
+        </article>
+
+        <article>
+          <strong>
+            Responses are preserved
+          </strong>
+
+          <p>
+            Relevant replies, denials and clarifications should be shown
+            fairly.
+          </p>
+        </article>
+
+        <article>
+          <strong>
+            Corrections remain visible
+          </strong>
+
+          <p>
+            Material changes should be recorded in an update history.
+          </p>
+        </article>
+
+        <article>
+          <strong>
+            Private information is limited
+          </strong>
+
+          <p>
+            Personal information should only be included where necessary,
+            lawful and proportionate.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="exposes-footer">
+      <div>
+        <strong>
+          Community Watch Network
+        </strong>
+
+        <span>
+          Building safer communities through awareness,
+          accountability and action.
+        </span>
+      </div>
+
+      <div class="exposes-footer-links">
+        <a href="privacy.html">
+          Privacy
+        </a>
+
+        <a href="transparency.html">
+          Transparency
+        </a>
+
+        <a href="security-status.html">
+          CWN Shield
+        </a>
+
+        <a href="index.html">
+          Portal
+        </a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="exposes.js"></script>
+</body>
+</html>
