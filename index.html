@@ -37,6 +37,8 @@
 
   <link rel="stylesheet" href="staff-directory.css">
   <link rel="stylesheet" href="cwn-tools.css">
+  <link rel="stylesheet" href="portal.css">
+
 
 
   <style>
@@ -832,8 +834,754 @@
     }
   </style>
 </head>
-<body>
+<body id="top">
+
+  <div
+    class="portal-progress"
+    aria-hidden="true"
+  >
+    <div
+      class="portal-progress-fill"
+      id="portal-progress-fill"
+    ></div>
+  </div>
+
+  <nav
+    class="portal-nav"
+    aria-label="CWN portal navigation"
+  >
+    <a
+      class="portal-nav-brand"
+      href="#top"
+    >
+      <span class="portal-nav-logo">
+        CWN
+      </span>
+
+      <span class="portal-nav-brand-text">
+        <strong>
+          Community Watch Network
+        </strong>
+
+        <span>
+          Official Portal
+        </span>
+      </span>
+    </a>
+
+    <div
+      class="portal-nav-links"
+      id="portal-nav-links"
+    >
+      <a
+        class="portal-nav-link"
+        href="#portal-dashboard"
+      >
+        Dashboard
+      </a>
+
+      <a
+        class="portal-nav-link"
+        href="#portal-status"
+      >
+        Status
+      </a>
+
+      <a
+        class="portal-nav-link"
+        href="#our-mission"
+      >
+        Mission
+      </a>
+
+      <a
+        class="portal-nav-link"
+        href="#staff-directory"
+      >
+        Staff
+      </a>
+
+      <a
+        class="portal-nav-link"
+        href="#malware-scanner"
+      >
+        Scanner
+      </a>
+
+      <button
+        class="portal-nav-button portal-nav-search"
+        type="button"
+        data-open-portal-search
+      >
+        Search ⌕
+      </button>
+    </div>
+
+    <button
+      class="portal-nav-button portal-nav-menu-button"
+      id="portal-nav-menu-button"
+      type="button"
+      aria-expanded="false"
+      aria-controls="portal-nav-links"
+      aria-label="Open navigation menu"
+    >
+      ☰
+    </button>
+  </nav>
+
+
   <main class="page">
+
+      <section
+        class="portal-dashboard"
+        id="portal-dashboard"
+      >
+        <div class="portal-dashboard-grid">
+          <div>
+            <span class="portal-eyebrow">
+              CWN PORTAL · PHASE 1
+            </span>
+
+            <h2>
+              Safer communities through awareness,
+              accountability and action.
+            </h2>
+
+            <p class="portal-dashboard-intro">
+              Welcome to the official Community Watch Network portal.
+              Access CWN services, public information, staff
+              verification, safety tools, support resources and
+              organisational updates from one central location.
+            </p>
+
+            <div class="portal-dashboard-actions">
+              <a
+                class="portal-primary-action"
+                href="mailto:Communityshieldofficial@gmail.com?subject=CWN%20Incident%20Report"
+              >
+                🚨 Report an Incident
+              </a>
+
+              <a
+                class="portal-secondary-action"
+                href="mailto:Communityshieldofficial@gmail.com?subject=CWN%20Support%20Request"
+              >
+                🎫 Get Support
+              </a>
+
+              <button
+                class="portal-secondary-action"
+                type="button"
+                data-open-portal-search
+              >
+                ⌕ Search Portal
+              </button>
+            </div>
+          </div>
+
+          <aside class="portal-dashboard-panel">
+            <span class="portal-panel-label">
+              ORGANISATION STATUS
+            </span>
+
+            <div class="portal-overall-status">
+              <span
+                class="portal-overall-status-dot"
+                aria-hidden="true"
+              ></span>
+
+              <div>
+                <strong>
+                  Operational
+                </strong>
+
+                <span>
+                  Core public services available
+                </span>
+              </div>
+            </div>
+
+            <div class="portal-review-time">
+              <span aria-hidden="true">
+                ◷
+              </span>
+
+              <span>
+                Manually reviewed:
+                <strong
+                  id="portal-reviewed-time"
+                  data-review-date="2026-08-04"
+                >
+                  4 August 2026
+                </strong>
+              </span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section
+        class="portal-section"
+        id="portal-quick-actions"
+      >
+        <div class="portal-section-header">
+          <div>
+            <span class="portal-eyebrow">
+              FAST ACCESS
+            </span>
+
+            <h2>
+              Quick Actions
+            </h2>
+
+            <p>
+              Go directly to CWN’s most important public services,
+              information and safety tools.
+            </p>
+          </div>
+
+          <span class="portal-section-id">
+            CWN-PORTAL-0001
+          </span>
+        </div>
+
+        <div class="portal-quick-actions">
+          <a
+            class="portal-action-card"
+            href="mailto:Communityshieldofficial@gmail.com?subject=CWN%20Incident%20Report"
+          >
+            <span class="portal-action-icon">
+              🚨
+            </span>
+
+            <strong>
+              Report an Incident
+            </strong>
+
+            <span>
+              Contact CWN about an online-safety concern or incident.
+            </span>
+
+            <span class="portal-action-arrow">
+              Open report channel →
+            </span>
+          </a>
+
+          <a
+            class="portal-action-card"
+            href="mailto:Communityshieldofficial@gmail.com?subject=CWN%20Support%20Request"
+          >
+            <span class="portal-action-icon">
+              🎫
+            </span>
+
+            <strong>
+              Get Support
+            </strong>
+
+            <span>
+              Request assistance, guidance or help with a CWN service.
+            </span>
+
+            <span class="portal-action-arrow">
+              Contact support →
+            </span>
+          </a>
+
+          <a
+            class="portal-action-card"
+            href="#staff-directory"
+          >
+            <span class="portal-action-icon">
+              👥
+            </span>
+
+            <strong>
+              Verify CWN Staff
+            </strong>
+
+            <span>
+              Search Executive Leadership, Directors and vacancies.
+            </span>
+
+            <span class="portal-action-arrow">
+              Open directory →
+            </span>
+          </a>
+
+          <a
+            class="portal-action-card"
+            href="#malware-scanner"
+          >
+            <span class="portal-action-icon">
+              🛡️
+            </span>
+
+            <strong>
+              Scan a File
+            </strong>
+
+            <span>
+              Perform a basic local risk check without uploading it.
+            </span>
+
+            <span class="portal-action-arrow">
+              Open scanner →
+            </span>
+          </a>
+
+          <a
+            class="portal-action-card"
+            href="#our-mission"
+          >
+            <span class="portal-action-icon">
+              📖
+            </span>
+
+            <strong>
+              About CWN
+            </strong>
+
+            <span>
+              Read CWN’s mission, values and organisational boundaries.
+            </span>
+
+            <span class="portal-action-arrow">
+              Read mission →
+            </span>
+          </a>
+
+          <a
+            class="portal-action-card"
+            href="privacy.html"
+          >
+            <span class="portal-action-icon">
+              🔒
+            </span>
+
+            <strong>
+              Data & Privacy
+            </strong>
+
+            <span>
+              See what this page collects, processes and does not collect.
+            </span>
+
+            <span class="portal-action-arrow">
+              Read notice →
+            </span>
+          </a>
+
+          <a
+            class="portal-action-card"
+            href="https://discord.gg/W5qQhjPWak"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="portal-action-icon">
+              💬
+            </span>
+
+            <strong>
+              Join the Discord
+            </strong>
+
+            <span>
+              Access CWN announcements, support and community channels.
+            </span>
+
+            <span class="portal-action-arrow">
+              Join server ↗
+            </span>
+          </a>
+
+          <a
+            class="portal-action-card"
+            href="https://vrc.group/CWN.3366"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="portal-action-icon">
+              🥽
+            </span>
+
+            <strong>
+              VRChat Group
+            </strong>
+
+            <span>
+              Open the official Community Watch Network VRChat group.
+            </span>
+
+            <span class="portal-action-arrow">
+              Open group ↗
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section
+        class="portal-section"
+        id="portal-status"
+      >
+        <div class="portal-section-header">
+          <div>
+            <span class="portal-eyebrow">
+              SERVICE AVAILABILITY
+            </span>
+
+            <h2>
+              CWN Service Status
+            </h2>
+
+            <p>
+              A manually maintained overview of CWN’s currently
+              available public services.
+            </p>
+          </div>
+
+          <span class="portal-section-id">
+            CWN-STATUS-0001
+          </span>
+        </div>
+
+        <div class="portal-status-grid">
+          <article class="portal-status-card">
+            <span
+              class="portal-service-dot portal-service-operational"
+              aria-hidden="true"
+            ></span>
+
+            <div>
+              <strong>
+                Links Portal
+              </strong>
+
+              <span>
+                Operational
+              </span>
+            </div>
+          </article>
+
+          <article class="portal-status-card">
+            <span
+              class="portal-service-dot portal-service-operational"
+              aria-hidden="true"
+            ></span>
+
+            <div>
+              <strong>
+                Discord Community
+              </strong>
+
+              <span>
+                Operational
+              </span>
+            </div>
+          </article>
+
+          <article class="portal-status-card">
+            <span
+              class="portal-service-dot portal-service-operational"
+              aria-hidden="true"
+            ></span>
+
+            <div>
+              <strong>
+                Staff Directory
+              </strong>
+
+              <span>
+                Operational
+              </span>
+            </div>
+          </article>
+
+          <article class="portal-status-card">
+            <span
+              class="portal-service-dot portal-service-operational"
+              aria-hidden="true"
+            ></span>
+
+            <div>
+              <strong>
+                File Risk Scanner
+              </strong>
+
+              <span>
+                Operational
+              </span>
+            </div>
+          </article>
+
+          <article class="portal-status-card">
+            <span
+              class="portal-service-dot portal-service-operational"
+              aria-hidden="true"
+            ></span>
+
+            <div>
+              <strong>
+                Support Contact
+              </strong>
+
+              <span>
+                Operational
+              </span>
+            </div>
+          </article>
+
+          <article class="portal-status-card">
+            <span
+              class="portal-service-dot portal-service-limited"
+              aria-hidden="true"
+            ></span>
+
+            <div>
+              <strong>
+                Recruitment
+              </strong>
+
+              <span>
+                Limited vacancies
+              </span>
+            </div>
+          </article>
+        </div>
+
+        <p class="portal-status-manual">
+          Status information is reviewed manually and does not represent
+          automated uptime monitoring.
+        </p>
+      </section>
+
+      <section
+        class="portal-section"
+        id="portal-vision"
+      >
+        <div class="portal-section-header">
+          <div>
+            <span class="portal-eyebrow">
+              DIRECTION AND PURPOSE
+            </span>
+
+            <h2>
+              Mission & Vision
+            </h2>
+
+            <p>
+              The principles guiding Community Watch Network’s current
+              work and long-term development.
+            </p>
+          </div>
+
+          <span class="portal-section-id">
+            CWN-MISSION-0002
+          </span>
+        </div>
+
+        <div class="portal-vision-grid">
+          <article class="portal-vision-card">
+            <span>
+              OUR MISSION
+            </span>
+
+            <h3>
+              Safer, informed and accountable communities
+            </h3>
+
+            <p>
+              CWN works to support people affected by online harm,
+              improve awareness, document credible concerns and help
+              communities respond responsibly and proportionately.
+            </p>
+          </article>
+
+          <article class="portal-vision-card">
+            <span>
+              OUR VISION
+            </span>
+
+            <h3>
+              A connected network built around trust and safety
+            </h3>
+
+            <p>
+              CWN aims to develop accessible safety resources, dependable
+              support systems and transparent community tools that help
+              people recognise risks and make better-informed decisions.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="portal-section"
+        id="portal-statistics"
+      >
+        <div class="portal-section-header">
+          <div>
+            <span class="portal-eyebrow">
+              ORGANISATION OVERVIEW
+            </span>
+
+            <h2>
+              CWN Statistics
+            </h2>
+
+            <p>
+              A current manual overview of the organisation and this
+              public portal.
+            </p>
+          </div>
+
+          <span class="portal-section-id">
+            CWN-STATS-0001
+          </span>
+        </div>
+
+        <div class="portal-statistics">
+          <article class="portal-stat-card">
+            <strong
+              class="portal-stat-value"
+              data-portal-count="9"
+            >
+              0
+            </strong>
+
+            <span class="portal-stat-label">
+              Appointed Leaders
+            </span>
+
+            <span class="portal-stat-detail">
+              Executive Leadership and active Directors
+            </span>
+          </article>
+
+          <article class="portal-stat-card">
+            <strong
+              class="portal-stat-value"
+              data-portal-count="10"
+            >
+              0
+            </strong>
+
+            <span class="portal-stat-label">
+              Directorates
+            </span>
+
+            <span class="portal-stat-detail">
+              CWN organisational departments
+            </span>
+          </article>
+
+          <article class="portal-stat-card">
+            <strong
+              class="portal-stat-value"
+              data-portal-count="4"
+            >
+              0
+            </strong>
+
+            <span class="portal-stat-label">
+              Director Vacancies
+            </span>
+
+            <span class="portal-stat-detail">
+              Currently unfilled Director roles
+            </span>
+          </article>
+
+          <article class="portal-stat-card">
+            <strong
+              class="portal-stat-value"
+              data-portal-count="13"
+            >
+              0
+            </strong>
+
+            <span class="portal-stat-label">
+              Deputy Vacancies
+            </span>
+
+            <span class="portal-stat-detail">
+              Executive and Directorate Deputy roles
+            </span>
+          </article>
+
+          <article class="portal-stat-card">
+            <strong
+              class="portal-stat-value"
+              data-portal-count="6"
+            >
+              0
+            </strong>
+
+            <span class="portal-stat-label">
+              Public Services
+            </span>
+
+            <span class="portal-stat-detail">
+              Listed in the current status panel
+            </span>
+          </article>
+
+          <article class="portal-stat-card">
+            <strong
+              class="portal-stat-value"
+              data-portal-count="1"
+            >
+              0
+            </strong>
+
+            <span class="portal-stat-label">
+              Local Safety Tool
+            </span>
+
+            <span class="portal-stat-detail">
+              Browser-based File Risk Scanner
+            </span>
+          </article>
+
+          <article class="portal-stat-card">
+            <strong
+              class="portal-stat-value"
+              data-portal-count="550"
+              data-portal-suffix=" GBP"
+            >
+              0
+            </strong>
+
+            <span class="portal-stat-label">
+              Fundraising Goal
+            </span>
+
+            <span class="portal-stat-detail">
+              Infrastructure and development support
+            </span>
+          </article>
+
+          <article class="portal-stat-card">
+            <strong
+              class="portal-stat-value"
+              data-portal-count="3"
+              data-portal-suffix=".0"
+            >
+              0
+            </strong>
+
+            <span class="portal-stat-label">
+              Portal Version
+            </span>
+
+            <span class="portal-stat-detail">
+              Phase 1 foundation release
+            </span>
+          </article>
+        </div>
+      </section>
+
+
     <section class="profile">
 
       <div class="logo">
@@ -1785,6 +2533,8 @@
 
 
   <script src="malware-scanner.js"></script>
+  <script src="portal.js"></script>
+
   <script src="staff-data.js"></script>
   <script src="staff-directory.js"></script>
 
@@ -1846,5 +2596,51 @@
       }
     );
   </script>
+
+  <div
+    class="portal-search-overlay"
+    id="portal-search-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Search CWN portal"
+    hidden
+  >
+    <div class="portal-search-dialog">
+      <div class="portal-search-header">
+        <input
+          class="portal-search-input"
+          id="portal-search-input"
+          type="search"
+          placeholder="Search staff, tools, mission, links and services..."
+          autocomplete="off"
+        >
+
+        <button
+          class="portal-search-close"
+          id="portal-search-close"
+          type="button"
+          aria-label="Close search"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div
+        class="portal-search-results"
+        id="portal-search-results"
+      ></div>
+    </div>
+  </div>
+
+  <button
+    class="portal-back-to-top"
+    id="portal-back-to-top"
+    type="button"
+    aria-label="Back to top"
+    hidden
+  >
+    ↑
+  </button>
+
 </body>
 </html>
