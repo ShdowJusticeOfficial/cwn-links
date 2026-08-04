@@ -14,7 +14,8 @@ module.exports = {
     "patch-notes.js",
     "bug-report.js",
     "malware-scanner.js",
-    "staff-directory.js"
+    "staff-directory.js",
+    "pii-protection.js"
   ],
 
   /*
@@ -53,7 +54,8 @@ module.exports = {
     "phase2.css",
     "cwn-tools.css",
     "staff-directory.css",
-    "bug-report.css"
+    "bug-report.css",
+    "pii-protection.css"
   ],
 
   staticFiles: [

@@ -139,6 +139,108 @@ function cleanText(
   return cleaned;
 }
 
+const sensitiveContentDetectors = [
+  {
+    type: "Private key",
+    highRisk: true,
+    pattern:
+      /-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----/i
+  },
+  {
+    type: "Discord credential",
+    highRisk: true,
+    pattern:
+      /(?:mfa\.[A-Za-z0-9_-]{20,}|[A-Za-z0-9_-]{23,28}\.[A-Za-z0-9_-]{6}\.[A-Za-z0-9_-]{25,})/
+  },
+  {
+    type: "JWT or bearer token",
+    highRisk: true,
+    pattern:
+      /(?:Bearer\s+)?eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{8,}/i
+  },
+  {
+    type: "GitHub token",
+    highRisk: true,
+    pattern:
+      /\b(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{30,255}\b/
+  },
+  {
+    type: "AWS access key",
+    highRisk: true,
+    pattern:
+      /\b(?:AKIA|ASIA)[A-Z0-9]{16}\b/
+  },
+  {
+    type: "Google API key",
+    highRisk: true,
+    pattern:
+      /\bAIza[0-9A-Za-z_-]{30,45}\b/
+  },
+  {
+    type: "Generic secret",
+    highRisk: true,
+    pattern:
+      /\b(?:api[_ -]?key|secret|token|password|passwd)\s*[:=]\s*["']?[A-Za-z0-9._~+/=-]{12,}["']?/i
+  },
+  {
+    type: "Email address",
+    highRisk: false,
+    pattern:
+      /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i
+  },
+  {
+    type: "IPv4 address",
+    highRisk: false,
+    pattern:
+      /\b(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)\b/
+  },
+  {
+    type: "UK postcode",
+    highRisk: false,
+    pattern:
+      /\b(?:GIR\s?0AA|[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2})\b/i
+  }
+];
+
+function scanSensitiveReportContent(
+  report
+) {
+  /*
+   * Contact information is intentionally omitted because users may
+   * voluntarily supply a contact address in the dedicated field.
+   */
+  const content = [
+    report.title,
+    report.description,
+    report.steps,
+    report.expected,
+    report.actual,
+    report.device,
+    report.browser,
+    report.pageUrl,
+    report.evidenceUrl,
+    report.notes
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  return sensitiveContentDetectors
+    .filter(
+      (detector) =>
+        detector.pattern.test(
+          content
+        )
+    )
+    .map(
+      (detector) => ({
+        type:
+          detector.type,
+        highRisk:
+          detector.highRisk
+      })
+    );
+}
+
 function neutraliseMentions(value) {
   return value
     .replace(/@everyone/gi, "@\u200beveryone")
@@ -788,6 +890,85 @@ module.exports = async function handler(
         report.evidenceUrl,
         "Evidence URL"
       );
+
+    const sensitiveFindings =
+      scanSensitiveReportContent(
+        report
+      );
+
+    const highRiskFindings =
+      sensitiveFindings.filter(
+        (finding) =>
+          finding.highRisk
+      );
+
+    if (
+      highRiskFindings.length > 0
+    ) {
+      console.warn(
+        "CWN Shield blocked high-risk content:",
+        highRiskFindings.map(
+          (finding) =>
+            finding.type
+        )
+      );
+
+      return json(
+        res,
+        400,
+        {
+          error:
+            "CWN Shield detected a credential, token, private key or other high-risk secret. Remove it before submitting.",
+
+          protection:
+            "CWN Shield Personal Information Protection",
+
+          findingTypes:
+            highRiskFindings.map(
+              (finding) =>
+                finding.type
+            )
+        }
+      );
+    }
+
+    if (
+      sensitiveFindings.length > 0 &&
+      body.personalInformationConfirmed !==
+        "on"
+    ) {
+      return json(
+        res,
+        400,
+        {
+          error:
+            "Possible personal information was detected. Review, redact or explicitly confirm it before submitting.",
+
+          protection:
+            "CWN Shield Personal Information Protection",
+
+          findingTypes:
+            sensitiveFindings.map(
+              (finding) =>
+                finding.type
+            )
+        }
+      );
+    }
+
+    if (
+      body.personalInformationScan !==
+      "completed"
+    ) {
+      return json(
+        res,
+        400,
+        {
+          error:
+            "Complete the CWN Shield personal-information check before submitting."
+        }
+      );
+    }
 
     for (
       const key of

@@ -46,6 +46,44 @@
     ["steps", "steps-counter", 1200]
   ];
 
+  const piiScanButton =
+    document.querySelector("#pii-scan-button");
+
+  const piiRedactButton =
+    document.querySelector("#pii-redact-button");
+
+  const piiStatus =
+    document.querySelector("#pii-protection-status");
+
+  const piiFindings =
+    document.querySelector("#pii-findings");
+
+  const piiConfirmation =
+    document.querySelector("#pii-confirmation");
+
+  const piiConfirmationCheckbox =
+    document.querySelector("#pii-confirmation-checkbox");
+
+  const piiProtectedFieldIds = [
+    "title",
+    "description",
+    "steps",
+    "expected",
+    "actual",
+    "device",
+    "browser",
+    "pageUrl",
+    "evidenceUrl",
+    "notes"
+  ];
+
+  let piiScanState = {
+    scanned: false,
+    findings: [],
+    hasHighRisk: false,
+    fingerprint: ""
+  };
+
   let turnstileVerified = false;
 
   window.cwnTurnstileComplete = () => {
@@ -136,9 +174,223 @@
     const data =
       new FormData(form);
 
+    data.set(
+      "personalInformationScan",
+      piiScanState.scanned
+        ? "completed"
+        : "not-completed"
+    );
+
     return Object.fromEntries(
       data.entries()
     );
+  };
+
+  const getPiiProtectedText = () =>
+    piiProtectedFieldIds
+      .map((fieldId) => {
+        const field =
+          document.getElementById(fieldId);
+
+        return field?.value || "";
+      })
+      .join("\n");
+
+  const getPiiFingerprint = () =>
+    getPiiProtectedText();
+
+  const resetPiiState = () => {
+    piiScanState = {
+      scanned: false,
+      findings: [],
+      hasHighRisk: false,
+      fingerprint: ""
+    };
+
+    if (piiStatus) {
+      piiStatus.className =
+        "pii-protection-status";
+
+      piiStatus.textContent =
+        "Report content changed. Run the check again before submitting.";
+    }
+
+    if (piiFindings) {
+      piiFindings.hidden = true;
+      piiFindings.replaceChildren();
+    }
+
+    if (piiRedactButton) {
+      piiRedactButton.hidden = true;
+    }
+
+    if (piiConfirmation) {
+      piiConfirmation.hidden = true;
+    }
+
+    if (piiConfirmationCheckbox) {
+      piiConfirmationCheckbox.checked =
+        false;
+    }
+  };
+
+  const renderPiiScan = (findings) => {
+    const hasHighRisk =
+      findings.some(
+        (finding) =>
+          finding.highRisk
+      );
+
+    const hasRedactable =
+      findings.some(
+        (finding) =>
+          finding.redactable
+      );
+
+    piiScanState = {
+      scanned: true,
+      findings,
+      hasHighRisk,
+      fingerprint:
+        getPiiFingerprint()
+    };
+
+    piiFindings.replaceChildren();
+
+    if (findings.length === 0) {
+      piiStatus.className =
+        "pii-protection-status pii-protection-status-safe";
+
+      piiStatus.textContent =
+        "No obvious personal-information or credential patterns were detected.";
+
+      piiFindings.hidden = true;
+      piiRedactButton.hidden = true;
+      piiConfirmation.hidden = true;
+      piiConfirmationCheckbox.checked =
+        false;
+
+      return;
+    }
+
+    piiFindings.hidden = false;
+
+    findings.forEach((finding) => {
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "pii-finding";
+
+      const name =
+        document.createElement("strong");
+
+      name.textContent =
+        finding.type;
+
+      const detail =
+        document.createElement("span");
+
+      detail.textContent =
+        `${finding.count} possible ${
+          finding.count === 1
+            ? "match"
+            : "matches"
+        } · ${
+          finding.redactable
+            ? "Can be redacted"
+            : "Must be removed"
+        }`;
+
+      row.append(name, detail);
+      piiFindings.append(row);
+    });
+
+    if (hasHighRisk) {
+      piiStatus.className =
+        "pii-protection-status pii-protection-status-critical";
+
+      piiStatus.textContent =
+        "High-risk credential or secret patterns were detected. Remove them before submitting.";
+
+      piiConfirmation.hidden = true;
+      piiConfirmationCheckbox.checked =
+        false;
+    } else {
+      piiStatus.className =
+        "pii-protection-status pii-protection-status-warning";
+
+      piiStatus.textContent =
+        "Possible personal information was detected. Redact it or confirm that its inclusion is necessary.";
+
+      piiConfirmation.hidden = false;
+    }
+
+    piiRedactButton.hidden =
+      !hasRedactable;
+  };
+
+  const scanPiiContent = () => {
+    const protection =
+      window.CWNPersonalInfoProtection;
+
+    if (!protection) {
+      showMessage(
+        "CWN Shield Personal Information Protection could not be loaded."
+      );
+
+      return [];
+    }
+
+    const findings =
+      protection.scanText(
+        getPiiProtectedText()
+      );
+
+    renderPiiScan(findings);
+
+    return findings;
+  };
+
+  const redactPiiContent = () => {
+    const protection =
+      window.CWNPersonalInfoProtection;
+
+    if (!protection) {
+      return;
+    }
+
+    piiProtectedFieldIds.forEach(
+      (fieldId) => {
+        const field =
+          document.getElementById(
+            fieldId
+          );
+
+        if (!field?.value) {
+          return;
+        }
+
+        const result =
+          protection.redactText(
+            field.value
+          );
+
+        field.value =
+          result.text;
+
+        field.dispatchEvent(
+          new Event(
+            "input",
+            {
+              bubbles: true
+            }
+          )
+        );
+      }
+    );
+
+    scanPiiContent();
   };
 
   const updateSeverity = () => {
@@ -193,6 +445,35 @@
     updateSeverity
   );
 
+  piiScanButton?.addEventListener(
+    "click",
+    scanPiiContent
+  );
+
+  piiRedactButton?.addEventListener(
+    "click",
+    redactPiiContent
+  );
+
+  piiProtectedFieldIds.forEach(
+    (fieldId) => {
+      document
+        .getElementById(fieldId)
+        ?.addEventListener(
+          "input",
+          () => {
+            if (
+              piiScanState.scanned &&
+              piiScanState.fingerprint !==
+                getPiiFingerprint()
+            ) {
+              resetPiiState();
+            }
+          }
+        );
+    }
+  );
+
   form.addEventListener(
     "submit",
     async (event) => {
@@ -212,6 +493,39 @@
       if (!turnstileVerified) {
         showMessage(
           "Please complete the human verification before submitting."
+        );
+
+        return;
+      }
+
+      if (
+        !piiScanState.scanned ||
+        piiScanState.fingerprint !==
+          getPiiFingerprint()
+      ) {
+        scanPiiContent();
+
+        showMessage(
+          "Review the CWN Shield personal-information check before submitting."
+        );
+
+        return;
+      }
+
+      if (piiScanState.hasHighRisk) {
+        showMessage(
+          "Remove all detected credentials, tokens, secrets or private keys before submitting."
+        );
+
+        return;
+      }
+
+      if (
+        piiScanState.findings.length > 0 &&
+        !piiConfirmationCheckbox.checked
+      ) {
+        showMessage(
+          "Redact the detected personal information or confirm that its inclusion is necessary."
         );
 
         return;
@@ -323,6 +637,7 @@
       hideMessage();
 
       turnstileVerified = false;
+      resetPiiState();
 
       if (
         window.turnstile &&

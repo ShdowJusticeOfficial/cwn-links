@@ -556,6 +556,37 @@
 
 
 
+
+    <section class="section">
+      <h2>
+        Personal-information protection
+      </h2>
+
+      <p>
+        The CWN bug-report form performs local pattern matching before
+        submission to identify information that may unintentionally
+        identify a person or expose an account credential. This may
+        include email addresses, phone numbers, IP addresses, postal
+        codes, coordinates, access tokens, API credentials and private
+        keys.
+      </p>
+
+      <p>
+        The browser check does not send detected values to a separate
+        analysis service. The report is checked again by the CWN
+        server-side endpoint to prevent the browser protection from
+        being bypassed.
+      </p>
+
+      <p>
+        High-risk credentials and private keys are rejected. Other
+        possible personal information must be redacted or explicitly
+        confirmed before submission. Detection is based on patterns and
+        may produce false positives or fail to recognise unusual
+        formats.
+      </p>
+    </section>
+
     <section class="section">
       <h2>
         Human verification and abuse prevention

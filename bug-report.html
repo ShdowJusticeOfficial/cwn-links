@@ -21,6 +21,8 @@
   <title>Report a Bug | Community Watch Network</title>
 
   <link rel="stylesheet" href="bug-report.css">
+  <link rel="stylesheet" href="pii-protection.css">
+
 </head>
 
 <body>
@@ -628,6 +630,91 @@
           >
         </label>
 
+
+        <section
+          class="pii-protection-panel"
+          id="pii-protection-panel"
+          aria-labelledby="pii-protection-title"
+        >
+          <div class="pii-protection-heading">
+            <span
+              class="pii-protection-icon"
+              aria-hidden="true"
+            >
+              🛡️
+            </span>
+
+            <div>
+              <strong id="pii-protection-title">
+                CWN Shield – Personal Information Protection
+              </strong>
+
+              <p>
+                Before submission, CWN Shield checks report content for
+                information that could unintentionally identify a person
+                or expose an account credential.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="pii-protection-status"
+            id="pii-protection-status"
+          >
+            The report has not been checked yet.
+          </div>
+
+          <div
+            class="pii-findings"
+            id="pii-findings"
+            hidden
+          ></div>
+
+          <div class="pii-protection-actions">
+            <button
+              class="pii-protection-button"
+              id="pii-scan-button"
+              type="button"
+            >
+              Check Report
+            </button>
+
+            <button
+              class="pii-protection-button pii-protection-button-secondary"
+              id="pii-redact-button"
+              type="button"
+              hidden
+            >
+              Redact Detected Information
+            </button>
+          </div>
+
+          <label
+            class="pii-confirmation"
+            id="pii-confirmation"
+            hidden
+          >
+            <input
+              id="pii-confirmation-checkbox"
+              name="personalInformationConfirmed"
+              type="checkbox"
+              value="on"
+            >
+
+            <span>
+              I reviewed the warning and confirm that any remaining
+              personal information is necessary, lawful and appropriate
+              for CWN to receive.
+            </span>
+          </label>
+
+          <p class="pii-protection-note">
+            This check is advisory and may produce false positives or
+            miss unusual formats. High-risk credentials and private
+            keys cannot be submitted.
+          </p>
+        </section>
+
         <div
           class="bug-form-message"
           id="bug-form-message"
@@ -714,6 +801,8 @@
     </footer>
   </main>
 
+
+  <script src="pii-protection.js"></script>
   <script src="bug-report.js"></script>
 </body>
 </html>
