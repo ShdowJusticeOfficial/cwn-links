@@ -36,6 +36,8 @@
   <title>Community Watch Network</title>
 
   <link rel="stylesheet" href="staff-directory.css">
+  <link rel="stylesheet" href="cwn-tools.css">
+
 
   <style>
     * {
@@ -1046,6 +1048,260 @@
       </div>
 
 
+
+      <section
+        class="cwn-mission"
+        id="our-mission"
+        aria-labelledby="mission-title"
+      >
+        <span class="cwn-section-label">
+          WHY CWN EXISTS
+        </span>
+
+        <h2 id="mission-title">
+          Our Mission
+        </h2>
+
+        <p class="cwn-mission-intro">
+          Community Watch Network exists to help create safer,
+          better-informed and more accountable online communities.
+          CWN supports people affected by online harm, develops
+          practical safety resources and works with communities to
+          identify risks, document concerns and encourage responsible
+          action.
+        </p>
+
+        <div class="mission-grid">
+          <article class="mission-card">
+            <span class="mission-card-icon" aria-hidden="true">
+              🛡️
+            </span>
+
+            <h3>
+              Protect Communities
+            </h3>
+
+            <p>
+              Help communities identify online risks, improve safety
+              practices and respond appropriately to credible concerns.
+            </p>
+          </article>
+
+          <article class="mission-card">
+            <span class="mission-card-icon" aria-hidden="true">
+              📚
+            </span>
+
+            <h3>
+              Educate and Inform
+            </h3>
+
+            <p>
+              Publish accessible online-safety guidance, awareness
+              resources and information that helps people make safer
+              decisions.
+            </p>
+          </article>
+
+          <article class="mission-card">
+            <span class="mission-card-icon" aria-hidden="true">
+              ⚖️
+            </span>
+
+            <h3>
+              Act Responsibly
+            </h3>
+
+            <p>
+              Handle reports and evidence carefully, remain impartial
+              and encourage proportionate action through appropriate
+              platforms and authorities.
+            </p>
+          </article>
+        </div>
+
+        <div class="mission-boundary">
+          <strong>Important:</strong>
+          CWN is an independent community organisation. It is not a
+          police force, government agency, emergency service, court,
+          antivirus company or substitute for qualified legal,
+          safeguarding or cybersecurity professionals.
+        </div>
+      </section>
+
+      <section
+        class="malware-scanner"
+        id="malware-scanner"
+        aria-labelledby="scanner-title"
+      >
+        <div class="scanner-header">
+          <div>
+            <span class="cwn-section-label">
+              LOCAL SECURITY TOOL
+            </span>
+
+            <h2 id="scanner-title">
+              File Risk Scanner
+            </h2>
+
+            <p class="scanner-description">
+              Inspect a file for suspicious extensions, misleading
+              filenames, common executable signatures and other basic
+              risk indicators.
+            </p>
+          </div>
+
+          <span class="local-processing-badge">
+            LOCAL PROCESSING
+          </span>
+        </div>
+
+        <div class="scanner-privacy-notice">
+          <span aria-hidden="true">🔒</span>
+
+          <p>
+            The selected file is analysed inside your browser. CWN does
+            not upload, transmit, store or receive the file, its
+            contents, filename or calculated SHA-256 hash through this
+            scanner.
+          </p>
+        </div>
+
+        <input
+          class="scanner-file-input"
+          id="malware-file-input"
+          type="file"
+        >
+
+        <div
+          class="scanner-drop-zone"
+          id="scanner-drop-zone"
+          role="button"
+          tabindex="0"
+          aria-controls="malware-file-input"
+        >
+          <div>
+            <span class="scanner-drop-icon" aria-hidden="true">
+              📁
+            </span>
+
+            <strong>
+              Select or drop a file
+            </strong>
+
+            <small>
+              The file stays on your device. Recommended maximum:
+              100 MB.
+            </small>
+          </div>
+        </div>
+
+        <div
+          class="scanner-selected-file"
+          id="scanner-selected-file"
+          hidden
+        >
+          <span>File name</span>
+          <strong id="scanner-file-name"></strong>
+
+          <span>File size</span>
+          <strong id="scanner-file-size"></strong>
+
+          <span>Reported type</span>
+          <strong id="scanner-file-type"></strong>
+        </div>
+
+        <div class="scanner-controls">
+          <button
+            class="scanner-button"
+            id="scanner-scan-button"
+            type="button"
+            disabled
+          >
+            Scan File Locally
+          </button>
+
+          <button
+            class="scanner-button scanner-button-secondary"
+            id="scanner-clear-button"
+            type="button"
+            disabled
+          >
+            Clear File
+          </button>
+        </div>
+
+        <div
+          class="scanner-progress"
+          id="scanner-progress"
+          hidden
+        >
+          <div class="scanner-progress-bar">
+            <div
+              class="scanner-progress-fill"
+              id="scanner-progress-fill"
+            ></div>
+          </div>
+
+          <span
+            class="scanner-progress-text"
+            id="scanner-progress-text"
+          >
+            Preparing local analysis…
+          </span>
+        </div>
+
+        <div
+          class="scanner-result"
+          id="scanner-result"
+          hidden
+        >
+          <div class="scanner-result-header">
+            <span
+              class="scanner-risk-badge"
+              id="scanner-risk-badge"
+            >
+              Result
+            </span>
+
+            <h3 id="scanner-result-title">
+              Analysis complete
+            </h3>
+          </div>
+
+          <div
+            class="scanner-findings"
+            id="scanner-findings"
+          ></div>
+
+          <div class="scanner-hash">
+            <span class="scanner-result-label">
+              Locally calculated SHA-256
+            </span>
+
+            <code id="scanner-hash"></code>
+          </div>
+        </div>
+
+        <p class="scanner-disclaimer">
+          <strong>Scanner limitation:</strong>
+          this tool performs basic static checks only. A low-risk result
+          does not prove that a file is safe, and a warning does not
+          prove that a file is malicious. Do not open files from
+          untrusted sources. Use reputable, updated security software
+          for a full malware scan.
+        </p>
+
+        <div class="privacy-link-row">
+          <a
+            class="privacy-page-link"
+            href="privacy.html"
+          >
+            Read CWN’s Data & Privacy Notice →
+          </a>
+        </div>
+      </section>
+
       <section
         class="staff-directory"
         id="staff-directory"
@@ -1527,6 +1783,8 @@
     </section>
   </main>
 
+
+  <script src="malware-scanner.js"></script>
   <script src="staff-data.js"></script>
   <script src="staff-directory.js"></script>
 
