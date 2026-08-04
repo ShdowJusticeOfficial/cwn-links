@@ -12,10 +12,8 @@ module.exports = {
     "phase2.js",
     "themes.js",
     "patch-notes.js",
-    "bug-report.js",
     "malware-scanner.js",
     "staff-directory.js",
-    "pii-protection.js"
   ],
 
   /*
@@ -23,6 +21,9 @@ module.exports = {
    * or configuration rather than private application logic.
    */
   readableJavaScript: [
+    "exposes.js",
+    "bug-report.js",
+    "pii-protection.js",
     "phase2-data.js",
     "staff-data.js"
   ],
@@ -46,7 +47,8 @@ module.exports = {
     "downloads.html",
     "search.html",
     "patch-notes.html",
-    "security-status.html"
+    "security-status.html",
+    "exposes.html"
   ],
 
   cssFiles: [
@@ -55,7 +57,8 @@ module.exports = {
     "cwn-tools.css",
     "staff-directory.css",
     "bug-report.css",
-    "pii-protection.css"
+    "pii-protection.css",
+    "exposes.css"
   ],
 
   staticFiles: [
