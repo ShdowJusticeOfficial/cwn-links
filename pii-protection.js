@@ -141,18 +141,61 @@
     const input =
       String(text ?? "");
 
+    const pattern =
+      detector?.pattern;
+
     /*
-     * Use RegExp.exec instead of String.matchAll for compatibility
-     * with older Android and embedded VR browser engines.
+     * Do not use instanceof RegExp here because values created in
+     * another JavaScript realm can fail that check.
      */
+    if (
+      !pattern ||
+      typeof pattern.source !== "string"
+    ) {
+      console.warn(
+        "[CWN Shield] Detector has no valid pattern:",
+        detector?.type || "Unknown detector"
+      );
+
+      return [];
+    }
+
+    /*
+     * Some embedded browsers do not expose RegExp.flags reliably.
+     * Reconstruct the flags from individual properties when needed.
+     */
+    const detectedFlags =
+      typeof pattern.flags === "string"
+        ? pattern.flags
+        : [
+            pattern.global
+              ? "g"
+              : "",
+            pattern.ignoreCase
+              ? "i"
+              : "",
+            pattern.multiline
+              ? "m"
+              : "",
+            pattern.unicode
+              ? "u"
+              : "",
+            pattern.sticky
+              ? "y"
+              : "",
+            pattern.dotAll
+              ? "s"
+              : ""
+          ].join("");
+
     const flags =
-      detector.pattern.flags.includes("g")
-        ? detector.pattern.flags
-        : `${detector.pattern.flags}g`;
+      detectedFlags.includes("g")
+        ? detectedFlags
+        : `${detectedFlags}g`;
 
     const expression =
       new RegExp(
-        detector.pattern.source,
+        pattern.source,
         flags
       );
 
@@ -171,7 +214,9 @@
         );
 
       if (
-        detector.context
+        detector.context &&
+        typeof detector.context.test ===
+          "function"
       ) {
         detector.context.lastIndex = 0;
 
