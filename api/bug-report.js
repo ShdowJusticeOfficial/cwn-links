@@ -72,8 +72,35 @@ const rateLimitStore =
   globalThis.__cwnBugRateLimit ||
   new Map();
 
+const temporaryBlockStore =
+  globalThis.__cwnBugTemporaryBlocks ||
+  new Map();
+
 globalThis.__cwnBugRateLimit =
   rateLimitStore;
+
+globalThis.__cwnBugTemporaryBlocks =
+  temporaryBlockStore;
+
+const RATE_LIMITS = {
+  short: {
+    windowMs: 60 * 1000,
+    maximum: 3
+  },
+
+  medium: {
+    windowMs: 15 * 60 * 1000,
+    maximum: 8
+  },
+
+  long: {
+    windowMs: 24 * 60 * 60 * 1000,
+    maximum: 25
+  }
+};
+
+const TEMPORARY_BLOCK_MS =
+  60 * 60 * 1000;
 
 function cleanText(
   value,
@@ -199,15 +226,74 @@ function hashIp(ip) {
     .slice(0, 16);
 }
 
+function cleanupSecurityStores(now) {
+  for (
+    const [
+      identifier,
+      blockedUntil
+    ] of temporaryBlockStore
+  ) {
+    if (blockedUntil <= now) {
+      temporaryBlockStore.delete(
+        identifier
+      );
+    }
+  }
+
+  for (
+    const [
+      identifier,
+      timestamps
+    ] of rateLimitStore
+  ) {
+    const recent =
+      timestamps.filter(
+        (timestamp) =>
+          now - timestamp <
+          RATE_LIMITS.long.windowMs
+      );
+
+    if (recent.length === 0) {
+      rateLimitStore.delete(
+        identifier
+      );
+    } else {
+      rateLimitStore.set(
+        identifier,
+        recent
+      );
+    }
+  }
+}
+
 function checkRateLimit(identifier) {
   const now = Date.now();
 
-  const windowMs =
-    15 * 60 * 1000;
+  cleanupSecurityStores(now);
 
-  const maximumRequests = 5;
+  const blockedUntil =
+    temporaryBlockStore.get(
+      identifier
+    );
 
-  const recent =
+  if (
+    blockedUntil &&
+    blockedUntil > now
+  ) {
+    return {
+      allowed: false,
+      blocked: true,
+      retryAfterSeconds:
+        Math.ceil(
+          (blockedUntil - now) /
+          1000
+        ),
+      reason:
+        "temporary-block"
+    };
+  }
+
+  const timestamps =
     (
       rateLimitStore.get(
         identifier
@@ -215,163 +301,103 @@ function checkRateLimit(identifier) {
     ).filter(
       (timestamp) =>
         now - timestamp <
-        windowMs
+        RATE_LIMITS.long.windowMs
     );
 
-  if (
-    recent.length >=
-    maximumRequests
-  ) {
-    return false;
+  const exceeded =
+    Object.entries(
+      RATE_LIMITS
+    ).find(
+      ([
+        ,
+        limit
+      ]) =>
+        timestamps.filter(
+          (timestamp) =>
+            now - timestamp <
+            limit.windowMs
+        ).length >=
+        limit.maximum
+    );
+
+  if (exceeded) {
+    const [
+      tier,
+      limit
+    ] = exceeded;
+
+    /*
+     * Repeat abuse triggers a one-hour temporary block.
+     */
+    if (
+      tier === "medium" ||
+      tier === "long"
+    ) {
+      temporaryBlockStore.set(
+        identifier,
+        now +
+          TEMPORARY_BLOCK_MS
+      );
+
+      return {
+        allowed: false,
+        blocked: true,
+        retryAfterSeconds:
+          Math.ceil(
+            TEMPORARY_BLOCK_MS /
+            1000
+          ),
+        reason:
+          `${tier}-limit`
+      };
+    }
+
+    const oldestRelevant =
+      timestamps
+        .filter(
+          (timestamp) =>
+            now - timestamp <
+            limit.windowMs
+        )
+        .sort(
+          (a, b) => a - b
+        )[0];
+
+    return {
+      allowed: false,
+      blocked: false,
+      retryAfterSeconds:
+        Math.max(
+          1,
+          Math.ceil(
+            (
+              limit.windowMs -
+              (
+                now -
+                oldestRelevant
+              )
+            ) /
+            1000
+          )
+        ),
+      reason:
+        `${tier}-limit`
+    };
   }
 
-  recent.push(now);
+  timestamps.push(now);
 
   rateLimitStore.set(
     identifier,
-    recent
+    timestamps
   );
 
-  if (
-    rateLimitStore.size > 1000
-  ) {
-    for (
-      const [
-        key,
-        timestamps
-      ] of rateLimitStore
-    ) {
-      if (
-        timestamps.every(
-          (timestamp) =>
-            now - timestamp >=
-            windowMs
-        )
-      ) {
-        rateLimitStore.delete(key);
-      }
-    }
-  }
-
-  return true;
-}
-
-async function validateTurnstileToken({
-  token,
-  clientIp,
-  idempotencyKey
-}) {
-  const secret =
-    process.env.TURNSTILE_SECRET_KEY;
-
-  if (!secret) {
-    console.error(
-      "TURNSTILE_SECRET_KEY is not configured."
-    );
-
-    throw new Error(
-      "Human verification is temporarily unavailable."
-    );
-  }
-
-  if (
-    typeof token !== "string" ||
-    token.length < 10 ||
-    token.length > 2048
-  ) {
-    throw new Error(
-      "Human verification is required."
-    );
-  }
-
-  const formData =
-    new URLSearchParams();
-
-  formData.set(
-    "secret",
-    secret
-  );
-
-  formData.set(
-    "response",
-    token
-  );
-
-  if (
-    clientIp &&
-    clientIp !== "unknown"
-  ) {
-    formData.set(
-      "remoteip",
-      clientIp
-    );
-  }
-
-  if (idempotencyKey) {
-    formData.set(
-      "idempotency_key",
-      idempotencyKey
-    );
-  }
-
-  const response =
-    await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":
-            "application/x-www-form-urlencoded"
-        },
-        body: formData.toString(),
-        signal:
-          AbortSignal.timeout(8000)
-      }
-    );
-
-  if (!response.ok) {
-    console.error(
-      "Turnstile verification HTTP error:",
-      response.status
-    );
-
-    throw new Error(
-      "Human verification could not be validated."
-    );
-  }
-
-  const result =
-    await response.json();
-
-  if (!result.success) {
-    console.warn(
-      "Turnstile validation rejected:",
-      result["error-codes"] || []
-    );
-
-    throw new Error(
-      "Human verification failed or expired. Please try again."
-    );
-  }
-
-  const expectedHostname =
-    process.env.TURNSTILE_EXPECTED_HOSTNAME;
-
-  if (
-    expectedHostname &&
-    result.hostname !== expectedHostname
-  ) {
-    console.warn(
-      "Unexpected Turnstile hostname:",
-      result.hostname
-    );
-
-    throw new Error(
-      "Human verification was issued for an unexpected website."
-    );
-  }
-
-  return result;
+  return {
+    allowed: true,
+    blocked: false,
+    retryAfterSeconds: 0,
+    reason: "allowed"
+  };
 }
 
 function createReference() {
@@ -467,6 +493,34 @@ module.exports = async function handler(
       {
         error:
           "Only POST requests are supported."
+      }
+    );
+  }
+
+  if (
+    process.env
+      .CWN_SHIELD_LOCKDOWN ===
+    "enabled"
+  ) {
+    res.setHeader(
+      "Retry-After",
+      "900"
+    );
+
+    res.setHeader(
+      "X-CWN-Shield",
+      "lockdown"
+    );
+
+    return json(
+      res,
+      503,
+      {
+        error:
+          "Bug reporting is temporarily unavailable while CWN Shield protection is active.",
+
+        protection:
+          "CWN Shield Lockdown"
       }
     );
   }
@@ -592,17 +646,45 @@ module.exports = async function handler(
       getClientIp(req)
     );
 
-  if (
-    !checkRateLimit(
+  const rateLimitResult =
+    checkRateLimit(
       clientIdentifier
-    )
-  ) {
+    );
+
+  res.setHeader(
+    "X-CWN-Shield",
+    "active"
+  );
+
+  res.setHeader(
+    "X-CWN-Request-ID",
+    crypto.randomUUID()
+  );
+
+  if (!rateLimitResult.allowed) {
+    res.setHeader(
+      "Retry-After",
+      String(
+        rateLimitResult
+          .retryAfterSeconds
+      )
+    );
+
     return json(
       res,
       429,
       {
         error:
-          "Too many reports were submitted from this connection. Please try again later."
+          rateLimitResult.blocked
+            ? "This connection has been temporarily blocked because of repeated excessive submissions."
+            : "Too many reports were submitted. Please wait before trying again.",
+
+        protection:
+          "CWN Shield",
+
+        retryAfter:
+          rateLimitResult
+            .retryAfterSeconds
       }
     );
   }

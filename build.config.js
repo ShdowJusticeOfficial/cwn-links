@@ -44,7 +44,8 @@ module.exports = {
     "faq.html",
     "downloads.html",
     "search.html",
-    "patch-notes.html"
+    "patch-notes.html",
+    "security-status.html"
   ],
 
   cssFiles: [

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#050806"
+  >
+
+  <title>CWN Shield | Security Status</title>
+
+  <link
+    rel="stylesheet"
+    href="phase2.css"
+  >
+
+  <script src="themes.js"></script>
+</head>
+
+<body>
+  <main class="p2-page">
+    <nav class="p2-nav">
+      <div class="p2-nav-links">
+        <a href="index.html">
+          ← Portal
+        </a>
+
+        <a href="status.html">
+          Service Status
+        </a>
+
+        <a href="bug-report.html">
+          Report a Bug
+        </a>
+
+        <a href="privacy.html">
+          Privacy
+        </a>
+      </div>
+
+      <select
+        class="p2-theme-select"
+        data-theme-select
+        aria-label="Portal theme"
+      >
+        <option value="cwn">
+          CWN Green
+        </option>
+
+        <option value="amoled">
+          AMOLED
+        </option>
+
+        <option value="blue">
+          CWN Blue
+        </option>
+
+        <option value="matrix">
+          Matrix
+        </option>
+
+        <option value="light">
+          Light
+        </option>
+      </select>
+    </nav>
+
+    <header class="p2-hero">
+      <span class="p2-eyebrow">
+        CWN SECURITY OPERATIONS
+      </span>
+
+      <h1>
+        CWN Shield
+      </h1>
+
+      <p>
+        CWN Shield is the layered protection system used to reduce
+        automated abuse, traffic floods and attacks against Community
+        Watch Network public services.
+      </p>
+    </header>
+
+    <section class="p2-section">
+      <div class="p2-section-heading">
+        <div>
+          <h2>
+            Current Protection Status
+          </h2>
+
+          <p>
+            This page describes the public protection layers currently
+            used by the CWN Portal.
+          </p>
+        </div>
+
+        <span class="p2-id">
+          CWN-SHIELD-0001
+        </span>
+      </div>
+
+      <div class="p2-grid">
+        <article class="p2-card">
+          <div class="p2-card-meta">
+            <span class="p2-chip p2-chip-green">
+              ACTIVE
+            </span>
+          </div>
+
+          <h3>
+            Platform DDoS Mitigation
+          </h3>
+
+          <p>
+            Network and infrastructure-level mitigation is provided by
+            the CWN Portal hosting platform.
+          </p>
+        </article>
+
+        <article class="p2-card">
+          <div class="p2-card-meta">
+            <span class="p2-chip p2-chip-green">
+              ACTIVE
+            </span>
+          </div>
+
+          <h3>
+            Web Application Firewall
+          </h3>
+
+          <p>
+            Firewall rules can deny, challenge and rate-limit suspicious
+            requests before they reach CWN application logic.
+          </p>
+        </article>
+
+        <article class="p2-card">
+          <div class="p2-card-meta">
+            <span class="p2-chip p2-chip-green">
+              ACTIVE
+            </span>
+          </div>
+
+          <h3>
+            Turnstile Verification
+          </h3>
+
+          <p>
+            Human verification protects public submission forms against
+            automated spam and abuse.
+          </p>
+        </article>
+
+        <article class="p2-card">
+          <div class="p2-card-meta">
+            <span class="p2-chip p2-chip-green">
+              ACTIVE
+            </span>
+          </div>
+
+          <h3>
+            Tiered Rate Limiting
+          </h3>
+
+          <p>
+            Short, medium and long request windows reduce repeated
+            submissions and temporarily block persistent abuse.
+          </p>
+        </article>
+
+        <article class="p2-card">
+          <div class="p2-card-meta">
+            <span class="p2-chip p2-chip-green">
+              READY
+            </span>
+          </div>
+
+          <h3>
+            Emergency Lockdown
+          </h3>
+
+          <p>
+            CWN can temporarily disable non-essential submission
+            endpoints during a security incident.
+          </p>
+        </article>
+
+        <article class="p2-card">
+          <div class="p2-card-meta">
+            <span class="p2-chip p2-chip-green">
+              ACTIVE
+            </span>
+          </div>
+
+          <h3>
+            Request Validation
+          </h3>
+
+          <p>
+            Method, origin, size, content type and field validation
+            reject malformed or unexpected submissions.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="p2-section">
+      <h2>
+        Important limitation
+      </h2>
+
+      <p>
+        No public website can guarantee uninterrupted availability
+        during every attack. CWN Shield combines platform-level
+        mitigation and application-level controls to reduce risk,
+        preserve essential services and support a controlled response.
+      </p>
+    </section>
+
+    <footer class="p2-footer">
+      Community Watch Network · CWN Shield · CWN-SHIELD-0001
+    </footer>
+  </main>
+</body>
+</html>
