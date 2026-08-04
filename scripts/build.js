@@ -198,30 +198,59 @@ async function minifyJavaScript(
            * Moderate protection settings.
            * Avoid high-cost control-flow flattening.
            */
-          controlFlowFlattening: false,
+          /*
+           * Moderate control-flow protection. Keep the threshold low
+           * to avoid excessive bundle growth and performance loss.
+           */
+          controlFlowFlattening: true,
+          controlFlowFlatteningThreshold: 0.16,
+
+          /*
+           * Dead-code injection causes large bundles and is deliberately
+           * kept disabled.
+           */
           deadCodeInjection: false,
 
           stringArray: true,
-          stringArrayThreshold: 0.55,
+          stringArrayThreshold: 0.72,
           stringArrayEncoding: [
             "base64"
           ],
+          stringArrayCallsTransform: true,
+          stringArrayCallsTransformThreshold: 0.35,
+          stringArrayWrappersCount: 2,
+          stringArrayWrappersChainedCalls: true,
+          stringArrayWrappersParametersMaxCount: 3,
+          stringArrayWrappersType: "function",
+
           rotateStringArray: true,
           shuffleStringArray: true,
 
-          splitStrings: false,
+          splitStrings: true,
+          splitStringsChunkLength: 7,
+
+          numbersToExpressions: true,
+          simplify: true,
+          unicodeEscapeSequence: false,
+
+          /*
+           * These settings frequently interfere with debugging and
+           * browser compatibility, so they remain disabled.
+           */
           selfDefending: false,
           debugProtection: false,
+          debugProtectionInterval: 0,
           disableConsoleOutput: false,
 
           identifierNamesGenerator:
-            "hexadecimal",
+            "mangled-shuffled",
 
           renameGlobals: false,
+          renameProperties: false,
           transformObjectKeys: false,
 
           /*
-           * Use a deterministic seed for reproducible builds.
+           * Deterministic builds.
            */
           seed: 3366
         }

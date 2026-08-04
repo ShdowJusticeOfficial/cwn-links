@@ -256,6 +256,124 @@ function checkRateLimit(identifier) {
   return true;
 }
 
+async function validateTurnstileToken({
+  token,
+  clientIp,
+  idempotencyKey
+}) {
+  const secret =
+    process.env.TURNSTILE_SECRET_KEY;
+
+  if (!secret) {
+    console.error(
+      "TURNSTILE_SECRET_KEY is not configured."
+    );
+
+    throw new Error(
+      "Human verification is temporarily unavailable."
+    );
+  }
+
+  if (
+    typeof token !== "string" ||
+    token.length < 10 ||
+    token.length > 2048
+  ) {
+    throw new Error(
+      "Human verification is required."
+    );
+  }
+
+  const formData =
+    new URLSearchParams();
+
+  formData.set(
+    "secret",
+    secret
+  );
+
+  formData.set(
+    "response",
+    token
+  );
+
+  if (
+    clientIp &&
+    clientIp !== "unknown"
+  ) {
+    formData.set(
+      "remoteip",
+      clientIp
+    );
+  }
+
+  if (idempotencyKey) {
+    formData.set(
+      "idempotency_key",
+      idempotencyKey
+    );
+  }
+
+  const response =
+    await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/x-www-form-urlencoded"
+        },
+        body: formData.toString(),
+        signal:
+          AbortSignal.timeout(8000)
+      }
+    );
+
+  if (!response.ok) {
+    console.error(
+      "Turnstile verification HTTP error:",
+      response.status
+    );
+
+    throw new Error(
+      "Human verification could not be validated."
+    );
+  }
+
+  const result =
+    await response.json();
+
+  if (!result.success) {
+    console.warn(
+      "Turnstile validation rejected:",
+      result["error-codes"] || []
+    );
+
+    throw new Error(
+      "Human verification failed or expired. Please try again."
+    );
+  }
+
+  const expectedHostname =
+    process.env.TURNSTILE_EXPECTED_HOSTNAME;
+
+  if (
+    expectedHostname &&
+    result.hostname !== expectedHostname
+  ) {
+    console.warn(
+      "Unexpected Turnstile hostname:",
+      result.hostname
+    );
+
+    throw new Error(
+      "Human verification was issued for an unexpected website."
+    );
+  }
+
+  return result;
+}
+
 function createReference() {
   const date =
     new Date()
@@ -364,6 +482,49 @@ module.exports = async function handler(
     );
   }
 
+  const fetchSite =
+    String(
+      req.headers["sec-fetch-site"] ||
+      ""
+    ).toLowerCase();
+
+  if (
+    fetchSite &&
+    ![
+      "same-origin",
+      "same-site",
+      "none"
+    ].includes(fetchSite)
+  ) {
+    return json(
+      res,
+      403,
+      {
+        error:
+          "Cross-site submissions are not permitted."
+      }
+    );
+  }
+
+  const userAgent =
+    String(
+      req.headers["user-agent"] ||
+      ""
+    );
+
+  if (
+    userAgent.length > 700
+  ) {
+    return json(
+      res,
+      400,
+      {
+        error:
+          "Invalid request metadata."
+      }
+    );
+  }
+
   const contentType =
     String(
       req.headers[
@@ -464,6 +625,18 @@ module.exports = async function handler(
         }
       );
     }
+
+    const requestId =
+      crypto.randomUUID();
+
+    await validateTurnstileToken({
+      token:
+        body["cf-turnstile-response"],
+      clientIp:
+        getClientIp(req),
+      idempotencyKey:
+        requestId
+    });
 
     if (
       body.safeContent !== "on" ||

@@ -636,3 +636,40 @@ textarea {
     scroll-behavior: auto;
   }
 }
+
+.bug-turnstile-panel {
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 0.6fr)
+    minmax(280px, 1fr);
+  gap: 18px;
+  align-items: center;
+  margin-top: 17px;
+  padding: 16px;
+  border: 1px solid rgba(109, 169, 255, 0.18);
+  border-radius: 15px;
+  background: rgba(109, 169, 255, 0.05);
+}
+
+.bug-turnstile-panel strong {
+  display: block;
+  color: var(--blue);
+  font-size: 0.78rem;
+}
+
+.bug-turnstile-panel p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.cf-turnstile {
+  min-height: 65px;
+}
+
+@media (max-width: 650px) {
+  .bug-turnstile-panel {
+    grid-template-columns: 1fr;
+  }
+}

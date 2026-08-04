@@ -6,7 +6,7 @@
   "scripts": {
     "check": "node scripts/check-source.js",
     "clean": "rm -rf dist build-report.json",
-    "build": "npm run check && node scripts/build.js && node scripts/check-dist.js",
+    "build": "npm run check && node scripts/build.js && node scripts/check-dist.js && node scripts/check-secrets.js",
     "preview": "python -m http.server 8080 --directory dist",
     "release": "npm run clean && npm run build"
   },

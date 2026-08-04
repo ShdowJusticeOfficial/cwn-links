@@ -46,6 +46,29 @@
     ["steps", "steps-counter", 1200]
   ];
 
+  let turnstileVerified = false;
+
+  window.cwnTurnstileComplete = () => {
+    turnstileVerified = true;
+    hideMessage();
+  };
+
+  window.cwnTurnstileExpired = () => {
+    turnstileVerified = false;
+
+    showMessage(
+      "Human verification expired. Please complete it again."
+    );
+  };
+
+  window.cwnTurnstileError = () => {
+    turnstileVerified = false;
+
+    showMessage(
+      "Human verification could not be completed. Please reload the page or try again."
+    );
+  };
+
   const severityDetails = {
     low: {
       label: "Low severity",
@@ -186,6 +209,14 @@
         return;
       }
 
+      if (!turnstileVerified) {
+        showMessage(
+          "Please complete the human verification before submitting."
+        );
+
+        return;
+      }
+
       const lastSubmission =
         Number(
           localStorage.getItem(
@@ -290,6 +321,15 @@
       success.hidden = true;
       form.hidden = false;
       hideMessage();
+
+      turnstileVerified = false;
+
+      if (
+        window.turnstile &&
+        typeof window.turnstile.reset === "function"
+      ) {
+        window.turnstile.reset();
+      }
 
       window.scrollTo({
         top: 0,
