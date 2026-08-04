@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Community Watch Network data and privacy notice."
+  >
+
+  <meta
+    name="theme-color"
+    content="#050806"
+  >
+
+  <title>Data & Privacy Notice | CWN</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --background: #050806;
+      --card: rgba(14, 22, 16, 0.94);
+      --text: #f3fff6;
+      --muted: #a2b0a6;
+      --green: #58f58a;
+      --blue: #6da9ff;
+      --yellow: #ffd166;
+      --border: rgba(255, 255, 255, 0.09);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(
+          circle at top,
+          rgba(88, 245, 138, 0.08),
+          transparent 34%
+        ),
+        linear-gradient(
+          180deg,
+          #071009,
+          var(--background)
+        );
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    a {
+      color: var(--blue);
+    }
+
+    .page {
+      width: min(900px, calc(100% - 30px));
+      margin: 0 auto;
+      padding: 38px 0 60px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      min-height: 42px;
+      padding: 0 14px;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero {
+      margin-top: 18px;
+      padding: 28px;
+      border: 1px solid rgba(88, 245, 138, 0.17);
+      border-radius: 24px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(88, 245, 138, 0.1),
+          transparent 40%
+        ),
+        var(--card);
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+    }
+
+    h1 {
+      margin: 9px 0 0;
+      font-size: clamp(2rem, 7vw, 3.4rem);
+      line-height: 1.03;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .updated {
+      display: inline-block;
+      margin-top: 17px;
+      padding: 7px 10px;
+      border: 1px solid rgba(88, 245, 138, 0.17);
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(88, 245, 138, 0.06);
+      font-size: 0.68rem;
+      font-weight: 800;
+    }
+
+    .notice {
+      margin-top: 15px;
+      padding: 16px;
+      border: 1px solid rgba(255, 209, 102, 0.18);
+      border-radius: 16px;
+      color: #d1d7d2;
+      background: rgba(255, 209, 102, 0.055);
+      font-size: 0.8rem;
+      line-height: 1.65;
+    }
+
+    .notice strong {
+      color: var(--yellow);
+    }
+
+    .section {
+      margin-top: 15px;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .section h3 {
+      margin: 20px 0 0;
+      color: var(--green);
+      font-size: 0.9rem;
+    }
+
+    .section p,
+    .section li {
+      color: #bdc9c0;
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
+    .section ul {
+      padding-left: 21px;
+    }
+
+    .data-table {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .data-row {
+      display: grid;
+      grid-template-columns:
+        minmax(150px, 0.35fr)
+        1fr;
+      gap: 16px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.065);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .data-row strong {
+      color: var(--text);
+      font-size: 0.78rem;
+    }
+
+    .data-row span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .yes {
+      color: var(--yellow);
+    }
+
+    .no {
+      color: var(--green);
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: #758078;
+      font-size: 0.7rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .hero,
+      .section {
+        padding: 19px;
+      }
+
+      .data-row {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <a class="back-link" href="index.html">
+      ← Back to CWN Links
+    </a>
+
+    <header class="hero">
+      <span class="eyebrow">
+        TRANSPARENCY DOCUMENT
+      </span>
+
+      <h1>
+        Data & Privacy Notice
+      </h1>
+
+      <p>
+        This notice explains what information the Community Watch
+        Network links page and local File Risk Scanner collect, what
+        they do not collect, and how external infrastructure may process
+        limited technical information.
+      </p>
+
+      <span class="updated">
+        Effective: 3 August 2026
+      </span>
+    </header>
+
+    <div class="notice">
+      <strong>Scope:</strong>
+      this notice covers the public CWN links page at
+      cwn-links.vercel.app and its browser-based File Risk Scanner. Other
+      CWN services, forms, Discord servers, help centres or investigation
+      systems may require separate privacy information.
+    </div>
+
+    <section class="section">
+      <h2>
+        1. Who is responsible for this page?
+      </h2>
+
+      <p>
+        Community Watch Network is responsible for the content and
+        functionality published on this links page.
+      </p>
+
+      <p>
+        Privacy enquiries can be sent to:
+        <a href="mailto:Communityshieldofficial@gmail.com">
+          Communityshieldofficial@gmail.com
+        </a>
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>
+        2. What this page intentionally collects
+      </h2>
+
+      <div class="data-table">
+        <div class="data-row">
+          <strong class="no">
+            General page visits
+          </strong>
+
+          <span>
+            CWN does not currently operate its own account system,
+            database, advertising tracker or custom visitor analytics on
+            this static links page.
+          </span>
+        </div>
+
+        <div class="data-row">
+          <strong class="no">
+            File scanner uploads
+          </strong>
+
+          <span>
+            None. Files selected in the File Risk Scanner are analysed
+            locally by JavaScript inside the visitor’s browser.
+          </span>
+        </div>
+
+        <div class="data-row">
+          <strong class="no">
+            File contents
+          </strong>
+
+          <span>
+            CWN does not receive or store the contents of files selected
+            in the local scanner.
+          </span>
+        </div>
+
+        <div class="data-row">
+          <strong class="no">
+            Filenames and hashes
+          </strong>
+
+          <span>
+            The scanner does not transmit selected filenames or
+            calculated SHA-256 hashes to CWN. They remain within the
+            current browser session unless the visitor copies or saves
+            them independently.
+          </span>
+        </div>
+
+        <div class="data-row">
+          <strong class="no">
+            Cookies set by CWN code
+          </strong>
+
+          <span>
+            The current links-page code does not intentionally set
+            advertising, analytics or profiling cookies.
+          </span>
+        </div>
+
+        <div class="data-row">
+          <strong class="yes">
+            Direct communications
+          </strong>
+
+          <span>
+            When a person voluntarily emails CWN, the email address,
+            message content and information they choose to provide are
+            received through the relevant email service.
+          </span>
+        </div>
+
+        <div class="data-row">
+          <strong class="yes">
+            Public staff information
+          </strong>
+
+          <span>
+            The directory publishes organisational role information,
+            display names and Discord user IDs supplied or approved for
+            public verification purposes.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>
+        3. Hosting and technical logs
+      </h2>
+
+      <p>
+        This website is hosted using Vercel. Like most hosting and
+        security providers, Vercel may process technical request
+        information required to deliver and protect the website. This
+        may include information such as an IP address, request time,
+        requested page, browser or device information, and security or
+        error logs.
+      </p>
+
+      <p>
+        This infrastructure processing is separate from the local File
+        Risk Scanner. Selecting or scanning a file does not cause the
+        file to be sent to the web server.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>
+        4. Why information may be used
+      </h2>
+
+      <ul>
+        <li>
+          To provide and secure the website.
+        </li>
+
+        <li>
+          To respond to messages or support enquiries voluntarily sent
+          to CWN.
+        </li>
+
+        <li>
+          To publish and verify CWN organisational roles.
+        </li>
+
+        <li>
+          To investigate technical faults, abuse or security incidents.
+        </li>
+
+        <li>
+          To meet legal, safeguarding or regulatory obligations where
+          applicable.
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>
+        5. Information CWN does not use this page for
+      </h2>
+
+      <ul>
+        <li>
+          Selling visitor information.
+        </li>
+
+        <li>
+          Behavioural advertising.
+        </li>
+
+        <li>
+          Automated profiling or eligibility decisions.
+        </li>
+
+        <li>
+          Uploading files selected in the local scanner.
+        </li>
+
+        <li>
+          Collecting passwords, payment-card details or government
+          identification through the links page.
+        </li>
+
+        <li>
+          Secretly activating cameras, microphones or location
+          services.
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>
+        6. Retention
+      </h2>
+
+      <p>
+        The local File Risk Scanner does not retain selected files after
+        the visitor clears the file, reloads the page or closes the
+        browser tab.
+      </p>
+
+      <p>
+        Direct emails and related records should be retained only for as
+        long as reasonably necessary to respond, maintain appropriate
+        records, protect users, resolve disputes or meet applicable
+        legal obligations.
+      </p>
+
+      <p>
+        Hosting and security-log retention is controlled in part by the
+        hosting provider and the configuration of the CWN Vercel
+        account.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>
+        7. Sharing and disclosure
+      </h2>
+
+      <p>
+        CWN does not sell information collected through this page.
+        Information may be processed by service providers necessary to
+        operate the site or communications, such as Vercel and the
+        relevant email provider.
+      </p>
+
+      <p>
+        Information may also be disclosed when reasonably necessary to
+        protect a person, investigate abuse, comply with law, respond to
+        lawful requests or refer a serious concern to an appropriate
+        platform, safeguarding body or authority.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>
+        8. Your choices and rights
+      </h2>
+
+      <p>
+        Depending on the applicable law and circumstances, individuals
+        may have rights concerning their personal information, including
+        asking for access, correction, deletion, restriction, objection
+        or information about how it is used.
+      </p>
+
+      <p>
+        Requests should be sent to
+        <a href="mailto:Communityshieldofficial@gmail.com">
+          Communityshieldofficial@gmail.com
+        </a>.
+        CWN may need enough information to verify the request and locate
+        the relevant records.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>
+        9. File Risk Scanner limitations
+      </h2>
+
+      <p>
+        The scanner checks limited indicators such as filename patterns,
+        file extensions, basic signatures and a locally calculated
+        SHA-256 hash. It does not execute files, unpack every archive,
+        inspect all file content, connect to a commercial malware
+        database or guarantee that a file is safe.
+      </p>
+
+      <p>
+        Visitors should use reputable, updated antivirus or endpoint
+        security software and avoid opening files from untrusted
+        sources.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>
+        10. Changes to this notice
+      </h2>
+
+      <p>
+        CWN may update this notice when the website, scanner, hosting,
+        analytics, forms or data-handling practices change. The effective
+        date at the top should be updated whenever a material change is
+        published.
+      </p>
+    </section>
+
+    <footer class="footer">
+      Community Watch Network · Data & Privacy Notice · CWN-PRIV-0001
+      <br>
+      This notice is intended to provide transparency and is not a
+      substitute for advice from a qualified data-protection
+      professional.
+    </footer>
+  </main>
+</body>
+</html>
