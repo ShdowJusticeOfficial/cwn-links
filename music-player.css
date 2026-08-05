@@ -1,0 +1,935 @@
+:root {
+  --cwn-audio-bg: rgba(5, 10, 7, 0.96);
+  --cwn-audio-card: rgba(12, 22, 15, 0.97);
+  --cwn-audio-border: rgba(255, 255, 255, 0.1);
+  --cwn-audio-text: #f3fff6;
+  --cwn-audio-muted: #98a69c;
+  --cwn-audio-green: #58f58a;
+  --cwn-audio-blue: #6da9ff;
+  --cwn-audio-red: #ff6b6b;
+}
+
+.cwn-audio-launcher {
+  position: fixed;
+  z-index: 9000;
+  right: 18px;
+  bottom: 18px;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(88, 245, 138, 0.3);
+  border-radius: 17px;
+  color: var(--cwn-audio-green);
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(88, 245, 138, 0.13),
+      transparent 70%
+    ),
+    var(--cwn-audio-bg);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.42),
+    0 0 24px rgba(88, 245, 138, 0.08);
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.cwn-audio-launcher:hover,
+.cwn-audio-launcher:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(88, 245, 138, 0.58);
+  outline: none;
+}
+
+.cwn-audio-launcher-playing {
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.42),
+    0 0 32px rgba(88, 245, 138, 0.2);
+}
+
+.cwn-audio-launcher-icon {
+  font-size: 1.25rem;
+}
+
+.cwn-audio-node {
+  position: fixed;
+  z-index: 8999;
+  right: 18px;
+  bottom: 82px;
+  width: min(390px, calc(100vw - 24px));
+  overflow: hidden;
+  border: 1px solid var(--cwn-audio-border);
+  border-radius: 22px;
+  color: var(--cwn-audio-text);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(88, 245, 138, 0.1),
+      transparent 38%
+    ),
+    linear-gradient(
+      150deg,
+      rgba(13, 24, 16, 0.98),
+      rgba(4, 8, 5, 0.98)
+    );
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(20px);
+  transform: translateY(14px) scale(0.98);
+  transform-origin: bottom right;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 180ms ease;
+}
+
+.cwn-audio-node-open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.cwn-audio-header {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 17px;
+  border-bottom: 1px solid var(--cwn-audio-border);
+}
+
+.cwn-audio-header-copy {
+  min-width: 0;
+}
+
+.cwn-audio-system-label {
+  display: block;
+  color: var(--cwn-audio-green);
+  font-size: 0.59rem;
+  font-weight: 900;
+  letter-spacing: 0.17em;
+}
+
+.cwn-audio-status {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  margin-top: 5px;
+  color: var(--cwn-audio-muted);
+  font-size: 0.62rem;
+  font-weight: 750;
+}
+
+.cwn-audio-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cwn-audio-green);
+  box-shadow: 0 0 10px var(--cwn-audio-green);
+}
+
+.cwn-audio-close {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  flex: 0 0 35px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--cwn-audio-border);
+  border-radius: 11px;
+  color: var(--cwn-audio-muted);
+  background: rgba(255, 255, 255, 0.025);
+  cursor: pointer;
+}
+
+.cwn-audio-track {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 14px;
+  padding: 18px 17px 13px;
+}
+
+.cwn-audio-artwork {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid rgba(88, 245, 138, 0.19);
+  border-radius: 17px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(88, 245, 138, 0.18),
+      rgba(5, 11, 7, 0.85)
+    );
+}
+
+.cwn-audio-artwork::before {
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--cwn-audio-green);
+  border-radius: 50%;
+  content: "";
+  opacity: 0.76;
+}
+
+.cwn-audio-artwork-playing::before {
+  animation: cwn-audio-spin 4s linear infinite;
+  border-left-color: transparent;
+}
+
+.cwn-audio-track-info {
+  min-width: 0;
+  align-self: center;
+}
+
+.cwn-audio-track-info strong,
+.cwn-audio-track-info span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cwn-audio-track-info strong {
+  font-size: 0.87rem;
+}
+
+.cwn-audio-track-info span {
+  margin-top: 5px;
+  color: var(--cwn-audio-muted);
+  font-size: 0.65rem;
+}
+
+.cwn-audio-equaliser {
+  height: 20px;
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  margin-top: 9px;
+}
+
+.cwn-audio-equaliser span {
+  width: 3px;
+  height: 5px;
+  margin: 0;
+  border-radius: 999px;
+  background: var(--cwn-audio-green);
+  opacity: 0.35;
+}
+
+.cwn-audio-equaliser-playing span {
+  animation:
+    cwn-audio-bar 760ms ease-in-out infinite alternate;
+  opacity: 0.9;
+}
+
+.cwn-audio-equaliser-playing span:nth-child(2) {
+  animation-delay: 110ms;
+}
+
+.cwn-audio-equaliser-playing span:nth-child(3) {
+  animation-delay: 210ms;
+}
+
+.cwn-audio-equaliser-playing span:nth-child(4) {
+  animation-delay: 70ms;
+}
+
+.cwn-audio-equaliser-playing span:nth-child(5) {
+  animation-delay: 290ms;
+}
+
+.cwn-audio-progress-area {
+  padding: 0 17px;
+}
+
+.cwn-audio-range {
+  width: 100%;
+  height: 5px;
+  margin: 0;
+  border-radius: 999px;
+  accent-color: var(--cwn-audio-green);
+  cursor: pointer;
+}
+
+.cwn-audio-time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  color: var(--cwn-audio-muted);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+  font-size: 0.57rem;
+}
+
+.cwn-audio-controls {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 17px 12px;
+}
+
+.cwn-audio-control {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--cwn-audio-border);
+  border-radius: 13px;
+  color: var(--cwn-audio-text);
+  background: rgba(255, 255, 255, 0.025);
+  cursor: pointer;
+}
+
+.cwn-audio-control-primary {
+  width: 51px;
+  height: 51px;
+  border-color: var(--cwn-audio-green);
+  color: #031008;
+  background: var(--cwn-audio-green);
+  font-size: 1.05rem;
+}
+
+.cwn-audio-control-active {
+  border-color: rgba(88, 245, 138, 0.35);
+  color: var(--cwn-audio-green);
+  background: rgba(88, 245, 138, 0.08);
+}
+
+.cwn-audio-volume-row {
+  display: grid;
+  grid-template-columns: 35px minmax(0, 1fr) 44px;
+  gap: 10px;
+  align-items: center;
+  padding: 0 17px 15px;
+}
+
+.cwn-audio-volume-value {
+  color: var(--cwn-audio-muted);
+  font-size: 0.61rem;
+  text-align: right;
+}
+
+.cwn-audio-footer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 17px;
+  border-top: 1px solid var(--cwn-audio-border);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.cwn-audio-footer span {
+  color: var(--cwn-audio-muted);
+  font-size: 0.57rem;
+}
+
+.cwn-audio-external {
+  color: var(--cwn-audio-blue);
+  font-size: 0.61rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.cwn-audio-error {
+  display: none;
+  margin: 0 17px 14px;
+  padding: 10px;
+  border: 1px solid rgba(255, 107, 107, 0.22);
+  border-radius: 11px;
+  color: var(--cwn-audio-red);
+  background: rgba(255, 107, 107, 0.055);
+  font-size: 0.62rem;
+  line-height: 1.5;
+}
+
+.cwn-audio-error-visible {
+  display: block;
+}
+
+@keyframes cwn-audio-bar {
+  from {
+    height: 4px;
+  }
+
+  to {
+    height: 19px;
+  }
+}
+
+@keyframes cwn-audio-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 520px) {
+  .cwn-audio-launcher {
+    right: 11px;
+    bottom: 11px;
+  }
+
+  .cwn-audio-node {
+    right: 9px;
+    bottom: 75px;
+    width: calc(100vw - 18px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cwn-audio-node,
+  .cwn-audio-launcher,
+  .cwn-audio-equaliser span,
+  .cwn-audio-artwork::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.cwn-audio-error {
+  white-space: pre-line;
+}
+
+.cwn-audio-preview {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 0 17px 12px;
+  padding: 13px;
+  border: 1px solid rgba(88, 245, 138, 0.18);
+  border-radius: 13px;
+  background: rgba(88, 245, 138, 0.045);
+}
+
+.cwn-audio-preview[hidden] {
+  display: none;
+}
+
+.cwn-audio-preview-badge {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border: 1px solid rgba(88, 245, 138, 0.25);
+  border-radius: 999px;
+  color: var(--cwn-audio-green);
+  background: rgba(88, 245, 138, 0.08);
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.cwn-audio-preview strong {
+  display: block;
+  color: var(--cwn-audio-text);
+  font-size: 0.7rem;
+}
+
+.cwn-audio-preview p {
+  margin: 5px 0 0;
+  color: var(--cwn-audio-muted);
+  font-size: 0.62rem;
+  line-height: 1.5;
+}
+
+.cwn-audio-control:disabled,
+.cwn-audio-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+  filter: grayscale(0.45);
+}
+
+.cwn-audio-node-preview-mode .cwn-audio-equaliser,
+.cwn-audio-node-preview-mode .cwn-audio-artwork::before {
+  opacity: 0.42;
+}
+
+.cwn-audio-node-preview-mode .cwn-audio-status-dot {
+  background: var(--cwn-audio-blue);
+  box-shadow: 0 0 10px var(--cwn-audio-blue);
+}
+
+.cwn-audio-node-preview-mode #cwn-audio-status-text::before {
+  content: "PREVIEW";
+  font-weight: 900;
+}
+
+.cwn-audio-node-preview-mode #cwn-audio-status-text {
+  font-size: 0;
+}
+
+.cwn-audio-node-preview-mode #cwn-audio-status-text::before {
+  font-size: 0.62rem;
+}
+
+@media (max-width: 520px) {
+  .cwn-audio-preview {
+    flex-direction: column;
+  }
+}
+
+/* ============================================================
+   CWN AUDIO NODE — PREVIEW EXPERIENCE v1.0
+   ============================================================ */
+
+.cwn-audio-build-label {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  padding: 4px 7px;
+  border: 1px solid rgba(88, 245, 138, 0.2);
+  border-radius: 999px;
+  color: var(--cwn-audio-green);
+  background: rgba(88, 245, 138, 0.055);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 0.48rem;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+}
+
+.cwn-audio-version {
+  margin-top: 6px !important;
+  color: rgba(152, 166, 156, 0.72) !important;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 0.54rem !important;
+  letter-spacing: 0.025em;
+}
+
+.cwn-audio-artwork {
+  isolation: isolate;
+}
+
+.cwn-audio-artwork::before {
+  display: none;
+}
+
+.cwn-audio-radar-ring {
+  position: absolute;
+  inset: 12px;
+  border: 2px solid rgba(88, 245, 138, 0.48);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 13px rgba(88, 245, 138, 0.11),
+    0 0 12px rgba(88, 245, 138, 0.1);
+}
+
+.cwn-audio-radar-ring::before,
+.cwn-audio-radar-ring::after {
+  position: absolute;
+  border: 1px solid rgba(88, 245, 138, 0.13);
+  border-radius: 50%;
+  content: "";
+}
+
+.cwn-audio-radar-ring::before {
+  inset: 5px;
+}
+
+.cwn-audio-radar-ring::after {
+  inset: 11px;
+}
+
+.cwn-audio-radar-sweep {
+  position: absolute;
+  z-index: 2;
+  inset: 8px;
+  overflow: hidden;
+  border-radius: 50%;
+  animation:
+    cwn-audio-radar-spin 4.8s linear infinite;
+}
+
+.cwn-audio-radar-sweep::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(88, 245, 138, 0.78),
+      transparent
+    );
+  content: "";
+  transform-origin: left center;
+}
+
+.cwn-audio-radar-core {
+  position: relative;
+  z-index: 3;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cwn-audio-green);
+  box-shadow:
+    0 0 8px var(--cwn-audio-green),
+    0 0 18px rgba(88, 245, 138, 0.7);
+  animation:
+    cwn-audio-core-pulse 1.9s ease-in-out infinite;
+}
+
+.cwn-audio-node-preview-mode .cwn-audio-artwork {
+  animation:
+    cwn-audio-artwork-idle 3.4s ease-in-out infinite;
+}
+
+.cwn-audio-node-preview-mode .cwn-audio-equaliser span {
+  animation:
+    cwn-audio-idle-bar 1.8s ease-in-out infinite alternate;
+  opacity: 0.48;
+}
+
+.cwn-audio-node-preview-mode
+.cwn-audio-equaliser span:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.cwn-audio-node-preview-mode
+.cwn-audio-equaliser span:nth-child(3) {
+  animation-delay: 310ms;
+}
+
+.cwn-audio-node-preview-mode
+.cwn-audio-equaliser span:nth-child(4) {
+  animation-delay: 90ms;
+}
+
+.cwn-audio-node-preview-mode
+.cwn-audio-equaliser span:nth-child(5) {
+  animation-delay: 240ms;
+}
+
+.cwn-audio-preview {
+  display: grid;
+  gap: 15px;
+  margin: 0 17px 13px;
+  padding: 16px;
+  border: 1px solid rgba(88, 245, 138, 0.2);
+  border-radius: 16px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(109, 169, 255, 0.07),
+      transparent 42%
+    ),
+    rgba(88, 245, 138, 0.035);
+}
+
+.cwn-audio-preview[hidden] {
+  display: none;
+}
+
+.cwn-audio-preview-heading {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cwn-audio-preview-badge,
+.cwn-audio-preview-version {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 25px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 0.49rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.cwn-audio-preview-badge {
+  border: 1px solid rgba(88, 245, 138, 0.28);
+  color: var(--cwn-audio-green);
+  background: rgba(88, 245, 138, 0.08);
+}
+
+.cwn-audio-preview-version {
+  border: 1px solid rgba(109, 169, 255, 0.2);
+  color: var(--cwn-audio-blue);
+  background: rgba(109, 169, 255, 0.06);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+}
+
+.cwn-audio-preview-copy strong {
+  display: block;
+  color: var(--cwn-audio-text);
+  font-size: 0.77rem;
+}
+
+.cwn-audio-preview-copy p {
+  margin: 7px 0 0;
+  color: var(--cwn-audio-muted);
+  font-size: 0.64rem;
+  line-height: 1.6;
+}
+
+.cwn-audio-section-title {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(243, 255, 246, 0.7);
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cwn-audio-deployment,
+.cwn-audio-roadmap {
+  padding-top: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.cwn-audio-deployment {
+  display: grid;
+  gap: 7px;
+}
+
+.cwn-audio-deployment-row {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  color: var(--cwn-audio-muted);
+  font-size: 0.59rem;
+}
+
+.cwn-audio-deployment-row strong {
+  color: rgba(152, 166, 156, 0.72);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 0.48rem;
+  letter-spacing: 0.06em;
+}
+
+.cwn-audio-stage {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border: 1px solid rgba(152, 166, 156, 0.18);
+  border-radius: 6px;
+  color: rgba(152, 166, 156, 0.7);
+  font-size: 0.58rem;
+}
+
+.cwn-audio-stage-complete {
+  border-color: rgba(88, 245, 138, 0.25);
+  color: var(--cwn-audio-green);
+  background: rgba(88, 245, 138, 0.07);
+}
+
+.cwn-audio-roadmap ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cwn-audio-roadmap li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--cwn-audio-muted);
+  font-size: 0.59rem;
+}
+
+.cwn-audio-roadmap li span {
+  width: 17px;
+  color: rgba(152, 166, 156, 0.58);
+  text-align: center;
+}
+
+.cwn-audio-roadmap-complete {
+  color: rgba(243, 255, 246, 0.84) !important;
+}
+
+.cwn-audio-roadmap-complete span {
+  color: var(--cwn-audio-green) !important;
+}
+
+.cwn-audio-notice {
+  display: none;
+  margin: 0 17px 14px;
+  padding: 14px;
+  border: 1px solid rgba(109, 169, 255, 0.2);
+  border-radius: 13px;
+  color: #a8c9ff;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(109, 169, 255, 0.075),
+      rgba(88, 245, 138, 0.035)
+    );
+  font-size: 0.63rem;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.cwn-audio-notice-visible {
+  display: block;
+}
+
+.cwn-audio-error,
+.cwn-audio-error-visible {
+  display: none !important;
+}
+
+.cwn-audio-control:disabled,
+.cwn-audio-range:disabled {
+  cursor: default !important;
+  pointer-events: none;
+  opacity: 0.24 !important;
+  filter:
+    grayscale(0.72)
+    saturate(0.3);
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.cwn-audio-node-preview-mode
+.cwn-audio-control-primary:disabled {
+  border-color: rgba(255, 255, 255, 0.09);
+  color: rgba(243, 255, 246, 0.45);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.cwn-audio-node-preview-mode
+.cwn-audio-range:disabled {
+  accent-color: rgba(152, 166, 156, 0.42);
+}
+
+.cwn-audio-node-preview-mode
+.cwn-audio-status-dot {
+  background: var(--cwn-audio-blue);
+  box-shadow:
+    0 0 8px var(--cwn-audio-blue),
+    0 0 16px rgba(109, 169, 255, 0.38);
+}
+
+.cwn-audio-node-preview-mode
+#cwn-audio-status-text {
+  font-size: 0;
+}
+
+.cwn-audio-node-preview-mode
+#cwn-audio-status-text::before {
+  content: "EARLY ACCESS BUILD";
+  color: var(--cwn-audio-blue);
+  font-size: 0.62rem;
+  font-weight: 900;
+}
+
+.cwn-audio-node-preview-mode
+.cwn-audio-progress-area {
+  opacity: 0.55;
+}
+
+@keyframes cwn-audio-radar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cwn-audio-core-pulse {
+  0%,
+  100% {
+    transform: scale(0.75);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes cwn-audio-artwork-idle {
+  0%,
+  100% {
+    box-shadow:
+      inset 0 0 15px rgba(88, 245, 138, 0.02),
+      0 0 0 rgba(88, 245, 138, 0);
+  }
+
+  50% {
+    box-shadow:
+      inset 0 0 18px rgba(88, 245, 138, 0.08),
+      0 0 22px rgba(88, 245, 138, 0.08);
+  }
+}
+
+@keyframes cwn-audio-idle-bar {
+  from {
+    height: 4px;
+  }
+
+  to {
+    height: 11px;
+  }
+}
+
+@media (max-width: 520px) {
+  .cwn-audio-preview-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cwn-audio-deployment-row {
+    grid-template-columns: 20px minmax(0, 1fr);
+  }
+
+  .cwn-audio-deployment-row strong {
+    grid-column: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cwn-audio-radar-sweep,
+  .cwn-audio-radar-core,
+  .cwn-audio-node-preview-mode .cwn-audio-artwork,
+  .cwn-audio-node-preview-mode .cwn-audio-equaliser span {
+    animation: none !important;
+  }
+}

@@ -25,7 +25,9 @@ module.exports = {
     "bug-report.js",
     "pii-protection.js",
     "phase2-data.js",
-    "staff-data.js"
+    "staff-data.js",
+    "music-config.js",
+    "music-player.js",
   ],
 
   /*
@@ -58,7 +60,12 @@ module.exports = {
     "staff-directory.css",
     "bug-report.css",
     "pii-protection.css",
-    "exposes.css"
+    "exposes.css",
+    "music-player.css",
+  ],
+
+  staticDirectories: [
+    "assets"
   ],
 
   staticFiles: [

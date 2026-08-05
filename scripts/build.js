@@ -425,6 +425,45 @@ function writeBuildMetadata() {
   );
 }
 
+function copyDirectory(relativeDirectory) {
+  const sourceDirectory =
+    path.join(
+      root,
+      relativeDirectory
+    );
+
+  const outputDirectory =
+    path.join(
+      outputRoot,
+      relativeDirectory
+    );
+
+  if (
+    !fs.existsSync(
+      sourceDirectory
+    )
+  ) {
+    console.log(
+      `Skipping missing optional directory: ${relativeDirectory}`
+    );
+
+    return;
+  }
+
+  fs.cpSync(
+    sourceDirectory,
+    outputDirectory,
+    {
+      recursive: true,
+      force: true
+    }
+  );
+
+  console.log(
+    `Copied directory ${relativeDirectory}`
+  );
+}
+
 async function main() {
   console.log(
     "Building CWN production portal..."
@@ -496,6 +535,18 @@ async function main() {
     copyFile(
       file,
       "static"
+    );
+  }
+
+  for (
+    const directory of
+    (
+      config.staticDirectories ||
+      []
+    )
+  ) {
+    copyDirectory(
+      directory
     );
   }
 
