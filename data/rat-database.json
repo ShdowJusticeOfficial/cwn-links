@@ -17,8 +17,8 @@
         "url": "https://github.com/vxaboveground/Overlord",
         "owner": "vxaboveground",
         "repository": "Overlord",
-        "relationship": "Static source comparison and build-system analysis linked the sample to the Overlord codebase.",
-        "projectDisclaimer": "This entry concerns the analysed sample and deployment evidence. It is not an allegation against every contributor or legitimate user of the public repository."
+        "relationship": "Static source comparison and build-system analysis linked the analysed sample to the Overlord codebase.",
+        "projectDisclaimer": "This entry concerns the analysed sample, its compiled configuration and associated deployment evidence. It is not an allegation against every contributor, fork, researcher or legitimate user of the public repository."
       },
       "sample": {
         "sha256": "7de2665b2a9448aa7ca54251b3b985784305796963f19a299337203a532fffbc",
@@ -45,12 +45,14 @@
         "limitation": "Hosting allocation identifies infrastructure ownership, not the person who rented, controlled or used the server."
       },
       "githubDisclosure": {
-        "status": "pending",
+        "status": "ready-to-report",
         "submitted": false,
         "reference": null,
         "submittedAt": null,
-        "statement": "A GitHub report has not yet been confirmed. Publishing this database entry does not automatically submit a report to GitHub.",
-        "reportUrl": "https://github.com/vxaboveground/Overlord/security"
+        "repositoryUrl": "https://github.com/vxaboveground/Overlord",
+        "reportUrl": "https://github.com/vxaboveground/Overlord/security",
+        "statement": "Community Watch Network has prepared a disclosure package. At the time of this database snapshot, no GitHub report has been confirmed as submitted. Publishing this database entry does not automatically submit a report to GitHub.",
+        "disclaimer": "GitHub determines whether repository content violates its policies. CWN is supplying technical evidence for review and does not claim that every repository contributor participated in malicious activity."
       },
       "badges": [
         {
@@ -74,7 +76,11 @@
           "type": "neutral"
         },
         {
-          "label": "GitHub Report Pending",
+          "label": "Public Contact Located",
+          "type": "info"
+        },
+        {
+          "label": "GitHub Report Ready",
           "type": "pending"
         }
       ],
@@ -176,6 +182,11 @@
           "time": "2026-08-05",
           "title": "CWN attribution analysis completed",
           "description": "Compiled configuration, token claims and source relationships were preserved."
+        },
+        {
+          "time": "2026-08-05",
+          "title": "Disclosure package prepared",
+          "description": "Community Watch Network completed a responsible-disclosure draft containing sample identifiers, configuration evidence, source-code correlation and attribution limitations."
         }
       ],
       "evidence": [
@@ -203,6 +214,14 @@
           "id": "CWN-EVD-OVD-0005",
           "title": "Embedded build token",
           "description": "The token contains a build UUID, internal account ID and issuance timestamp."
+        },
+        {
+          "id": "CWN-EVD-OVD-0006",
+          "title": "Public Telegram reference",
+          "description": "The public project repository references the Telegram account @Onimai.",
+          "source": "https://github.com/vxaboveground/Overlord",
+          "status": "public-source-observation",
+          "limitation": "This evidence records a public association only and does not independently identify the sample operator."
         }
       ],
       "limitations": [
@@ -212,7 +231,23 @@
         "The token signature has not yet been verified.",
         "The suspected endpoint was not contacted.",
         "The payload was not executed.",
-        "Publishing this entry does not itself submit a GitHub report."
+        "Publishing this entry does not itself submit a GitHub report.",
+        "The public Telegram reference does not independently establish the identity of the sample builder, distributor or operator.",
+        "Publishing this database entry does not automatically submit a report to GitHub.",
+        "GitHub must independently assess whether the repository or its content violates platform policy.",
+        "The findings concern the analysed sample and do not allege that every contributor or user of the repository acted maliciously."
+      ],
+      "communications": [
+        {
+          "platform": "Telegram",
+          "handle": "@Onimai",
+          "url": "https://t.me/Onimai",
+          "relationship": "Public contact reference associated with the project repository.",
+          "status": "publicly-observed",
+          "confidence": "high",
+          "evidenceId": "CWN-EVD-OVD-0006",
+          "limitation": "The existence of a public contact reference does not, by itself, establish who built, distributed or operated the analysed sample."
+        }
       ]
     }
   ]
