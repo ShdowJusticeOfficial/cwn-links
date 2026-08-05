@@ -1,0 +1,219 @@
+{
+  "database": {
+    "name": "CWN RAT Database",
+    "organisation": "Community Watch Network",
+    "lastUpdated": "2026-08-05"
+  },
+  "entries": [
+    {
+      "id": "CWN-RAT-2026-0001",
+      "name": "Overlord Individually Configured Client Sample",
+      "family": "Overlord",
+      "classification": "Remote administration tool observed in a maliciously configured deployment",
+      "severity": "critical",
+      "confidence": "high",
+      "status": "active-analysis",
+      "sourceRepository": {
+        "url": "https://github.com/vxaboveground/Overlord",
+        "owner": "vxaboveground",
+        "repository": "Overlord",
+        "relationship": "Static source comparison and build-system analysis linked the sample to the Overlord codebase.",
+        "projectDisclaimer": "This entry concerns the analysed sample and deployment evidence. It is not an allegation against every contributor or legitimate user of the public repository."
+      },
+      "sample": {
+        "sha256": "7de2665b2a9448aa7ca54251b3b985784305796963f19a299337203a532fffbc",
+        "sizeBytes": 16377344,
+        "format": "PE32+ Windows x86-64 executable",
+        "architecture": "x86-64",
+        "language": "Go",
+        "compilationTimestamp": null
+      },
+      "compiledConfiguration": {
+        "fallbackServer": "85.17.116.161:5173",
+        "ipAddress": "85.17.116.161",
+        "port": 5173,
+        "mutex": "mptUc1YfsqC.U48angOzGZXX",
+        "buildId": "2fc41d73-b0f4-41d2-ab0a-c2ed660f4f01",
+        "builderAccountId": 1,
+        "tokenIssuedAt": "2026-07-14T16:08:05Z",
+        "tokenVersion": 1
+      },
+      "networkAttribution": {
+        "provider": "LeaseWeb Netherlands B.V.",
+        "asn": "AS60781",
+        "country": "NL",
+        "limitation": "Hosting allocation identifies infrastructure ownership, not the person who rented, controlled or used the server."
+      },
+      "githubDisclosure": {
+        "status": "pending",
+        "submitted": false,
+        "reference": null,
+        "submittedAt": null,
+        "statement": "A GitHub report has not yet been confirmed. Publishing this database entry does not automatically submit a report to GitHub.",
+        "reportUrl": "https://github.com/vxaboveground/Overlord/security"
+      },
+      "badges": [
+        {
+          "label": "Source Match Confirmed",
+          "type": "confirmed"
+        },
+        {
+          "label": "Malicious Sample Observed",
+          "type": "danger"
+        },
+        {
+          "label": "Operational C2 Compiled",
+          "type": "danger"
+        },
+        {
+          "label": "Build Attribution Partial",
+          "type": "warning"
+        },
+        {
+          "label": "Operator Not Identified",
+          "type": "neutral"
+        },
+        {
+          "label": "GitHub Report Pending",
+          "type": "pending"
+        }
+      ],
+      "iocs": [
+        {
+          "type": "SHA-256",
+          "value": "7de2665b2a9448aa7ca54251b3b985784305796963f19a299337203a532fffbc",
+          "confidence": "High",
+          "context": "Decrypted payload"
+        },
+        {
+          "type": "IPv4",
+          "value": "85.17.116.161",
+          "confidence": "High",
+          "context": "Compiled fallback server"
+        },
+        {
+          "type": "TCP port",
+          "value": "5173",
+          "confidence": "High",
+          "context": "Compiled service port"
+        },
+        {
+          "type": "Mutex",
+          "value": "mptUc1YfsqC.U48angOzGZXX",
+          "confidence": "High",
+          "context": "Compiled sample mutex"
+        },
+        {
+          "type": "Build ID",
+          "value": "2fc41d73-b0f4-41d2-ab0a-c2ed660f4f01",
+          "confidence": "High",
+          "context": "Embedded signed-build token"
+        },
+        {
+          "type": "Builder account ID",
+          "value": "1",
+          "confidence": "High",
+          "context": "Internal panel identifier only"
+        },
+        {
+          "type": "Token issuance",
+          "value": "2026-07-14T16:08:05Z",
+          "confidence": "High, signature pending",
+          "context": "Decoded token claim"
+        }
+      ],
+      "mitreAttack": [
+        {
+          "id": "T1057",
+          "name": "Process Discovery",
+          "basis": "Process-list capability was identified.",
+          "status": "Confirmed capability"
+        },
+        {
+          "id": "T1105",
+          "name": "Ingress Tool Transfer",
+          "basis": "File upload and download commands were identified.",
+          "status": "Confirmed capability"
+        },
+        {
+          "id": "T1113",
+          "name": "Screen Capture",
+          "basis": "Screenshot and desktop capture functionality was identified.",
+          "status": "Confirmed capability"
+        },
+        {
+          "id": "T1115",
+          "name": "Clipboard Data",
+          "basis": "Clipboard content and synchronisation commands were identified.",
+          "status": "Confirmed capability"
+        },
+        {
+          "id": "T1056.001",
+          "name": "Keylogging",
+          "basis": "Keylogger retrieval and clearing commands were identified.",
+          "status": "Confirmed capability"
+        },
+        {
+          "id": "T1125",
+          "name": "Video Capture",
+          "basis": "Webcam enumeration and configuration commands were identified.",
+          "status": "Confirmed capability"
+        },
+        {
+          "id": "T1547.001",
+          "name": "Registry Run Keys / Startup Folder",
+          "basis": "Registry and startup persistence capabilities were present.",
+          "status": "Build capability observed"
+        }
+      ],
+      "timeline": [
+        {
+          "time": "2026-07-14T16:08:05Z",
+          "title": "Build token issued",
+          "description": "Embedded claims record the build ID and internal builder account ID."
+        },
+        {
+          "time": "2026-08-05",
+          "title": "CWN attribution analysis completed",
+          "description": "Compiled configuration, token claims and source relationships were preserved."
+        }
+      ],
+      "evidence": [
+        {
+          "id": "CWN-EVD-OVD-0001",
+          "title": "Decrypted payload",
+          "description": "PE32+ x86-64 Go executable."
+        },
+        {
+          "id": "CWN-EVD-OVD-0002",
+          "title": "Compiled endpoint descriptor",
+          "description": "Go string descriptor references 85.17.116.161:5173."
+        },
+        {
+          "id": "CWN-EVD-OVD-0003",
+          "title": "Configuration loader reference",
+          "description": "The endpoint is used when no server override exists."
+        },
+        {
+          "id": "CWN-EVD-OVD-0004",
+          "title": "Fallback server reference",
+          "description": "The same endpoint is inserted when no server URLs are configured."
+        },
+        {
+          "id": "CWN-EVD-OVD-0005",
+          "title": "Embedded build token",
+          "description": "The token contains a build UUID, internal account ID and issuance timestamp."
+        }
+      ],
+      "limitations": [
+        "Static analysis does not prove that every embedded command was executed.",
+        "The builder account ID does not identify a real-world person.",
+        "The endpoint allocation does not identify the subscriber or operator.",
+        "The token signature has not yet been verified.",
+        "The suspected endpoint was not contacted.",
+        "The payload was not executed.",
+        "Publishing this entry does not itself submit a GitHub report."
+      ]
+    }
+  ]
+}

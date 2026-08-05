@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Community Watch Network defensive RAT and malware intelligence database."
+  >
+
+  <title>CWN RAT Database</title>
+
+  <link
+    rel="stylesheet"
+    href="assets/css/rat-database.css"
+  >
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a
+        class="brand"
+        href="index.html"
+      >
+        <span class="brand-mark">CWN</span>
+
+        <span>
+          <strong>Community Watch Network</strong>
+          <small>Defensive Malware Intelligence</small>
+        </span>
+      </a>
+
+      <a
+        class="back-link"
+        href="index.html"
+      >
+        ← Main links
+      </a>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">
+          COMMUNITY WATCH NETWORK
+        </p>
+
+        <h1>CWN RAT Database</h1>
+
+        <p class="hero-copy">
+          Defensive malware intelligence, indicators of compromise,
+          evidence records, attribution limits, MITRE ATT&amp;CK mappings
+          and responsible-disclosure status.
+        </p>
+      </div>
+
+      <div class="hero-status">
+        <span class="status-dot"></span>
+        <span>Active intelligence database</span>
+      </div>
+    </section>
+
+    <section class="notice notice-warning">
+      <strong>Important legal and evidential notice</strong>
+
+      <p>
+        This database documents analysed samples, infrastructure and
+        technical evidence. It does not accuse repository contributors,
+        hosting providers or named individuals of operating malware unless
+        that conclusion is independently established by verified evidence.
+      </p>
+
+      <p>
+        Publication in this database does not automatically submit a report
+        to GitHub, a hosting provider or law enforcement. Disclosure status
+        is shown separately for each entry.
+      </p>
+    </section>
+
+    <section
+      id="database-summary"
+      class="summary-grid"
+      aria-label="Database summary"
+    >
+      <article class="summary-card">
+        <span class="summary-label">Entries</span>
+        <strong id="entry-count">Loading…</strong>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-label">Critical findings</span>
+        <strong id="critical-count">Loading…</strong>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-label">Last updated</span>
+        <strong id="last-updated">Loading…</strong>
+      </article>
+    </section>
+
+    <section class="toolbar">
+      <div>
+        <label for="search-input">
+          Search intelligence records
+        </label>
+
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search family, SHA-256, IP, mutex, build ID…"
+          autocomplete="off"
+        >
+      </div>
+
+      <div>
+        <label for="severity-filter">
+          Severity
+        </label>
+
+        <select id="severity-filter">
+          <option value="all">All severities</option>
+          <option value="critical">Critical</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+    </section>
+
+    <section
+      id="database-status"
+      class="loading-panel"
+    >
+      Loading CWN intelligence records…
+    </section>
+
+    <section
+      id="rat-entries"
+      class="entry-list"
+      aria-live="polite"
+    ></section>
+
+    <section class="notice notice-neutral">
+      <strong>Responsible use</strong>
+
+      <p>
+        Indicators are provided for defensive detection, incident response,
+        threat intelligence, research and lawful reporting. Do not use this
+        information to access, disrupt or interfere with remote systems.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      © 2026 Community Watch Network. Defensive intelligence only.
+    </p>
+  </footer>
+
+  <script
+    src="assets/js/rat-database.js"
+    defer
+  ></script>
+</body>
+</html>
