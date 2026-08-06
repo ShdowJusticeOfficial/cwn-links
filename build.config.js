@@ -28,13 +28,18 @@ module.exports = {
     "staff-data.js",
     "music-config.js",
     "music-player.js",
+    "maintenance.js",
   ],
 
   /*
    * Server-side files are copied without client-side obfuscation.
    */
   serverJavaScript: [
-    "api/bug-report.js"
+    "api/bug-report.js",
+    "api/maintenance/auth.js",
+    "api/maintenance/login.js",
+    "api/maintenance/logout.js",
+    "api/maintenance/session.js"
   ],
 
   htmlFiles: [
@@ -50,7 +55,8 @@ module.exports = {
     "search.html",
     "patch-notes.html",
     "security-status.html",
-    "exposes.html"
+    "exposes.html",
+    "maintenance.html"
   ],
 
   cssFiles: [
@@ -62,6 +68,7 @@ module.exports = {
     "pii-protection.css",
     "exposes.css",
     "music-player.css",
+    "maintenance.css"
   ],
 
   staticDirectories: [
@@ -70,7 +77,7 @@ module.exports = {
 
   staticFiles: [
     "README.md",
-    "LICENSE",
+    "LICENSE.MD",
     "robots.txt",
     "sitemap.xml",
     "favicon.ico",

@@ -1,7 +1,7 @@
 {
   "name": "cwn-portal",
   "version": "3.1.0",
-  "description": "The official **Community Watch Network (CWN)** links page, providing quick access to CWN services, projects, investigations, staff information, social platforms, public resources, and community tools.",
+  "description": "The official Community Watch Network website and public service portal.",
   "main": "bug-report.js",
   "scripts": {
     "check": "node scripts/check-source.js",
@@ -16,7 +16,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "SEE LICENSE IN LICENSE.MD",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/ShdowJusticeOfficial/cwn-links/issues"
