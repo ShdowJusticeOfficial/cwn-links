@@ -9,2811 +9,953 @@
   >
 
   <meta
-    name="description"
-    content="Official links for Community Watch Network."
-  >
-
-  <meta
     name="theme-color"
-    content="#050806"
+    content="#040806"
   >
 
   <meta
-    property="og:title"
-    content="Community Watch Network"
-  >
-
-  <meta
-    property="og:description"
-    content="Official CWN links, community pages, support and contact information."
-  >
-
-  <meta
-    property="og:type"
-    content="website"
+    name="description"
+    content="Community Watch Network — community safety resources, reporting systems, projects, transparency and public information."
   >
 
   <title>Community Watch Network</title>
 
-  <link rel="stylesheet" href="staff-directory.css">
-  <link rel="stylesheet" href="cwn-tools.css">
-  <link rel="stylesheet" href="portal.css">
-  <link rel="stylesheet" href="phase2.css">
-  <script src="themes.js"></script>
-
-
-
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root {
-      --background: #050806;
-      --background-secondary: #09100b;
-
-      --card: rgba(15, 22, 17, 0.92);
-      --card-hover: rgba(88, 245, 138, 0.08);
-
-      --text: #f3fff6;
-      --muted: #9eafa3;
-
-      --green: #58f58a;
-      --green-dark: #07190d;
-      --green-soft: rgba(88, 245, 138, 0.12);
-
-      --blue: #6da9ff;
-      --yellow: #ffd166;
-      --red: #ff6b6b;
-
-      --border: rgba(255, 255, 255, 0.09);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-
-      color: var(--text);
-
-      background:
-        radial-gradient(
-          circle at top,
-          rgba(88, 245, 138, 0.18),
-          transparent 32%
-        ),
-        radial-gradient(
-          circle at bottom,
-          rgba(109, 169, 255, 0.08),
-          transparent 35%
-        ),
-        var(--background);
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-
-      position: fixed;
-      inset: 0;
-
-      pointer-events: none;
-
-      background-image:
-        linear-gradient(
-          rgba(255, 255, 255, 0.025) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.025) 1px,
-          transparent 1px
-        );
-
-      background-size: 34px 34px;
-
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent
-        );
-
-      z-index: -1;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .page {
-      width: min(100%, 650px);
-      min-height: 100vh;
-
-      margin: auto;
-
-      padding:
-        38px
-        18px
-        30px;
-    }
-
-    .profile {
-      text-align: center;
-    }
-
-    .logo {
-      width: 100px;
-      height: 100px;
-
-      margin:
-        0
-        auto
-        18px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 28px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #70ff9e,
-          var(--green)
-        );
-
-      color: #041108;
-
-      font-size: 30px;
-      font-weight: 900;
-      letter-spacing: -2px;
-
-      box-shadow:
-        0 0 50px
-        rgba(88, 245, 138, 0.28);
-    }
-
-    .official-status {
-      display: inline-flex;
-      align-items: center;
-
-      gap: 8px;
-
-      color: var(--green);
-
-      font-size: 11px;
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-
-      border-radius: 50%;
-
-      background: var(--green);
-
-      box-shadow:
-        0 0 12px
-        var(--green);
-
-      animation:
-        pulse
-        2s
-        infinite;
-    }
-
-    @keyframes pulse {
-      0%,
-      100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0.45;
-      }
-    }
-
-    h1 {
-      margin:
-        14px
-        0
-        10px;
-
-      font-size:
-        clamp(
-          32px,
-          8vw,
-          54px
-        );
-
-      line-height: 1;
-
-      letter-spacing: -2px;
-    }
-
-    .username {
-      margin:
-        0
-        0
-        12px;
-
-      color: var(--green);
-
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .bio {
-      max-width: 500px;
-
-      margin: auto;
-
-      color: var(--muted);
-
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .quick-info {
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          3,
-          1fr
-        );
-
-      gap: 10px;
-
-      margin-top: 24px;
-    }
-
-    .quick-info-card {
-      padding: 13px 8px;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.025
-        );
-
-      border:
-        1px
-        solid
-        var(--border);
-
-      border-radius: 14px;
-    }
-
-    .quick-info-card strong {
-      display: block;
-
-      color: var(--green);
-
-      font-size: 13px;
-    }
-
-    .quick-info-card span {
-      display: block;
-
-      margin-top: 4px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-    }
-
-    .section-title {
-      margin:
-        32px
-        0
-        12px;
-
-      text-align: left;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-    }
-
-    .links {
-      display: grid;
-
-      gap: 12px;
-    }
-
-    .link-button {
-      min-height: 86px;
-
-      padding:
-        17px
-        19px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 15px;
-
-      color: var(--text);
-
-      text-decoration: none;
-      text-align: left;
-
-      background:
-        var(--card);
-
-      border:
-        1px
-        solid
-        var(--border);
-
-      border-radius: 17px;
-
-      backdrop-filter:
-        blur(14px);
-
-      transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease;
-    }
-
-    .link-button:hover,
-    .link-button:focus-visible {
-      transform:
-        translateY(-2px);
-
-      border-color:
-        rgba(
-          88,
-          245,
-          138,
-          0.5
-        );
-
-      background:
-        var(--card-hover);
-
-      outline: none;
-    }
-
-    .link-content {
-      min-width: 0;
-    }
-
-    .link-category {
-      display: block;
-
-      margin-bottom: 6px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-      font-weight: 800;
-
-      letter-spacing: 1.4px;
-    }
-
-    .link-title {
-      display: block;
-
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .link-detail {
-      display: block;
-
-      margin-top: 6px;
-
-      color: var(--muted);
-
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .arrow {
-      flex-shrink: 0;
-
-      color: var(--green);
-
-      font-size: 24px;
-    }
-
-    .featured-link {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(88, 245, 138, 0.13),
-          rgba(15, 22, 17, 0.95)
-        );
-
-      border-color:
-        rgba(
-          88,
-          245,
-          138,
-          0.25
-        );
-    }
-
-    .support-link {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(109, 169, 255, 0.13),
-          rgba(15, 22, 17, 0.95)
-        );
-
-      border-color:
-        rgba(
-          109,
-          169,
-          255,
-          0.25
-        );
-    }
-
-    .support-link .arrow {
-      color: var(--blue);
-    }
-
-    .badge {
-      display: inline-block;
-
-      margin-top: 9px;
-
-      padding:
-        5px
-        8px;
-
-      border-radius: 999px;
-
-      color: #041108;
-
-      background:
-        var(--green);
-
-      font-size: 9px;
-      font-weight: 900;
-
-      letter-spacing: 0.8px;
-    }
-
-    .goal-box {
-      margin-top: 14px;
-
-      padding: 18px;
-
-      text-align: left;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(109, 169, 255, 0.09),
-          rgba(255, 255, 255, 0.02)
-        );
-
-      border:
-        1px
-        solid
-        rgba(
-          109,
-          169,
-          255,
-          0.22
-        );
-
-      border-radius: 17px;
-    }
-
-    .goal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 12px;
-    }
-
-    .goal-header span {
-      color: var(--blue);
-
-      font-size: 11px;
-      font-weight: 900;
-
-      letter-spacing: 1.3px;
-    }
-
-    .goal-header strong {
-      font-size: 20px;
-    }
-
-    .goal-box p {
-      margin:
-        12px
-        0
-        0;
-
-      color: var(--muted);
-
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .goal-items {
-      display: grid;
-      gap: 7px;
-
-      margin-top: 14px;
-    }
-
-    .goal-item {
-      color: var(--muted);
-
-      font-size: 12px;
-    }
-
-    .coming-soon {
-      margin-top: 22px;
-
-      padding: 19px;
-
-      text-align: left;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255, 209, 102, 0.09),
-          rgba(255, 255, 255, 0.02)
-        );
-
-      border:
-        1px
-        solid
-        rgba(
-          255,
-          209,
-          102,
-          0.24
-        );
-
-      border-radius: 17px;
-    }
-
-    .coming-soon-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 14px;
-    }
-
-    .coming-label {
-      color: var(--yellow);
-
-      font-size: 10px;
-      font-weight: 900;
-
-      letter-spacing: 1.4px;
-    }
-
-    .coming-badge {
-      padding:
-        6px
-        9px;
-
-      color: #171104;
-
-      background:
-        var(--yellow);
-
-      border-radius: 999px;
-
-      font-size: 9px;
-      font-weight: 900;
-
-      letter-spacing: 1px;
-    }
-
-    .coming-soon h2 {
-      margin:
-        12px
-        0
-        8px;
-
-      font-size: 20px;
-
-      letter-spacing: -0.5px;
-    }
-
-    .coming-soon p {
-      margin: 0;
-
-      color: var(--muted);
-
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .progress {
-      width: 100%;
-      height: 8px;
-
-      margin-top: 16px;
-
-      overflow: hidden;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.07
-        );
-
-      border-radius: 999px;
-    }
-
-    .progress-bar {
-      width: 35%;
-      height: 100%;
-
-      background:
-        var(--yellow);
-
-      border-radius: 999px;
-
-      box-shadow:
-        0 0 14px
-        rgba(
-          255,
-          209,
-          102,
-          0.35
-        );
-    }
-
-    .contact-card {
-      margin-top: 22px;
-
-      padding: 18px;
-
-      text-align: left;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.025
-        );
-
-      border:
-        1px
-        solid
-        var(--border);
-
-      border-radius: 17px;
-    }
-
-    .contact-card h2 {
-      margin:
-        0
-        0
-        8px;
-
-      font-size: 18px;
-    }
-
-    .contact-card p {
-      margin: 0;
-
-      color: var(--muted);
-
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .contact-email {
-      display: block;
-
-      margin-top: 12px;
-
-      color: var(--green);
-
-      font-size: 13px;
-      font-weight: 800;
-
-      word-break: break-word;
-    }
-
-    .disclaimer {
-      margin-top: 20px;
-
-      padding:
-        15px
-        16px;
-
-      color: var(--muted);
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          0.025
-        );
-
-      border:
-        1px
-        solid
-        var(--border);
-
-      border-radius: 14px;
-
-      font-size: 12px;
-      line-height: 1.55;
-
-      text-align: left;
-    }
-
-    .disclaimer strong {
-      color: var(--text);
-    }
-
-    .footer {
-      margin-top: 25px;
-
-      display: flex;
-      justify-content: space-between;
-
-      gap: 15px;
-
-      color: #6f7e73;
-
-      font-size: 10px;
-      font-weight: 700;
-
-      letter-spacing: 1px;
-    }
-
-    @media (max-width: 470px) {
-      .page {
-        padding-top: 28px;
-      }
-
-      .logo {
-        width: 84px;
-        height: 84px;
-
-        border-radius: 23px;
-
-        font-size: 26px;
-      }
-
-      .quick-info {
-        grid-template-columns: 1fr;
-      }
-
-      .link-button {
-        min-height: 80px;
-
-        padding:
-          16px
-          17px;
-      }
-
-      .goal-header {
-        align-items: flex-start;
-
-        flex-direction: column;
-      }
-
-      .footer {
-        flex-direction: column;
-
-        gap: 7px;
-      }
-    }
-  </style>
-
-  <link rel="stylesheet" href="music-player.css">
-
+  <link
+    rel="stylesheet"
+    href="/assets/css/cwn-design-system.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/assets/css/home.css"
+  >
 </head>
-<body id="top">
 
-  <div
-    class="portal-progress"
-    aria-hidden="true"
-  >
-    <div
-      class="portal-progress-fill"
-      id="portal-progress-fill"
-    ></div>
-  </div>
+<body>
+  <div class="cwn-site">
+    <header class="cwn-nav">
+      <div class="cwn-container cwn-nav-inner">
+        <a
+          class="cwn-nav-brand"
+          href="/"
+          aria-label="Community Watch Network home"
+        >
+          <span class="cwn-nav-mark">
+            CWN
+          </span>
 
-  <nav
-    class="portal-nav"
-    aria-label="CWN portal navigation"
-  >
-    <a
-      class="portal-nav-brand"
-      href="#top"
-    >
-      <span class="portal-nav-logo">
-        CWN
-      </span>
+          <span>
+            <strong>
+              Community Watch Network
+            </strong>
+          </span>
+        </a>
 
-      <span class="portal-nav-brand-text">
-        <strong>
-          Community Watch Network
-        </strong>
+        <nav
+          class="cwn-nav-links"
+          aria-label="Primary navigation"
+        >
+          <a
+            class="cwn-nav-link"
+            aria-current="page"
+            href="/"
+          >
+            Home
+          </a>
 
-        <span>
-          Official Portal
-        </span>
-      </span>
-    </a>
+          <a
+            class="cwn-nav-link"
+            href="/bug-report"
+          >
+            Reports
+          </a>
 
-    <div
-      class="portal-nav-links"
-      id="portal-nav-links"
-    >
-      <a
-        class="portal-nav-link"
-        href="#portal-dashboard"
-      >
-        Dashboard
-      </a>
+          <a
+            class="cwn-nav-link"
+            href="/exposes"
+          >
+            Investigations
+          </a>
 
-      <a
-        class="portal-nav-link"
-        href="#portal-status"
-      >
-        Status
-      </a>
+          <a
+            class="cwn-nav-link"
+            href="/projects"
+          >
+            Projects
+          </a>
 
-      <a
-        class="portal-nav-link"
-        href="#our-mission"
-      >
-        Mission
-      </a>
+          <a
+            class="cwn-nav-link"
+            href="/about"
+          >
+            About
+          </a>
 
-      <a
-        class="portal-nav-link"
-        href="#staff-directory"
-      >
-        Staff
-      </a>
+          <a
+            class="cwn-nav-link"
+            href="/status"
+          >
+            Status
+          </a>
 
-      <a
-        class="portal-nav-link"
-        href="#malware-scanner"
-      >
-        Scanner
-      </a>
+          <a
+            class="cwn-nav-link"
+            href="/transparency"
+          >
+            Transparency
+          </a>
+        </nav>
 
-      <a
-        class="portal-nav-link"
-        href="bug-report.html"
-      >
-        Report Bug
-      </a>
+        <button
+          class="cwn-button cwn-button-secondary cwn-nav-toggle"
+          type="button"
+          data-mobile-menu-open
+          aria-label="Open navigation"
+        >
+          Menu
+        </button>
+      </div>
+    </header>
 
-
-      <a class="portal-nav-link" href="status.html">
-        Full Status
-      </a>
-
-      <a class="portal-nav-link" href="news.html">
-        News
-      </a>
-
-      <a class="portal-nav-link" href="changelog.html">
-        Changelog
-      </a>
-
-      <a class="portal-nav-link" href="search.html">
-        Search
-      </a>
-
-      <button
-        class="portal-nav-button portal-nav-search"
-        type="button"
-        data-open-portal-search
-      >
-        Search ⌕
-      </button>
-    </div>
-
-    <button
-      class="portal-nav-button portal-nav-menu-button"
-      id="portal-nav-menu-button"
-      type="button"
-      aria-expanded="false"
-      aria-controls="portal-nav-links"
-      aria-label="Open navigation menu"
-    >
-      ☰
-    </button>
-  </nav>
-
-
-  <main class="page">
-
-      <section
-        class="portal-dashboard"
-        id="portal-dashboard"
-      >
-        <div class="portal-dashboard-grid">
-          <div>
-            <span class="portal-eyebrow">
-              CWN PORTAL · PHASE 1
+    <main>
+      <section class="home-hero">
+        <div class="cwn-container home-hero-grid">
+          <div class="home-hero-copy">
+            <span class="cwn-eyebrow">
+              COMMUNITY WATCH NETWORK // ONLINE
             </span>
 
-            <h2>
-              Safer communities through awareness,
-              accountability and action.
-            </h2>
+            <h1>
+              Awareness.
+              Accountability.
+              <span>
+                Action.
+              </span>
+            </h1>
 
-            <p class="portal-dashboard-intro">
-              Welcome to the official Community Watch Network portal.
-              Access CWN services, public information, staff
-              verification, safety tools, support resources and
-              organisational updates from one central location.
+            <p>
+              Community Watch Network provides community-focused
+              reporting, public safety resources, transparency tools,
+              technical projects and information designed to help
+              people make safer decisions online.
             </p>
 
-            <div class="portal-dashboard-actions">
+            <div class="home-hero-actions">
               <a
-                class="portal-primary-action"
-                href="mailto:Communityshieldofficial@gmail.com?subject=CWN%20Incident%20Report"
+                class="cwn-button cwn-button-primary cwn-button-lg"
+                href="/bug-report"
               >
-                🚨 Report an Incident
+                Submit a report
               </a>
 
               <a
-                class="portal-secondary-action"
-                href="mailto:Communityshieldofficial@gmail.com?subject=CWN%20Support%20Request"
+                class="cwn-button cwn-button-secondary cwn-button-lg"
+                href="/transparency"
               >
-                🎫 Get Support
+                Explore CWN
               </a>
+            </div>
 
-              <button
-                class="portal-secondary-action"
-                type="button"
-                data-open-portal-search
-              >
-                ⌕ Search Portal
-              </button>
+            <div class="home-hero-meta">
+              <span class="cwn-badge cwn-badge-success">
+                <span class="cwn-status-dot"></span>
+                Network operational
+              </span>
+
+              <span class="cwn-badge">
+                Independent community project
+              </span>
+
+              <span class="cwn-badge cwn-badge-info">
+                Phase 2C
+              </span>
             </div>
           </div>
 
-          <aside class="portal-dashboard-panel">
-            <span class="portal-panel-label">
-              ORGANISATION STATUS
-            </span>
-
-            <div class="portal-overall-status">
-              <span
-                class="portal-overall-status-dot"
-                aria-hidden="true"
-              ></span>
-
+          <aside class="cwn-card cwn-card-elevated home-command-panel">
+            <div class="home-command-header">
               <div>
-                <strong>
-                  Operational
-                </strong>
+                <span class="cwn-eyebrow">
+                  NETWORK OVERVIEW
+                </span>
+
+                <h3>
+                  CWN Operations
+                </h3>
+              </div>
+
+              <span class="home-command-reference">
+                CWN-NET-01
+              </span>
+            </div>
+
+            <p>
+              Public systems and project infrastructure are being
+              consolidated into the new CWN platform.
+            </p>
+
+            <div class="home-command-status">
+              <div>
+                <span class="cwn-status-dot cwn-text-success"></span>
 
                 <span>
-                  Core public services available
+                  Website
                 </span>
+
+                <strong class="cwn-text-success">
+                  ONLINE
+                </strong>
+              </div>
+
+              <div>
+                <span class="cwn-status-dot cwn-text-success"></span>
+
+                <span>
+                  Reporting
+                </span>
+
+                <strong class="cwn-text-success">
+                  ACTIVE
+                </strong>
+              </div>
+
+              <div>
+                <span class="cwn-status-dot cwn-text-info"></span>
+
+                <span>
+                  Rebrand programme
+                </span>
+
+                <strong class="cwn-text-info">
+                  PHASE 2C
+                </strong>
+              </div>
+
+              <div>
+                <span class="cwn-status-dot cwn-text-warning"></span>
+
+                <span>
+                  New platform services
+                </span>
+
+                <strong class="cwn-text-warning">
+                  BUILDING
+                </strong>
               </div>
             </div>
 
-            <div class="portal-review-time">
-              <span aria-hidden="true">
-                ◷
-              </span>
-
-              <span>
-                Manually reviewed:
-                <strong
-                  id="portal-reviewed-time"
-                  data-review-date="2026-08-04"
-                >
-                  4 August 2026
-                </strong>
-              </span>
+            <div
+              class="cwn-progress"
+              style="margin-top: 22px;"
+            >
+              <div
+                class="cwn-progress-bar"
+                style="width: 42%;"
+              ></div>
             </div>
           </aside>
         </div>
       </section>
 
-      <section
-        class="portal-section"
-        id="portal-quick-actions"
-      >
-        <div class="portal-section-header">
-          <div>
-            <span class="portal-eyebrow">
-              FAST ACCESS
+      <section class="home-network-strip">
+        <div class="cwn-container home-network-grid">
+          <div class="home-network-item">
+            <span>
+              PLATFORM STATUS
             </span>
 
-            <h2>
-              Quick Actions
-            </h2>
-
-            <p>
-              Go directly to CWN’s most important public services,
-              information and safety tools.
-            </p>
+            <strong class="cwn-text-success">
+              Operational
+            </strong>
           </div>
 
-          <span class="portal-section-id">
-            CWN-PORTAL-0001
-          </span>
-        </div>
-
-        <div class="portal-quick-actions">
-          <a
-            class="portal-action-card"
-            href="mailto:Communityshieldofficial@gmail.com?subject=CWN%20Incident%20Report"
-          >
-            <span class="portal-action-icon">
-              🚨
+          <div class="home-network-item">
+            <span>
+              WEBSITE GENERATION
             </span>
 
             <strong>
-              Report an Incident
+              Phase 2C
             </strong>
+          </div>
 
+          <div class="home-network-item">
             <span>
-              Contact CWN about an online-safety concern or incident.
-            </span>
-
-            <span class="portal-action-arrow">
-              Open report channel →
-            </span>
-          </a>
-
-          <a
-            class="portal-action-card"
-            href="mailto:Communityshieldofficial@gmail.com?subject=CWN%20Support%20Request"
-          >
-            <span class="portal-action-icon">
-              🎫
+              PUBLIC ACCESS
             </span>
 
             <strong>
-              Get Support
+              Maintenance protected
             </strong>
+          </div>
 
+          <div class="home-network-item">
             <span>
-              Request assistance, guidance or help with a CWN service.
-            </span>
-
-            <span class="portal-action-arrow">
-              Contact support →
-            </span>
-          </a>
-
-          <a
-            class="portal-action-card"
-            href="#staff-directory"
-          >
-            <span class="portal-action-icon">
-              👥
+              CWN STATUS
             </span>
 
             <strong>
-              Verify CWN Staff
+              Active
             </strong>
-
-            <span>
-              Search Executive Leadership, Directors and vacancies.
-            </span>
-
-            <span class="portal-action-arrow">
-              Open directory →
-            </span>
-          </a>
-
-          <a
-            class="portal-action-card"
-            href="#malware-scanner"
-          >
-            <span class="portal-action-icon">
-              🛡️
-            </span>
-
-            <strong>
-              Scan a File
-            </strong>
-
-            <span>
-              Perform a basic local risk check without uploading it.
-            </span>
-
-            <span class="portal-action-arrow">
-              Open scanner →
-            </span>
-          </a>
-
-          <a
-            class="portal-action-card"
-            href="#our-mission"
-          >
-            <span class="portal-action-icon">
-              📖
-            </span>
-
-            <strong>
-              About CWN
-            </strong>
-
-            <span>
-              Read CWN’s mission, values and organisational boundaries.
-            </span>
-
-            <span class="portal-action-arrow">
-              Read mission →
-            </span>
-          </a>
-
-          <a
-            class="portal-action-card"
-            href="bug-report.html"
-          >
-            <span class="portal-action-icon">
-              🐞
-            </span>
-
-            <strong>
-              Report a Bug
-            </strong>
-
-            <span>
-              Report a technical issue affecting a CWN service.
-            </span>
-
-            <span class="portal-action-arrow">
-              Open bug report →
-            </span>
-          </a>
-
-          <a
-            class="portal-action-card"
-            href="privacy.html"
-          >
-            <span class="portal-action-icon">
-              🔒
-            </span>
-
-            <strong>
-              Data & Privacy
-            </strong>
-
-            <span>
-              See what this page collects, processes and does not collect.
-            </span>
-
-            <span class="portal-action-arrow">
-              Read notice →
-            </span>
-          </a>
-
-          <a
-            class="portal-action-card"
-            href="https://discord.gg/W5qQhjPWak"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="portal-action-icon">
-              💬
-            </span>
-
-            <strong>
-              Join the Discord
-            </strong>
-
-            <span>
-              Access CWN announcements, support and community channels.
-            </span>
-
-            <span class="portal-action-arrow">
-              Join server ↗
-            </span>
-          </a>
-
-          <a
-            class="portal-action-card"
-            href="https://vrc.group/CWN.3366"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="portal-action-icon">
-              🥽
-            </span>
-
-            <strong>
-              VRChat Group
-            </strong>
-
-            <span>
-              Open the official Community Watch Network VRChat group.
-            </span>
-
-            <span class="portal-action-arrow">
-              Open group ↗
-            </span>
-          </a>
+          </div>
         </div>
       </section>
 
-      <section
-        class="portal-section"
-        id="portal-status"
-      >
-        <div class="portal-section-header">
-          <div>
-            <span class="portal-eyebrow">
-              SERVICE AVAILABILITY
-            </span>
-
-            <h2>
-              CWN Service Status
-            </h2>
-
-            <p>
-              A manually maintained overview of CWN’s currently
-              available public services.
-            </p>
-          </div>
-
-          <span class="portal-section-id">
-            CWN-STATUS-0001
-          </span>
-        </div>
-
-        <div class="portal-status-grid">
-          <article class="portal-status-card">
-            <span
-              class="portal-service-dot portal-service-operational"
-              aria-hidden="true"
-            ></span>
-
+      <section class="cwn-section">
+        <div class="cwn-container">
+          <div class="home-section-heading">
             <div>
-              <strong>
-                Links Portal
-              </strong>
-
-              <span>
-                Operational
+              <span class="cwn-eyebrow">
+                WHAT CWN DOES
               </span>
+
+              <h2>
+                Community infrastructure built around safety,
+                information and accountability.
+              </h2>
             </div>
-          </article>
-
-          <article class="portal-status-card">
-            <span
-              class="portal-service-dot portal-service-operational"
-              aria-hidden="true"
-            ></span>
-
-            <div>
-              <strong>
-                Discord Community
-              </strong>
-
-              <span>
-                Operational
-              </span>
-            </div>
-          </article>
-
-          <article class="portal-status-card">
-            <span
-              class="portal-service-dot portal-service-operational"
-              aria-hidden="true"
-            ></span>
-
-            <div>
-              <strong>
-                Staff Directory
-              </strong>
-
-              <span>
-                Operational
-              </span>
-            </div>
-          </article>
-
-          <article class="portal-status-card">
-            <span
-              class="portal-service-dot portal-service-operational"
-              aria-hidden="true"
-            ></span>
-
-            <div>
-              <strong>
-                File Risk Scanner
-              </strong>
-
-              <span>
-                Operational
-              </span>
-            </div>
-          </article>
-
-          <article class="portal-status-card">
-            <span
-              class="portal-service-dot portal-service-operational"
-              aria-hidden="true"
-            ></span>
-
-            <div>
-              <strong>
-                Support Contact
-              </strong>
-
-              <span>
-                Operational
-              </span>
-            </div>
-          </article>
-
-          <article class="portal-status-card">
-            <span
-              class="portal-service-dot portal-service-limited"
-              aria-hidden="true"
-            ></span>
-
-            <div>
-              <strong>
-                Recruitment
-              </strong>
-
-              <span>
-                Limited vacancies
-              </span>
-            </div>
-          </article>
-        </div>
-
-        <p class="portal-status-manual">
-          Status information is reviewed manually and does not represent
-          automated uptime monitoring.
-        </p>
-      </section>
-
-      <section
-        class="portal-section"
-        id="portal-vision"
-      >
-        <div class="portal-section-header">
-          <div>
-            <span class="portal-eyebrow">
-              DIRECTION AND PURPOSE
-            </span>
-
-            <h2>
-              Mission & Vision
-            </h2>
 
             <p>
-              The principles guiding Community Watch Network’s current
-              work and long-term development.
+              CWN combines community reporting, technical resources
+              and public information into one accessible platform.
             </p>
           </div>
 
-          <span class="portal-section-id">
-            CWN-MISSION-0002
-          </span>
-        </div>
-
-        <div class="portal-vision-grid">
-          <article class="portal-vision-card">
-            <span>
-              OUR MISSION
-            </span>
-
-            <h3>
-              Safer, informed and accountable communities
-            </h3>
-
-            <p>
-              CWN works to support people affected by online harm,
-              improve awareness, document credible concerns and help
-              communities respond responsibly and proportionately.
-            </p>
-          </article>
-
-          <article class="portal-vision-card">
-            <span>
-              OUR VISION
-            </span>
-
-            <h3>
-              A connected network built around trust and safety
-            </h3>
-
-            <p>
-              CWN aims to develop accessible safety resources, dependable
-              support systems and transparent community tools that help
-              people recognise risks and make better-informed decisions.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section
-        class="portal-section"
-        id="portal-statistics"
-      >
-        <div class="portal-section-header">
-          <div>
-            <span class="portal-eyebrow">
-              ORGANISATION OVERVIEW
-            </span>
-
-            <h2>
-              CWN Statistics
-            </h2>
-
-            <p>
-              A current manual overview of the organisation and this
-              public portal.
-            </p>
-          </div>
-
-          <span class="portal-section-id">
-            CWN-STATS-0001
-          </span>
-        </div>
-
-        <div class="portal-statistics">
-          <article class="portal-stat-card">
-            <strong
-              class="portal-stat-value"
-              data-portal-count="9"
-            >
-              0
-            </strong>
-
-            <span class="portal-stat-label">
-              Appointed Leaders
-            </span>
-
-            <span class="portal-stat-detail">
-              Executive Leadership and active Directors
-            </span>
-          </article>
-
-          <article class="portal-stat-card">
-            <strong
-              class="portal-stat-value"
-              data-portal-count="10"
-            >
-              0
-            </strong>
-
-            <span class="portal-stat-label">
-              Directorates
-            </span>
-
-            <span class="portal-stat-detail">
-              CWN organisational departments
-            </span>
-          </article>
-
-          <article class="portal-stat-card">
-            <strong
-              class="portal-stat-value"
-              data-portal-count="4"
-            >
-              0
-            </strong>
-
-            <span class="portal-stat-label">
-              Director Vacancies
-            </span>
-
-            <span class="portal-stat-detail">
-              Currently unfilled Director roles
-            </span>
-          </article>
-
-          <article class="portal-stat-card">
-            <strong
-              class="portal-stat-value"
-              data-portal-count="13"
-            >
-              0
-            </strong>
-
-            <span class="portal-stat-label">
-              Deputy Vacancies
-            </span>
-
-            <span class="portal-stat-detail">
-              Executive and Directorate Deputy roles
-            </span>
-          </article>
-
-          <article class="portal-stat-card">
-            <strong
-              class="portal-stat-value"
-              data-portal-count="6"
-            >
-              0
-            </strong>
-
-            <span class="portal-stat-label">
-              Public Services
-            </span>
-
-            <span class="portal-stat-detail">
-              Listed in the current status panel
-            </span>
-          </article>
-
-          <article class="portal-stat-card">
-            <strong
-              class="portal-stat-value"
-              data-portal-count="1"
-            >
-              0
-            </strong>
-
-            <span class="portal-stat-label">
-              Local Safety Tool
-            </span>
-
-            <span class="portal-stat-detail">
-              Browser-based File Risk Scanner
-            </span>
-          </article>
-
-          <article class="portal-stat-card">
-            <strong
-              class="portal-stat-value"
-              data-portal-count="550"
-              data-portal-suffix=" GBP"
-            >
-              0
-            </strong>
-
-            <span class="portal-stat-label">
-              Fundraising Goal
-            </span>
-
-            <span class="portal-stat-detail">
-              Infrastructure and development support
-            </span>
-          </article>
-
-          <article class="portal-stat-card">
-            <strong
-              class="portal-stat-value"
-              data-portal-count="3"
-              data-portal-suffix=".0"
-            >
-              0
-            </strong>
-
-            <span class="portal-stat-label">
-              Portal Version
-            </span>
-
-            <span class="portal-stat-detail">
-              Phase 1 foundation release
-            </span>
-          </article>
-        </div>
-      </section>
-
-
-    <section class="profile">
-
-      <div class="logo">
-        CWN
-      </div>
-
-      <div class="official-status">
-        <span class="status-dot"></span>
-        OFFICIAL COMMUNITY WATCH NETWORK LINKS
-      </div>
-
-      <h1>
-        Community Watch Network
-      </h1>
-
-      <p class="username">
-        @CommunityWatchNetwork
-      </p>
-
-      <p class="bio">
-        An independent community-led project focused
-        on online safety, education, awareness,
-        responsible reporting and digital wellbeing.
-      </p>
-
-      <div class="quick-info">
-
-        <div class="quick-info-card">
-          <strong>
-            Independent
-          </strong>
-
-          <span>
-            Community-led
-          </span>
-        </div>
-
-        <div class="quick-info-card">
-          <strong>
-            CWN.3366
-          </strong>
-
-          <span>
-            VRChat group
-          </span>
-        </div>
-
-        <div class="quick-info-card">
-          <strong>
-            £550
-          </strong>
-
-          <span>
-            Fundraising goal
-          </span>
-        </div>
-
-      </div>
-
-      <div class="section-title">
-        OFFICIAL LINKS
-      </div>
-
-      <div class="links">
-
-        <a
-          class="link-button featured-link"
-          href="https://discord.gg/W5qQhjPWak"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div class="link-content">
-
-            <span class="link-category">
-              DISCORD COMMUNITY
-            </span>
-
-            <span class="link-title">
-              Join the CWN Discord
-            </span>
-
-            <span class="link-detail">
-              Access community updates, announcements,
-              resources, support channels and CWN projects.
-            </span>
-
-            <span class="badge">
-              OFFICIAL SERVER
-            </span>
-
-          </div>
-
-          <span class="arrow">
-            ↗
-          </span>
-        </a>
-
-        <a
-          class="link-button"
-          href="https://vrc.group/CWN.3366"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div class="link-content">
-
-            <span class="link-category">
-              VRCHAT SHORT LINK
-            </span>
-
-            <span class="link-title">
-              Join the CWN VRChat Group
-            </span>
-
-            <span class="link-detail">
-              Open the group using the official short code:
-              CWN.3366.
-            </span>
-
-          </div>
-
-          <span class="arrow">
-            ↗
-          </span>
-        </a>
-
-        <a
-          class="link-button"
-          href="https://vrchat.com/home/group/grp_aea18cf8-b70a-4d23-9a83-54a1c81e029c"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div class="link-content">
-
-            <span class="link-category">
-              VRCHAT FULL GROUP PAGE
-            </span>
-
-            <span class="link-title">
-              View the Official CWN Group
-            </span>
-
-            <span class="link-detail">
-              Open the full Community Watch Network
-              group page on the VRChat website.
-            </span>
-
-          </div>
-
-          <span class="arrow">
-            ↗
-          </span>
-        </a>
-
-        <a
-          class="link-button support-link"
-          href="https://www.gofundme.com/f/help-keep-community-watch-network-online/cl/o?utm_campaign=man_sharesheet_dash&utm_content=amp20_t1&utm_medium=customer&utm_source=copy_link&lang=en_GB&attribution_id=sl%3A256e5642-eca1-4d32-a65a-1472083d96bf&ts=1784379220"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div class="link-content">
-
-            <span class="link-category">
-              OFFICIAL GOFUNDME
-            </span>
-
-            <span class="link-title">
-              💙 Support Community Watch Network
-            </span>
-
-            <span class="link-detail">
-              Help fund CWN servers, website hosting,
-              infrastructure, development and essential
-              VR equipment.
-            </span>
-
-            <span class="badge">
-              GOAL: £550
-            </span>
-
-          </div>
-
-          <span class="arrow">
-            ↗
-          </span>
-        </a>
-
-        <a
-          class="link-button"
-          href="mailto:Communityshieldofficial@gmail.com"
-        >
-          <div class="link-content">
-
-            <span class="link-category">
-              CONTACT
-            </span>
-
-            <span class="link-title">
-              Contact the CWN Team
-            </span>
-
-            <span class="link-detail">
-              Communityshieldofficial@gmail.com
-            </span>
-
-          </div>
-
-          <span class="arrow">
-            ↗
-          </span>
-        </a>
-
-      </div>
-
-
-
-
-      <section class="portal-section" id="portal-phase2">
-        <div class="portal-section-header">
-          <div>
-            <span class="portal-eyebrow">
-              CWN PORTAL PHASE 2
-            </span>
-
-            <h2>
-              Information, transparency and release tools
-            </h2>
-
-            <p>
-              Explore CWN service status, public news, downloads,
-              frequently asked questions, changelog history, portal
-              search and the Patch Note Generator.
-            </p>
-          </div>
-
-          <span class="portal-section-id">
-            CWN-PHASE2-0001
-          </span>
-        </div>
-
-        <div class="portal-quick-actions">
-          <a class="portal-action-card" href="security-status.html">
-            <span class="portal-action-icon">🛡️</span>
-            <strong>CWN Shield</strong>
-            <span>Review the portal’s traffic and abuse-protection layers.</span>
-            <span class="portal-action-arrow">View protection →</span>
-          </a>
-
-          <a class="portal-action-card" href="exposes.html">
-            <span class="portal-action-icon">🔎</span>
-            <strong>Exposés and Investigations</strong>
-            <span>Read CWN public-interest investigations, evidence summaries and published reports.</span>
-            <span class="portal-action-arrow">Browse investigations →</span>
-          </a>
-
-          <a class="portal-action-card" href="status.html">
-            <span class="portal-action-icon">🟢</span>
-            <strong>Service Status</strong>
-            <span>View all tracked CWN public services.</span>
-            <span class="portal-action-arrow">Open status →</span>
-          </a>
-
-          <a class="portal-action-card" href="transparency.html">
-            <span class="portal-action-icon">📊</span>
-            <strong>Transparency</strong>
-            <span>Review public organisation statistics and projects.</span>
-            <span class="portal-action-arrow">Open dashboard →</span>
-          </a>
-
-          <a class="portal-action-card" href="news.html">
-            <span class="portal-action-icon">📰</span>
-            <strong>CWN News</strong>
-            <span>Read official portal and organisation updates.</span>
-            <span class="portal-action-arrow">Read news →</span>
-          </a>
-
-          <a class="portal-action-card" href="faq.html">
-            <span class="portal-action-icon">❓</span>
-            <strong>FAQ</strong>
-            <span>Find answers to common CWN questions.</span>
-            <span class="portal-action-arrow">Open FAQ →</span>
-          </a>
-
-          <a class="portal-action-card" href="downloads.html">
-            <span class="portal-action-icon">📂</span>
-            <strong>Downloads</strong>
-            <span>Access public tools, forms and resources.</span>
-            <span class="portal-action-arrow">Open downloads →</span>
-          </a>
-
-          <a class="portal-action-card" href="changelog.html">
-            <span class="portal-action-icon">📋</span>
-            <strong>Changelog</strong>
-            <span>Review every published CWN Portal release.</span>
-            <span class="portal-action-arrow">View releases →</span>
-          </a>
-
-          <a class="portal-action-card" href="search.html">
-            <span class="portal-action-icon">🔍</span>
-            <strong>Universal Search</strong>
-            <span>Search public CWN pages and resources.</span>
-            <span class="portal-action-arrow">Search portal →</span>
-          </a>
-
-          <a class="portal-action-card" href="patch-notes.html">
-            <span class="portal-action-icon">🛠️</span>
-            <strong>Patch Note Generator</strong>
-            <span>Create Markdown, Discord and JSON release notes.</span>
-            <span class="portal-action-arrow">Generate notes →</span>
-          </a>
-        </div>
-      </section>
-
-      <section
-        class="cwn-mission"
-        id="our-mission"
-        aria-labelledby="mission-title"
-      >
-        <span class="cwn-section-label">
-          WHY CWN EXISTS
-        </span>
-
-        <h2 id="mission-title">
-          Our Mission
-        </h2>
-
-        <p class="cwn-mission-intro">
-          Community Watch Network exists to help create safer,
-          better-informed and more accountable online communities.
-          CWN supports people affected by online harm, develops
-          practical safety resources and works with communities to
-          identify risks, document concerns and encourage responsible
-          action.
-        </p>
-
-        <div class="mission-grid">
-          <article class="mission-card">
-            <span class="mission-card-icon" aria-hidden="true">
-              🛡️
-            </span>
-
-            <h3>
-              Protect Communities
-            </h3>
-
-            <p>
-              Help communities identify online risks, improve safety
-              practices and respond appropriately to credible concerns.
-            </p>
-          </article>
-
-          <article class="mission-card">
-            <span class="mission-card-icon" aria-hidden="true">
-              📚
-            </span>
-
-            <h3>
-              Educate and Inform
-            </h3>
-
-            <p>
-              Publish accessible online-safety guidance, awareness
-              resources and information that helps people make safer
-              decisions.
-            </p>
-          </article>
-
-          <article class="mission-card">
-            <span class="mission-card-icon" aria-hidden="true">
-              ⚖️
-            </span>
-
-            <h3>
-              Act Responsibly
-            </h3>
-
-            <p>
-              Handle reports and evidence carefully, remain impartial
-              and encourage proportionate action through appropriate
-              platforms and authorities.
-            </p>
-          </article>
-        </div>
-
-        <div class="mission-boundary">
-          <strong>Important:</strong>
-          CWN is an independent community organisation. It is not a
-          police force, government agency, emergency service, court,
-          antivirus company or substitute for qualified legal,
-          safeguarding or cybersecurity professionals.
-        </div>
-      </section>
-
-      <section
-        class="malware-scanner"
-        id="malware-scanner"
-        aria-labelledby="scanner-title"
-      >
-        <div class="scanner-header">
-          <div>
-            <span class="cwn-section-label">
-              LOCAL SECURITY TOOL
-            </span>
-
-            <h2 id="scanner-title">
-              File Risk Scanner
-            </h2>
-
-            <p class="scanner-description">
-              Inspect a file for suspicious extensions, misleading
-              filenames, common executable signatures and other basic
-              risk indicators.
-            </p>
-          </div>
-
-          <span class="local-processing-badge">
-            LOCAL PROCESSING
-          </span>
-        </div>
-
-        <div class="scanner-privacy-notice">
-          <span aria-hidden="true">🔒</span>
-
-          <p>
-            The selected file is analysed inside your browser. CWN does
-            not upload, transmit, store or receive the file, its
-            contents, filename or calculated SHA-256 hash through this
-            scanner.
-          </p>
-        </div>
-
-        <input
-          class="scanner-file-input"
-          id="malware-file-input"
-          type="file"
-        >
-
-        <div
-          class="scanner-drop-zone"
-          id="scanner-drop-zone"
-          role="button"
-          tabindex="0"
-          aria-controls="malware-file-input"
-        >
-          <div>
-            <span class="scanner-drop-icon" aria-hidden="true">
-              📁
-            </span>
-
-            <strong>
-              Select or drop a file
-            </strong>
-
-            <small>
-              The file stays on your device. Recommended maximum:
-              100 MB.
-            </small>
-          </div>
-        </div>
-
-        <div
-          class="scanner-selected-file"
-          id="scanner-selected-file"
-          hidden
-        >
-          <span>File name</span>
-          <strong id="scanner-file-name"></strong>
-
-          <span>File size</span>
-          <strong id="scanner-file-size"></strong>
-
-          <span>Reported type</span>
-          <strong id="scanner-file-type"></strong>
-        </div>
-
-        <div class="scanner-controls">
-          <button
-            class="scanner-button"
-            id="scanner-scan-button"
-            type="button"
-            disabled
-          >
-            Scan File Locally
-          </button>
-
-          <button
-            class="scanner-button scanner-button-secondary"
-            id="scanner-clear-button"
-            type="button"
-            disabled
-          >
-            Clear File
-          </button>
-        </div>
-
-        <div
-          class="scanner-progress"
-          id="scanner-progress"
-          hidden
-        >
-          <div class="scanner-progress-bar">
-            <div
-              class="scanner-progress-fill"
-              id="scanner-progress-fill"
-            ></div>
-          </div>
-
-          <span
-            class="scanner-progress-text"
-            id="scanner-progress-text"
-          >
-            Preparing local analysis…
-          </span>
-        </div>
-
-        <div
-          class="scanner-result"
-          id="scanner-result"
-          hidden
-        >
-          <div class="scanner-result-header">
-            <span
-              class="scanner-risk-badge"
-              id="scanner-risk-badge"
-            >
-              Result
-            </span>
-
-            <h3 id="scanner-result-title">
-              Analysis complete
-            </h3>
-          </div>
-
-          <div
-            class="scanner-findings"
-            id="scanner-findings"
-          ></div>
-
-          <div class="scanner-hash">
-            <span class="scanner-result-label">
-              Locally calculated SHA-256
-            </span>
-
-            <code id="scanner-hash"></code>
-          </div>
-        </div>
-
-        <p class="scanner-disclaimer">
-          <strong>Scanner limitation:</strong>
-          this tool performs basic static checks only. A low-risk result
-          does not prove that a file is safe, and a warning does not
-          prove that a file is malicious. Do not open files from
-          untrusted sources. Use reputable, updated security software
-          for a full malware scan.
-        </p>
-
-        <div class="privacy-link-row">
-          <a
-            class="privacy-page-link"
-            href="privacy.html"
-          >
-            Read CWN’s Data & Privacy Notice →
-          </a>
-        </div>
-      </section>
-
-      <section
-        class="staff-directory"
-        id="staff-directory"
-        aria-labelledby="staff-directory-title"
-      >
-        <div class="staff-directory-header">
-          <div>
-            <span class="staff-directory-eyebrow">
-              VERIFIED CWN TEAM
-            </span>
-
-            <h2 id="staff-directory-title">
-              Staff Directory
-            </h2>
-
-            <p>
-              Search CWN staff members, leadership,
-              divisions and current activity status.
-            </p>
-          </div>
-
-          <div
-            class="staff-directory-count"
-            aria-live="polite"
-          >
-            <strong id="staff-visible-count">0</strong>
-            <span>staff shown</span>
-          </div>
-        </div>
-
-        <div class="staff-directory-notice">
-          <span aria-hidden="true">✓</span>
-
-          <p>
-            Only profiles shown in this official directory
-            should be treated as verified CWN staff.
-          </p>
-        </div>
-
-        <div class="staff-directory-tools">
-          <label class="staff-search">
-            <span class="sr-only">
-              Search staff directory
-            </span>
-
-            <span
-              class="staff-search-icon"
-              aria-hidden="true"
-            >
-              ⌕
-            </span>
-
-            <input
-              id="staff-search-input"
-              type="search"
-              placeholder="Search name, role, division or ID..."
-              autocomplete="off"
-            >
-          </label>
-
-          <label class="staff-filter">
-            <span class="sr-only">
-              Filter staff by division
-            </span>
-
-            <select id="staff-division-filter">
-              <option value="all">
-                All divisions
-              </option>
-            </select>
-          </label>
-
-          <label class="staff-filter">
-            <span class="sr-only">
-              Filter staff by status
-            </span>
-
-            <select id="staff-status-filter">
-              <option value="all">
-                All statuses
-              </option>
-
-              <option value="active">
-                Active
-              </option>
-
-              <option value="break">
-                On break
-              </option>
-
-              <option value="inactive">
-                Inactive
-              </option>
-
-              <option value="vacant">
-                Vacant
-              </option>
-            </select>
-          </label>
-
-          <button
-            class="staff-clear-button"
-            id="staff-clear-filters"
-            type="button"
-          >
-            Clear
-          </button>
-        </div>
-
-        <section
-          class="staff-hierarchy-section executive-hierarchy-section"
-          id="executive-leadership-section"
-        >
-          <div class="staff-section-heading">
-            <div>
-              <span class="staff-section-eyebrow">
-                HIGHEST ORGANISATIONAL AUTHORITY
+          <div class="cwn-grid cwn-grid-3">
+            <article class="cwn-card cwn-card-interactive home-service-card">
+              <span class="home-service-number">
+                01
               </span>
 
               <h3>
-                Executive Leadership
+                Reports
               </h3>
 
               <p>
-                The Founder, Co-Founder / Second-in-Command and
-                Third-in-Command oversee Community Watch Network
-                as a whole.
+                Submit structured reports about CWN services,
+                technical problems or community safety concerns.
               </p>
-            </div>
 
-            <span class="staff-section-icon" aria-hidden="true">
-              👑
-            </span>
-          </div>
+              <a
+                class="cwn-button cwn-button-secondary"
+                href="/bug-report"
+              >
+                Open reporting
+              </a>
+            </article>
 
-          <div
-            class="staff-executive-grid"
-            id="staff-executive"
-            aria-label="CWN Executive Leadership"
-          ></div>
-        </section>
-
-        <section
-          class="staff-hierarchy-section directorate-hierarchy-section"
-          id="directorates-section"
-        >
-          <div class="staff-section-heading">
-            <div>
-              <span class="staff-section-eyebrow">
-                DEPARTMENTAL LEADERSHIP
+            <article class="cwn-card cwn-card-interactive home-service-card">
+              <span class="home-service-number">
+                02
               </span>
 
               <h3>
-                CWN Directorates
+                Investigations
               </h3>
 
               <p>
-                Directors manage their respective departments
-                under the oversight of Executive Leadership.
+                Review published CWN material, documented information
+                and public-interest investigation updates.
               </p>
+
+              <a
+                class="cwn-button cwn-button-secondary"
+                href="/exposes"
+              >
+                View investigations
+              </a>
+            </article>
+
+            <article class="cwn-card cwn-card-interactive home-service-card">
+              <span class="home-service-number">
+                03
+              </span>
+
+              <h3>
+                Safety resources
+              </h3>
+
+              <p>
+                Access technical guidance, security information and
+                resources for safer online communities.
+              </p>
+
+              <a
+                class="cwn-button cwn-button-secondary"
+                href="/security-status"
+              >
+                Safety centre
+              </a>
+            </article>
+
+            <article class="cwn-card cwn-card-interactive home-service-card">
+              <span class="home-service-number">
+                04
+              </span>
+
+              <h3>
+                Transparency
+              </h3>
+
+              <p>
+                Understand how CWN operates, what its services do and
+                how platform changes are communicated.
+              </p>
+
+              <a
+                class="cwn-button cwn-button-secondary"
+                href="/transparency"
+              >
+                View transparency
+              </a>
+            </article>
+
+            <article class="cwn-card cwn-card-interactive home-service-card">
+              <span class="home-service-number">
+                05
+              </span>
+
+              <h3>
+                Tools
+              </h3>
+
+              <p>
+                Explore CWN-developed utilities, public tools and
+                technical resources.
+              </p>
+
+              <a
+                class="cwn-button cwn-button-secondary"
+                href="/downloads"
+              >
+                Browse tools
+              </a>
+            </article>
+
+            <article class="cwn-card cwn-card-interactive home-service-card">
+              <span class="home-service-number">
+                06
+              </span>
+
+              <h3>
+                Updates
+              </h3>
+
+              <p>
+                Follow platform releases, community announcements and
+                technical development.
+              </p>
+
+              <a
+                class="cwn-button cwn-button-secondary"
+                href="/news"
+              >
+                Latest updates
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cwn-section">
+        <div class="cwn-container">
+          <div class="cwn-card cwn-card-elevated home-safety">
+            <div class="home-safety-grid">
+              <div>
+                <span class="cwn-eyebrow">
+                  COMMUNITY SAFETY
+                </span>
+
+                <h2>
+                  Something needs attention?
+                </h2>
+
+                <p>
+                  CWN provides structured channels for technical
+                  reports, community concerns and safety-related
+                  information. Reports should contain factual,
+                  relevant information and avoid unnecessary private
+                  data.
+                </p>
+              </div>
+
+              <div class="home-safety-actions">
+                <a
+                  class="cwn-button cwn-button-primary cwn-button-lg"
+                  href="/bug-report"
+                >
+                  Start a report
+                </a>
+
+                <a
+                  class="cwn-button cwn-button-secondary"
+                  href="/privacy"
+                >
+                  Read privacy guidance
+                </a>
+
+                <a
+                  class="cwn-button cwn-button-ghost"
+                  href="/faq"
+                >
+                  Reporting FAQ
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cwn-section">
+        <div class="cwn-container">
+          <div class="home-section-heading">
+            <div>
+              <span class="cwn-eyebrow">
+                CWN PROJECTS
+              </span>
+
+              <h2>
+                Building more than a website.
+              </h2>
             </div>
 
-            <span class="staff-section-icon" aria-hidden="true">
-              🛡️
-            </span>
+            <p>
+              CWN's platform includes community tools, moderation and
+              safety systems, communication software and technical
+              projects.
+            </p>
           </div>
 
-          <div
-            class="staff-featured"
-            id="staff-featured"
-            aria-label="Appointed CWN Directors"
-          ></div>
+          <div class="cwn-grid cwn-grid-3">
+            <article class="cwn-card cwn-card-interactive home-project-card">
+              <div class="home-project-status">
+                <span class="cwn-badge cwn-badge-info">
+                  Development
+                </span>
 
-          <div
-            class="staff-grid"
-            id="staff-grid"
-            aria-live="polite"
-          ></div>
-        </section>
-
-        <div
-          class="staff-empty"
-          id="staff-empty"
-          hidden
-        >
-          <strong>No matching staff found</strong>
-
-          <span>
-            Try changing the search or filters.
-          </span>
-        </div>
-
-
-        <div class="directorate-handbook">
-          <section class="directorate-info-panel executive-info-panel">
-            <span class="directorate-info-label">
-              EXECUTIVE LEADERSHIP
-            </span>
-
-            <h3>
-              Community Watch Network Executive Leadership
-            </h3>
-
-            <p>
-              Executive Leadership is the highest level of
-              authority within Community Watch Network.
-            </p>
-
-            <p>
-              The Founder, Co-Founder / Second-in-Command and
-              Third-in-Command establish strategic direction,
-              supervise all Directorates and ensure CWN operates
-              professionally, effectively and in accordance with
-              its mission.
-            </p>
-
-            <p>
-              Each Executive Leadership position may appoint a
-              Deputy to assist with day-to-day responsibilities
-              and provide continuity when required. All current
-              Executive Leadership Deputy positions are vacant.
-            </p>
-          </section>
-
-
-          <section class="directorate-info-panel">
-            <span class="directorate-info-label">
-              ORGANISATIONAL STRUCTURE
-            </span>
-
-            <h3>
-              Community Watch Network Directorates
-            </h3>
-
-            <p>
-              CWN Directorates are responsible for overseeing
-              their respective departments and maintaining
-              professionalism, accountability and operational
-              effectiveness across the organisation.
-            </p>
-
-            <p>
-              Each Director reports to Executive Leadership and
-              is responsible for the management, development and
-              performance of their department.
-            </p>
-          </section>
-
-          <div class="directorate-info-grid">
-            <section class="directorate-info-panel">
-              <span class="directorate-info-label">
-                DEPUTY DIRECTORS
-              </span>
+                <code>
+                  CWN-HAVEN
+                </code>
+              </div>
 
               <h3>
-                Deputy Director Responsibilities
+                CWN Haven
               </h3>
 
-              <ul>
-                <li>
-                  Assists the Director with day-to-day
-                  responsibilities.
-                </li>
+              <p>
+                A privacy-focused communications platform being
+                developed as part of CWN's broader ecosystem.
+              </p>
 
-                <li>
-                  Acts on behalf of the Director during periods
-                  of absence.
-                </li>
-
-                <li>
-                  Supports planning, organisation and
-                  departmental management.
-                </li>
-
-                <li>
-                  Helps maintain departmental standards and
-                  continuity.
-                </li>
-
-                <li>
-                  Is expected to be capable of assuming the
-                  Director role if required.
-                </li>
-              </ul>
-            </section>
-
-            <section class="directorate-info-panel">
-              <span class="directorate-info-label">
-                LEADERSHIP STANDARDS
+              <span class="cwn-badge">
+                Active project
               </span>
+            </article>
+
+            <article class="cwn-card cwn-card-interactive home-project-card">
+              <div class="home-project-status">
+                <span class="cwn-badge cwn-badge-success">
+                  Active
+                </span>
+
+                <code>
+                  CWN-QA
+                </code>
+              </div>
 
               <h3>
-                Director Expectations
+                QA Toolkit
               </h3>
 
-              <ul>
-                <li>
-                  Demonstrate professionalism and maturity.
-                </li>
+              <p>
+                Technical testing and reporting utilities designed to
+                improve reliability and structured bug analysis.
+              </p>
 
-                <li>
-                  Maintain activity within their department.
-                </li>
+              <span class="cwn-badge">
+                Internal / public tooling
+              </span>
+            </article>
 
-                <li>
-                  Lead by example and uphold CWN standards.
-                </li>
+            <article class="cwn-card cwn-card-interactive home-project-card">
+              <div class="home-project-status">
+                <span class="cwn-badge cwn-badge-warning">
+                  Rebuilding
+                </span>
 
-                <li>
-                  Work collaboratively with other Directorates.
-                </li>
+                <code>
+                  CWN-WEB
+                </code>
+              </div>
 
-                <li>
-                  Submit reports or updates to Executive
-                  Leadership when required.
-                </li>
-              </ul>
-            </section>
+              <h3>
+                CWN Web Platform
+              </h3>
+
+              <p>
+                The complete redesign of CWN's public presence,
+                services and community infrastructure.
+              </p>
+
+              <span class="cwn-badge cwn-badge-info">
+                Phase 2C
+              </span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cwn-section">
+        <div class="cwn-container">
+          <div class="home-section-heading">
+            <div>
+              <span class="cwn-eyebrow">
+                NETWORK UPDATES
+              </span>
+
+              <h2>
+                Latest platform activity.
+              </h2>
+            </div>
+
+            <a
+              class="cwn-button cwn-button-secondary"
+              href="/changelog"
+            >
+              Full changelog
+            </a>
           </div>
 
-          <section class="directorate-info-panel">
-            <span class="directorate-info-label">
-              FUTURE DEVELOPMENT
+          <div class="home-update-list">
+            <article class="home-update">
+              <time>
+                07 AUG 2026
+              </time>
+
+              <div>
+                <strong>
+                  Phase 2C started
+                </strong>
+
+                <p>
+                  The new CWN website shell and homepage development
+                  programme has begun.
+                </p>
+              </div>
+
+              <span class="cwn-badge cwn-badge-info">
+                Development
+              </span>
+            </article>
+
+            <article class="home-update">
+              <time>
+                07 AUG 2026
+              </time>
+
+              <div>
+                <strong>
+                  CWN Design System 2B completed
+                </strong>
+
+                <p>
+                  Navigation, forms, data displays, overlays and core
+                  interface primitives are now available.
+                </p>
+              </div>
+
+              <span class="cwn-badge cwn-badge-success">
+                Complete
+              </span>
+            </article>
+
+            <article class="home-update">
+              <time>
+                06 AUG 2026
+              </time>
+
+              <div>
+                <strong>
+                  Maintenance gateway deployed
+                </strong>
+
+                <p>
+                  Public access was placed behind the maintenance
+                  system while the new platform is developed.
+                </p>
+              </div>
+
+              <span class="cwn-badge cwn-badge-success">
+                Production
+              </span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cwn-section">
+        <div class="cwn-container">
+          <div class="home-transparency-grid">
+            <div>
+              <span class="cwn-eyebrow">
+                TRANSPARENCY
+              </span>
+
+              <h2>
+                Clear boundaries matter.
+              </h2>
+
+              <p>
+                CWN is a community organisation and is not a
+                government agency, police service, emergency service
+                or court. The website should clearly distinguish
+                community information from official authorities.
+              </p>
+
+              <a
+                class="cwn-button cwn-button-secondary"
+                href="/transparency"
+              >
+                Transparency centre
+              </a>
+            </div>
+
+            <div class="home-transparency-list">
+              <div>
+                <span class="cwn-status-dot cwn-text-success"></span>
+
+                <div>
+                  <strong>
+                    Public policies
+                  </strong>
+
+                  <span>
+                    Clear information about CWN processes.
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <span class="cwn-status-dot cwn-text-info"></span>
+
+                <div>
+                  <strong>
+                    Changelog
+                  </strong>
+
+                  <span>
+                    Track changes to CWN services.
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <span class="cwn-status-dot cwn-text-warning"></span>
+
+                <div>
+                  <strong>
+                    Service status
+                  </strong>
+
+                  <span>
+                    Review current operational information.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="cwn-footer">
+      <div class="cwn-container cwn-footer-grid">
+        <div class="cwn-footer-brand">
+          <a
+            class="cwn-nav-brand"
+            href="/"
+          >
+            <span class="cwn-nav-mark">
+              CWN
             </span>
 
-            <h3>
-              Additional Directorates
-            </h3>
+            <strong>
+              Community Watch Network
+            </strong>
+          </a>
 
-            <p>
-              Executive Leadership may establish, merge, rename
-              or dissolve Directorates as Community Watch Network
-              grows and operational requirements evolve.
-            </p>
-          </section>
-        </div>
+          <p>
+            Community-focused safety resources, reporting tools,
+            transparency and technical projects.
+          </p>
 
-        <div class="staff-directory-footer">
-          <span>
-            Staff verification system
+          <span class="cwn-badge cwn-badge-success">
+            <span class="cwn-status-dot"></span>
+            Operational
           </span>
-
-          <strong>
-            CWN-DIR-0001
-          </strong>
-        </div>
-      </section>
-
-      <section class="goal-box">
-
-        <div class="goal-header">
-          <span>
-            CWN FUNDRAISING
-          </span>
-
-          <strong>
-            £550 Goal
-          </strong>
         </div>
 
-        <p>
-          Donations will help Community Watch Network
-          continue operating, improving its services
-          and developing new projects for the community.
-        </p>
+        <div>
+          <h3 class="cwn-footer-heading">
+            CWN
+          </h3>
 
-        <div class="goal-items">
+          <div class="cwn-footer-links">
+            <a href="/transparency">
+              Transparency
+            </a>
 
-          <div class="goal-item">
-            🖥️ Server hosting and reliability
+            <a href="/status">
+              Status
+            </a>
+
+            <a href="/news">
+              News
+            </a>
+
+            <a href="/changelog">
+              Changelog
+            </a>
           </div>
-
-          <div class="goal-item">
-            🌐 Website hosting and domain costs
-          </div>
-
-          <div class="goal-item">
-            ☁️ Backend infrastructure and cloud services
-          </div>
-
-          <div class="goal-item">
-            🛠️ Development of tools and projects
-          </div>
-
-          <div class="goal-item">
-            🎮 Essential VR development and testing equipment
-          </div>
-
         </div>
 
-      </section>
+        <div>
+          <h3 class="cwn-footer-heading">
+            Safety
+          </h3>
 
-      <section class="coming-soon">
+          <div class="cwn-footer-links">
+            <a href="/bug-report">
+              Reports
+            </a>
 
-        <div class="coming-soon-header">
+            <a href="/security-status">
+              Security
+            </a>
 
-          <span class="coming-label">
-            OFFICIAL CWN WEBSITE
-          </span>
+            <a href="/privacy">
+              Privacy
+            </a>
 
-          <span class="coming-badge">
-            COMING SOON
-          </span>
-
+            <a href="/faq">
+              FAQ
+            </a>
+          </div>
         </div>
 
-        <h2>
-          A larger CWN website is currently in development.
-        </h2>
+        <div>
+          <h3 class="cwn-footer-heading">
+            Resources
+          </h3>
 
-        <p>
-          The upcoming website is planned to include
-          safety resources, community information,
-          project updates, reporting guidance,
-          partnerships, staff information, news,
-          documentation and more.
-        </p>
+          <div class="cwn-footer-links">
+            <a href="/downloads">
+              Downloads
+            </a>
 
-        <div
-          class="progress"
-          aria-label="Website development progress"
-        >
-          <div class="progress-bar"></div>
+            <a href="/exposes">
+              Investigations
+            </a>
+
+            <a href="/search">
+              Search
+            </a>
+
+            <a href="/patch-notes">
+              Patch notes
+            </a>
+          </div>
         </div>
-
-      </section>
-
-      <section class="contact-card">
-
-        <h2>
-          Official Contact
-        </h2>
-
-        <p>
-          For general enquiries, partnerships,
-          community questions or CWN-related contact,
-          email the team using the address below.
-        </p>
-
-        <a
-          class="contact-email"
-          href="mailto:Communityshieldofficial@gmail.com"
-        >
-          Communityshieldofficial@gmail.com
-        </a>
-
-      </section>
-            <div class="disclaimer">
-
-        <strong>
-          Important disclaimer:
-        </strong>
-
-        Community Watch Network is an independent
-        community-led organisation.
-
-        CWN is not a police force, government agency,
-        law-enforcement organisation, emergency service
-        or replacement for official platform reporting
-        systems.
-
-        If someone is in immediate danger, contact the
-        relevant emergency services or official authorities.
-
       </div>
 
-      <footer class="footer">
-
+      <div class="cwn-container cwn-footer-bottom">
         <span>
-          COMMUNITY WATCH NETWORK
+          © 2026 Community Watch Network.
         </span>
 
         <span>
-          CWN-LINK-0001
+          Awareness · Accountability · Action
         </span>
-
-      </footer>
-
-    </section>
-  
-<a
-  class="link-card"
-  href="rat-database.html"
->
-  <span class="link-icon">🛡️</span>
-
-  <span class="link-content">
-    <strong>CWN RAT Database</strong>
-
-    <small>
-      Defensive malware intelligence, IOCs, evidence records,
-      MITRE ATT&CK mappings and disclosure status.
-    </small>
-  </span>
-</a>
-
-
-</main>
-
-
-  <script src="malware-scanner.js"></script>
-  <script src="portal.js"></script>
-  <script src="phase2-data.js"></script>
-  <script src="phase2.js"></script>
-
-
-  <script src="staff-data.js"></script>
-  <script src="staff-directory.js"></script>
-
-  <script>
-    const linkButtons =
-      document.querySelectorAll(
-        ".link-button"
-      );
-
-    linkButtons.forEach(
-      (button) => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            button.style.transform =
-              "scale(0.98)";
-
-            setTimeout(
-              () => {
-
-                button.style.transform =
-                  "";
-
-              },
-              150
-            );
-
-          }
-        );
-
-      }
-    );
-
-    const statusDot =
-      document.querySelector(
-        ".status-dot"
-      );
-
-    document.addEventListener(
-      "visibilitychange",
-      () => {
-
-        if (
-          document.hidden
-        ) {
-
-          statusDot.style.animationPlayState =
-            "paused";
-
-        } else {
-
-          statusDot.style.animationPlayState =
-            "running";
-
-        }
-
-      }
-    );
-  </script>
+      </div>
+    </footer>
+  </div>
 
   <div
-    class="portal-search-overlay"
-    id="portal-search-overlay"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Search CWN portal"
-    hidden
+    class="cwn-mobile-nav"
+    data-mobile-menu
+    aria-hidden="true"
   >
-    <div class="portal-search-dialog">
-      <div class="portal-search-header">
-        <input
-          class="portal-search-input"
-          id="portal-search-input"
-          type="search"
-          placeholder="Search staff, tools, mission, links and services..."
-          autocomplete="off"
+    <aside class="cwn-mobile-panel">
+      <div class="cwn-mobile-header">
+        <a
+          class="cwn-nav-brand"
+          href="/"
         >
+          <span class="cwn-nav-mark">
+            CWN
+          </span>
+
+          <strong>
+            CWN
+          </strong>
+        </a>
 
         <button
-          class="portal-search-close"
-          id="portal-search-close"
+          class="cwn-button cwn-button-secondary cwn-button-sm"
           type="button"
-          aria-label="Close search"
+          data-mobile-menu-close
         >
-          ✕
+          Close
         </button>
       </div>
 
-      <div
-        class="portal-search-results"
-        id="portal-search-results"
-      ></div>
-    </div>
+      <nav
+        class="cwn-mobile-links"
+        aria-label="Mobile navigation"
+      >
+        <a href="/">
+          Home
+        </a>
+
+        <a href="/bug-report">
+          Reports
+        </a>
+
+        <a href="/exposes">
+          Investigations
+        </a>
+
+        <a href="/projects">
+          Projects
+        </a>
+
+        <a href="/about">
+          About
+        </a>
+
+        <a href="/status">
+          Status
+        </a>
+
+        <a href="/transparency">
+          Transparency
+        </a>
+
+        <a href="/downloads">
+          Downloads
+        </a>
+
+        <a href="/news">
+          News
+        </a>
+
+        <a href="/faq">
+          Help & FAQ
+        </a>
+      </nav>
+    </aside>
   </div>
 
-  <button
-    class="portal-back-to-top"
-    id="portal-back-to-top"
-    type="button"
-    aria-label="Back to top"
-    hidden
-  >
-    ↑
-  </button>
-
-
-  <script src="music-config.js"></script>
-  <script src="music-player.js"></script>
-
+  <script src="/assets/js/home.js"></script>
 </body>
 </html>

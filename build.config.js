@@ -57,7 +57,16 @@ module.exports = {
     "security-status.html",
     "exposes.html",
     "maintenance.html",
-    "design-system.html"
+    "design-system.html",
+    "404.html",
+    "about.html",
+    "projects.html",
+    "departments.html",
+    "leadership.html",
+    "partners.html",
+    "contact.html",
+    "reports.html",
+    "safety.html",
   ],
 
   cssFiles: [
@@ -69,7 +78,7 @@ module.exports = {
     "pii-protection.css",
     "exposes.css",
     "music-player.css",
-    "maintenance.css"
+    "maintenance.css",
   ],
 
   staticDirectories: [
@@ -81,7 +90,5 @@ module.exports = {
     "LICENSE.MD",
     "robots.txt",
     "sitemap.xml",
-    "favicon.ico",
-    "manifest.webmanifest"
   ]
 };

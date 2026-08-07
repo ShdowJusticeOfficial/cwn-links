@@ -1,7 +1,7 @@
 {
-  "name": "cwn-portal",
-  "version": "3.1.0",
-  "description": "The official Community Watch Network website and public service portal.",
+  "name": "cwn-website",
+  "version": "4.0.0-alpha.1",
+  "description": "The official Community Watch Network website, public services and community platform.",
   "main": "bug-report.js",
   "scripts": {
     "check": "node scripts/check-source.js",

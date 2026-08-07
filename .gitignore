@@ -48,3 +48,6 @@ backups/
 
 # Safe environment variable template
 !.env.example
+
+# Local migration backups
+index.pre-phase2c.html
