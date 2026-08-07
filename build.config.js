@@ -56,7 +56,8 @@ module.exports = {
     "patch-notes.html",
     "security-status.html",
     "exposes.html",
-    "maintenance.html"
+    "maintenance.html",
+    "design-system.html"
   ],
 
   cssFiles: [

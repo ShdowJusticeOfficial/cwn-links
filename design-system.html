@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow, noarchive"
+  >
+
+  <title>CWN Design System</title>
+
+  <link
+    rel="stylesheet"
+    href="/assets/css/cwn-design-system.css"
+  >
+
+  <style>
+    .design-shell {
+      padding-block: 32px 80px;
+    }
+
+    .design-hero {
+      display: grid;
+      gap: 18px;
+      padding: clamp(24px, 6vw, 56px);
+      border: 1px solid var(--cwn-border);
+      border-radius: var(--cwn-radius-2xl);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(14, 24, 18, 0.95),
+          rgba(5, 10, 7, 0.96)
+        );
+      box-shadow: var(--cwn-shadow-md);
+    }
+
+    .design-hero h1 {
+      max-width: 900px;
+      margin-bottom: 0;
+    }
+
+    .design-hero p {
+      max-width: 760px;
+      margin-bottom: 0;
+    }
+
+    .design-section {
+      margin-top: 28px;
+    }
+
+    .design-section-header {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .design-section-header h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+    }
+
+    .design-section-header p {
+      max-width: 620px;
+      margin: 0;
+      color: var(--cwn-text-muted);
+      font-size: var(--cwn-text-sm);
+    }
+
+    .design-token-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .design-token {
+      overflow: hidden;
+      border: 1px solid var(--cwn-border);
+      border-radius: var(--cwn-radius-lg);
+      background: var(--cwn-surface);
+    }
+
+    .design-token-preview {
+      min-height: 88px;
+    }
+
+    .design-token-meta {
+      padding: 12px;
+    }
+
+    .design-token-meta strong,
+    .design-token-meta code {
+      display: block;
+    }
+
+    .design-token-meta strong {
+      font-size: var(--cwn-text-sm);
+    }
+
+    .design-token-meta code {
+      margin-top: 4px;
+      color: var(--cwn-text-muted);
+      font-size: var(--cwn-text-xs);
+    }
+
+    .design-demo-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .design-button-row,
+    .design-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .design-button-row .cwn-button {
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 420px) {
+      .design-button-row {
+        display: grid;
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .design-button-row .cwn-button {
+        width: 100%;
+      }
+    }
+
+    .design-type-sample {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--cwn-border);
+    }
+
+    .design-type-sample:last-child {
+      border-bottom: 0;
+    }
+
+    .design-type-sample span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--cwn-text-muted);
+      font-family: var(--cwn-font-mono);
+      font-size: var(--cwn-text-xs);
+    }
+
+    .design-type-sample h1,
+    .design-type-sample h2,
+    .design-type-sample h3,
+    .design-type-sample p {
+      margin-bottom: 0;
+    }
+
+    .design-form-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .design-progress-demo {
+      display: grid;
+      gap: 16px;
+    }
+
+    .design-progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--cwn-text-muted);
+      font-size: var(--cwn-text-xs);
+    }
+
+    .design-skeleton-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .design-skeleton-card {
+      padding: 18px;
+      border: 1px solid var(--cwn-border);
+      border-radius: var(--cwn-radius-lg);
+      background: var(--cwn-surface);
+    }
+
+    .design-skeleton-title {
+      height: 18px;
+      width: 60%;
+    }
+
+    .design-skeleton-line {
+      height: 11px;
+      margin-top: 10px;
+    }
+
+    .design-skeleton-line.short {
+      width: 72%;
+    }
+
+    .design-footer {
+      margin-top: 32px;
+      padding: 22px 0 0;
+      border-top: 1px solid var(--cwn-border);
+      color: var(--cwn-text-muted);
+      font-size: var(--cwn-text-xs);
+    }
+
+    @media (max-width: 900px) {
+      .design-token-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .design-skeleton-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .design-token-preview {
+        min-height: 68px;
+      }
+
+      .design-token-meta {
+        padding: 13px 15px;
+      }
+
+      .design-section {
+        margin-top: 24px;
+      }
+
+      .design-section-header {
+
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .design-token-grid,
+      .design-form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="cwn-container design-shell">
+    <section class="design-hero">
+      <span class="cwn-eyebrow">
+        CWN DESIGN SYSTEM // PHASE 2B
+      </span>
+
+      <h1>
+        Community Watch Network
+        interface foundation.
+      </h1>
+
+      <p>
+        This internal page is the visual reference for CWN's new
+        website identity. Components shown here will be reused across
+        public pages, staff systems, reports, projects and future
+        developer tools.
+      </p>
+
+      <div class="design-badge-row">
+        <span class="cwn-badge cwn-badge-success">
+          <span class="cwn-status-dot"></span>
+          Design system active
+        </span>
+
+        <span class="cwn-badge cwn-badge-info">
+          Phase 2B
+        </span>
+
+        <span class="cwn-badge">
+          Internal preview
+        </span>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">
+            TOKENS
+          </span>
+
+          <h2>
+            Brand colours
+          </h2>
+        </div>
+
+        <p>
+          Core visual tokens used throughout the CWN interface.
+        </p>
+      </div>
+
+      <div class="design-token-grid">
+        <article class="design-token">
+          <div
+            class="design-token-preview"
+            style="background: var(--cwn-success);"
+          ></div>
+
+          <div class="design-token-meta">
+            <strong>
+              CWN Green
+            </strong>
+
+            <code>
+              --cwn-success
+            </code>
+          </div>
+        </article>
+
+        <article class="design-token">
+          <div
+            class="design-token-preview"
+            style="background: var(--cwn-info);"
+          ></div>
+
+          <div class="design-token-meta">
+            <strong>
+              Information
+            </strong>
+
+            <code>
+              --cwn-info
+            </code>
+          </div>
+        </article>
+
+        <article class="design-token">
+          <div
+            class="design-token-preview"
+            style="background: var(--cwn-warning);"
+          ></div>
+
+          <div class="design-token-meta">
+            <strong>
+              Warning
+            </strong>
+
+            <code>
+              --cwn-warning
+            </code>
+          </div>
+        </article>
+
+        <article class="design-token">
+          <div
+            class="design-token-preview"
+            style="background: var(--cwn-danger);"
+          ></div>
+
+          <div class="design-token-meta">
+            <strong>
+              Critical
+            </strong>
+
+            <code>
+              --cwn-danger
+            </code>
+          </div>
+        </article>
+
+        <article class="design-token">
+          <div
+            class="design-token-preview"
+            style="background: var(--cwn-bg);"
+          ></div>
+
+          <div class="design-token-meta">
+            <strong>
+              Base background
+            </strong>
+
+            <code>
+              --cwn-bg
+            </code>
+          </div>
+        </article>
+
+        <article class="design-token">
+          <div
+            class="design-token-preview"
+            style="background: var(--cwn-surface);"
+          ></div>
+
+          <div class="design-token-meta">
+            <strong>
+              Surface
+            </strong>
+
+            <code>
+              --cwn-surface
+            </code>
+          </div>
+        </article>
+
+        <article class="design-token">
+          <div
+            class="design-token-preview"
+            style="background: var(--cwn-surface-raised);"
+          ></div>
+
+          <div class="design-token-meta">
+            <strong>
+              Raised surface
+            </strong>
+
+            <code>
+              --cwn-surface-raised
+            </code>
+          </div>
+        </article>
+
+        <article class="design-token">
+          <div
+            class="design-token-preview"
+            style="background: var(--cwn-text);"
+          ></div>
+
+          <div class="design-token-meta">
+            <strong>
+              Primary text
+            </strong>
+
+            <code>
+              --cwn-text
+            </code>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">
+            TYPOGRAPHY
+          </span>
+
+          <h2>
+            Type scale
+          </h2>
+        </div>
+      </div>
+
+      <div class="cwn-card">
+        <div class="design-type-sample">
+          <span>
+            Display / H1
+          </span>
+
+          <h1>
+            Awareness. Accountability. Action.
+          </h1>
+        </div>
+
+        <div class="design-type-sample">
+          <span>
+            H2
+          </span>
+
+          <h2>
+            Community safety infrastructure
+          </h2>
+        </div>
+
+        <div class="design-type-sample">
+          <span>
+            H3
+          </span>
+
+          <h3>
+            Reports and investigations
+          </h3>
+        </div>
+
+        <div class="design-type-sample">
+          <span>
+            Body
+          </span>
+
+          <p>
+            Community Watch Network provides community resources,
+            reporting systems and public safety information.
+          </p>
+        </div>
+
+        <div class="design-type-sample">
+          <span>
+            Mono
+          </span>
+
+          <code class="cwn-mono">
+            CWN-SYS-2026 // OPERATIONAL
+          </code>
+        </div>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">
+            ACTIONS
+          </span>
+
+          <h2>
+            Buttons
+          </h2>
+        </div>
+      </div>
+
+      <div class="cwn-card design-demo-stack">
+        <div class="design-button-row">
+          <button class="cwn-button cwn-button-primary">
+            Primary action
+          </button>
+
+          <button class="cwn-button cwn-button-secondary">
+            Secondary
+          </button>
+
+          <button class="cwn-button cwn-button-danger">
+            Critical action
+          </button>
+
+          <button class="cwn-button cwn-button-ghost">
+            Ghost action
+          </button>
+        </div>
+
+        <div class="design-button-row">
+          <button class="cwn-button cwn-button-primary cwn-button-sm">
+            Small
+          </button>
+
+          <button class="cwn-button cwn-button-primary">
+            Standard
+          </button>
+
+          <button class="cwn-button cwn-button-primary cwn-button-lg">
+            Large
+          </button>
+
+          <button
+            class="cwn-button cwn-button-secondary"
+            disabled
+          >
+            Disabled
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">
+            STATUS
+          </span>
+
+          <h2>
+            Badges and states
+          </h2>
+        </div>
+      </div>
+
+      <div class="cwn-card">
+        <div class="design-badge-row">
+          <span class="cwn-badge cwn-badge-success">
+            <span class="cwn-status-dot"></span>
+            Operational
+          </span>
+
+          <span class="cwn-badge cwn-badge-warning">
+            <span class="cwn-status-dot"></span>
+            Degraded
+          </span>
+
+          <span class="cwn-badge cwn-badge-danger">
+            <span class="cwn-status-dot"></span>
+            Incident
+          </span>
+
+          <span class="cwn-badge cwn-badge-info">
+            <span class="cwn-status-dot"></span>
+            Information
+          </span>
+
+          <span class="cwn-badge">
+            Scheduled
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">
+            MESSAGING
+          </span>
+
+          <h2>
+            Alerts
+          </h2>
+        </div>
+      </div>
+
+      <div class="design-demo-stack">
+        <div class="cwn-alert cwn-alert-success">
+          <div>
+            <strong>
+              Operation successful
+            </strong>
+
+            <div>
+              The requested CWN action completed successfully.
+            </div>
+          </div>
+        </div>
+
+        <div class="cwn-alert cwn-alert-info">
+          <div>
+            <strong>
+              Information
+            </strong>
+
+            <div>
+              Additional context is available for this service.
+            </div>
+          </div>
+        </div>
+
+        <div class="cwn-alert cwn-alert-warning">
+          <div>
+            <strong>
+              Review required
+            </strong>
+
+            <div>
+              This item requires further attention before continuing.
+            </div>
+          </div>
+        </div>
+
+        <div class="cwn-alert cwn-alert-danger">
+          <div>
+            <strong>
+              Critical notice
+            </strong>
+
+            <div>
+              A serious condition has been detected.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">
+            SURFACES
+          </span>
+
+          <h2>
+            Cards
+          </h2>
+        </div>
+      </div>
+
+      <div class="cwn-grid cwn-grid-3">
+        <article class="cwn-card">
+          <div class="cwn-card-header">
+            <div>
+              <h3 class="cwn-card-title">
+                Reports
+              </h3>
+
+              <p class="cwn-card-description">
+                Submit and review structured community reports.
+              </p>
+            </div>
+
+            <span class="cwn-badge cwn-badge-success">
+              Active
+            </span>
+          </div>
+
+          <button class="cwn-button cwn-button-secondary">
+            Open reports
+          </button>
+        </article>
+
+        <article class="cwn-card cwn-card-interactive">
+          <div class="cwn-card-header">
+            <div>
+              <h3 class="cwn-card-title">
+                Investigations
+              </h3>
+
+              <p class="cwn-card-description">
+                Public information and investigation updates.
+              </p>
+            </div>
+          </div>
+
+          <button class="cwn-button cwn-button-secondary">
+            View investigations
+          </button>
+        </article>
+
+        <article class="cwn-card cwn-card-interactive">
+          <div class="cwn-card-header">
+            <div>
+              <h3 class="cwn-card-title">
+                Projects
+              </h3>
+
+              <p class="cwn-card-description">
+                Explore active Community Watch Network projects.
+              </p>
+            </div>
+          </div>
+
+          <button class="cwn-button cwn-button-primary">
+            Explore projects
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">
+            INPUT
+          </span>
+
+          <h2>
+            Forms
+          </h2>
+        </div>
+      </div>
+
+      <div class="cwn-card">
+        <div class="design-form-grid">
+          <div class="cwn-field">
+            <label
+              class="cwn-label"
+              for="design-name"
+            >
+              Display name
+            </label>
+
+            <input
+              class="cwn-input"
+              id="design-name"
+              type="text"
+              placeholder="Enter a name"
+            >
+
+            <span class="cwn-field-help">
+              Example supporting text.
+            </span>
+          </div>
+
+          <div class="cwn-field">
+            <label
+              class="cwn-label"
+              for="design-category"
+            >
+              Category
+            </label>
+
+            <select
+              class="cwn-select"
+              id="design-category"
+            >
+              <option>
+                General
+              </option>
+
+              <option>
+                Safety
+              </option>
+
+              <option>
+                Technical
+              </option>
+            </select>
+          </div>
+
+          <div
+            class="cwn-field"
+            style="grid-column: 1 / -1;"
+          >
+            <label
+              class="cwn-label"
+              for="design-message"
+            >
+              Description
+            </label>
+
+            <textarea
+              class="cwn-textarea"
+              id="design-message"
+              placeholder="Enter information..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">
+            PROGRESS
+          </span>
+
+          <h2>
+            Progress states
+          </h2>
+        </div>
+      </div>
+
+      <div class="cwn-card design-progress-demo">
+        <div>
+          <div class="design-progress-label">
+            <span>
+              Website rebrand
+            </span>
+
+            <strong>
+              25%
+            </strong>
+          </div>
+
+          <div class="cwn-progress">
+            <div
+              class="cwn-progress-bar"
+              style="width: 25%;"
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="design-progress-label">
+            <span>
+              Reporting platform
+            </span>
+
+            <strong>
+              62%
+            </strong>
+          </div>
+
+          <div class="cwn-progress">
+            <div
+              class="cwn-progress-bar"
+              style="width: 62%;"
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="design-progress-label">
+            <span>
+              Deployment
+            </span>
+
+            <strong>
+              100%
+            </strong>
+          </div>
+
+          <div class="cwn-progress">
+            <div
+              class="cwn-progress-bar"
+              style="width: 100%;"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">
+            LOADING
+          </span>
+
+          <h2>
+            Skeleton states
+          </h2>
+        </div>
+      </div>
+
+      <div class="design-skeleton-grid">
+        <div class="design-skeleton-card">
+          <div
+            class="cwn-skeleton design-skeleton-title"
+          ></div>
+
+          <div
+            class="cwn-skeleton design-skeleton-line"
+          ></div>
+
+          <div
+            class="cwn-skeleton design-skeleton-line short"
+          ></div>
+        </div>
+
+        <div class="design-skeleton-card">
+          <div
+            class="cwn-skeleton design-skeleton-title"
+          ></div>
+
+          <div
+            class="cwn-skeleton design-skeleton-line"
+          ></div>
+
+          <div
+            class="cwn-skeleton design-skeleton-line short"
+          ></div>
+        </div>
+
+        <div class="design-skeleton-card">
+          <div
+            class="cwn-skeleton design-skeleton-title"
+          ></div>
+
+          <div
+            class="cwn-skeleton design-skeleton-line"
+          ></div>
+
+          <div
+            class="cwn-skeleton design-skeleton-line short"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">NAVIGATION</span>
+          <h2>Application navigation</h2>
+        </div>
+      </div>
+
+      <div class="cwn-card">
+        <nav class="cwn-nav" style="position: static; border-radius: 16px; overflow: hidden;">
+          <div class="cwn-container cwn-nav-inner">
+            <a class="cwn-nav-brand" href="#">
+              <span class="cwn-nav-mark">CWN</span>
+              <strong>Community Watch Network</strong>
+            </a>
+
+            <div class="cwn-nav-links">
+              <a class="cwn-nav-link" aria-current="page" href="#">Home</a>
+              <a class="cwn-nav-link" href="#">Reports</a>
+              <a class="cwn-nav-link" href="#">Projects</a>
+              <a class="cwn-nav-link" href="#">About</a>
+            </div>
+
+            <button class="cwn-button cwn-button-secondary cwn-button-sm cwn-nav-toggle">
+              Menu
+            </button>
+          </div>
+        </nav>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">PATH</span>
+          <h2>Breadcrumbs</h2>
+        </div>
+      </div>
+
+      <div class="cwn-card">
+        <nav class="cwn-breadcrumbs" aria-label="Breadcrumb">
+          <a href="#">Home</a>
+          <span class="cwn-breadcrumb-separator">/</span>
+          <a href="#">Projects</a>
+          <span class="cwn-breadcrumb-separator">/</span>
+          <span aria-current="page">CWN Haven</span>
+        </nav>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">NAVIGATION STATE</span>
+          <h2>Tabs</h2>
+        </div>
+      </div>
+
+      <div class="cwn-tabs" role="tablist">
+        <button class="cwn-tab" data-cwn-tab role="tab" aria-selected="true">
+          Overview
+        </button>
+        <button class="cwn-tab" data-cwn-tab role="tab" aria-selected="false">
+          Activity
+        </button>
+        <button class="cwn-tab" data-cwn-tab role="tab" aria-selected="false">
+          Security
+        </button>
+        <button class="cwn-tab" data-cwn-tab role="tab" aria-selected="false">
+          Settings
+        </button>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">DISCOVERY</span>
+          <h2>Search and dropdowns</h2>
+        </div>
+      </div>
+
+      <div class="cwn-card design-demo-stack">
+        <div class="cwn-search">
+          <input
+            class="cwn-search-input"
+            type="search"
+            placeholder="Search CWN..."
+          >
+          <span class="cwn-search-shortcut">/</span>
+        </div>
+
+        <div class="cwn-dropdown">
+          <button
+            class="cwn-button cwn-button-secondary"
+            data-cwn-dropdown-toggle
+            aria-controls="demo-dropdown"
+          >
+            Open actions
+          </button>
+
+          <div
+            class="cwn-dropdown-menu"
+            id="demo-dropdown"
+            hidden
+          >
+            <button class="cwn-dropdown-item">View details</button>
+            <button class="cwn-dropdown-item">Copy reference</button>
+            <button class="cwn-dropdown-item">Open report</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">CONTROLS</span>
+          <h2>Switches and choices</h2>
+        </div>
+      </div>
+
+      <div class="cwn-card design-demo-stack">
+        <label class="cwn-choice">
+          <span>Live notifications</span>
+          <span class="cwn-switch">
+            <input type="checkbox" checked>
+            <span class="cwn-switch-track"></span>
+          </span>
+        </label>
+
+        <label class="cwn-choice">
+          <input type="checkbox" checked>
+          Include public updates
+        </label>
+
+        <label class="cwn-choice">
+          <input type="radio" name="demo-priority" checked>
+          Standard priority
+        </label>
+
+        <label class="cwn-choice">
+          <input type="radio" name="demo-priority">
+          High priority
+        </label>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">IDENTITY</span>
+          <h2>Avatars</h2>
+        </div>
+      </div>
+
+      <div class="cwn-card design-button-row">
+        <span class="cwn-avatar cwn-avatar-sm">CW</span>
+        <span class="cwn-avatar">NW</span>
+        <span class="cwn-avatar cwn-avatar-lg">DEV</span>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">DATA</span>
+          <h2>Operational statistics</h2>
+        </div>
+      </div>
+
+      <div class="cwn-stat-grid">
+        <article class="cwn-stat">
+          <span class="cwn-stat-label">Open reports</span>
+          <strong class="cwn-stat-value">24</strong>
+        </article>
+
+        <article class="cwn-stat">
+          <span class="cwn-stat-label">Active projects</span>
+          <strong class="cwn-stat-value">9</strong>
+        </article>
+
+        <article class="cwn-stat">
+          <span class="cwn-stat-label">Services online</span>
+          <strong class="cwn-stat-value">12</strong>
+        </article>
+
+        <article class="cwn-stat">
+          <span class="cwn-stat-label">Current incidents</span>
+          <strong class="cwn-stat-value">0</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">DATA VIEW</span>
+          <h2>Tables</h2>
+        </div>
+      </div>
+
+      <div class="cwn-table-wrap">
+        <table class="cwn-table">
+          <thead>
+            <tr>
+              <th>Reference</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CWN-RPT-001</td>
+              <td>Safety</td>
+              <td><span class="cwn-badge cwn-badge-warning">Review</span></td>
+              <td>Today</td>
+            </tr>
+            <tr>
+              <td>CWN-RPT-002</td>
+              <td>Technical</td>
+              <td><span class="cwn-badge cwn-badge-success">Resolved</span></td>
+              <td>Yesterday</td>
+            </tr>
+            <tr>
+              <td>CWN-RPT-003</td>
+              <td>Community</td>
+              <td><span class="cwn-badge cwn-badge-info">Open</span></td>
+              <td>2 days ago</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">NAVIGATION</span>
+          <h2>Pagination</h2>
+        </div>
+      </div>
+
+      <nav class="cwn-pagination" aria-label="Pagination">
+        <a class="cwn-page" href="#">‹</a>
+        <a class="cwn-page" aria-current="page" href="#">1</a>
+        <a class="cwn-page" href="#">2</a>
+        <a class="cwn-page" href="#">3</a>
+        <a class="cwn-page" href="#">›</a>
+      </nav>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">EMPTY STATE</span>
+          <h2>No results</h2>
+        </div>
+      </div>
+
+      <div class="cwn-empty-state">
+        <span class="cwn-empty-icon">Ø</span>
+        <h3>No matching reports</h3>
+        <p>
+          Try changing the filters or search terms.
+        </p>
+        <button class="cwn-button cwn-button-secondary">
+          Clear filters
+        </button>
+      </div>
+    </section>
+
+    <section class="design-section">
+      <div class="design-section-header">
+        <div>
+          <span class="cwn-eyebrow">OVERLAYS</span>
+          <h2>Modal, toast and tooltip</h2>
+        </div>
+      </div>
+
+      <div class="cwn-card design-button-row">
+        <button
+          class="cwn-button cwn-button-primary"
+          data-cwn-modal-open="design-demo-modal"
+        >
+          Open modal
+        </button>
+
+        <span class="cwn-tooltip">
+          <button class="cwn-button cwn-button-secondary">
+            Hover / focus
+          </button>
+          <span class="cwn-tooltip-content">
+            Contextual information appears here.
+          </span>
+        </span>
+      </div>
+    </section>
+
+    <div
+      class="cwn-modal-backdrop"
+      id="design-demo-modal"
+      hidden
+    >
+      <section class="cwn-modal" role="dialog" aria-modal="true">
+        <span class="cwn-eyebrow">CONFIRM ACTION</span>
+        <h3>Review operation</h3>
+        <p>
+          This is the standard CWN confirmation dialog style.
+        </p>
+
+        <div class="design-button-row">
+          <button
+            class="cwn-button cwn-button-primary"
+            data-cwn-modal-close
+          >
+            Confirm
+          </button>
+
+          <button
+            class="cwn-button cwn-button-secondary"
+            data-cwn-modal-close
+          >
+            Cancel
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <div class="cwn-toast-stack" style="position: static; width: 100%; margin-top: 28px;">
+      <div class="cwn-toast">
+        <strong>Report updated</strong>
+        <span>The latest changes were saved successfully.</span>
+      </div>
+    </div>
+
+    <footer class="design-footer">
+      Community Watch Network Design System · Phase 2B · Internal
+      development reference
+    </footer>
+  </main>
+  <script src="/assets/js/design-system/components.js"></script>
+</body>
+</html>

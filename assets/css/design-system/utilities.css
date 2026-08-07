@@ -1,0 +1,75 @@
+.cwn-flex {
+  display: flex;
+}
+
+.cwn-grid-display {
+  display: grid;
+}
+
+.cwn-items-center {
+  align-items: center;
+}
+
+.cwn-items-start {
+  align-items: flex-start;
+}
+
+.cwn-justify-between {
+  justify-content: space-between;
+}
+
+.cwn-justify-center {
+  justify-content: center;
+}
+
+.cwn-gap-1 {
+  gap: var(--cwn-space-1);
+}
+
+.cwn-gap-2 {
+  gap: var(--cwn-space-2);
+}
+
+.cwn-gap-3 {
+  gap: var(--cwn-space-3);
+}
+
+.cwn-gap-4 {
+  gap: var(--cwn-space-4);
+}
+
+.cwn-gap-6 {
+  gap: var(--cwn-space-6);
+}
+
+.cwn-gap-8 {
+  gap: var(--cwn-space-8);
+}
+
+.cwn-text-center {
+  text-align: center;
+}
+
+.cwn-text-success {
+  color: var(--cwn-success);
+}
+
+.cwn-text-warning {
+  color: var(--cwn-warning);
+}
+
+.cwn-text-danger {
+  color: var(--cwn-danger);
+}
+
+.cwn-text-info {
+  color: var(--cwn-info);
+}
+
+.cwn-w-full {
+  width: 100%;
+}
+
+.cwn-hidden {
+  display: none !important;
+}
